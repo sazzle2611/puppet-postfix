@@ -1,4 +1,9 @@
+require 'puppet_x/bodgit/postfix/util'
+
 Puppet::Type.newtype(:postfix_main) do
+
+  include PuppetX::Bodgit::Postfix::Util
+
   @doc = ''
 
   ensurable do
@@ -40,7 +45,39 @@ Puppet::Type.newtype(:postfix_main) do
     desc ''
   end
 
+  def value_split(value)
+    value.split(/[\s,]+/)
+  end
+
   autorequire(:file) do
-    self[:target]
+    autos = [self[:target]]
+    if self[:value]
+      values = value_split(self[:value]).collect do |x|
+        expand(x)
+      end
+
+      autos += file_autorequires(values)
+    end
+    autos
+  end
+
+  autorequire(:postfix_main) do
+    autos = []
+    if self[:value]
+      value_split(self[:value]).each do |v|
+        value_scan(v) do |x|
+          autos << x
+        end
+      end
+    end
+    autos
+  end
+
+  autorequire(:postfix_master) do
+    autos = []
+    if self[:setting] =~ /_service_name$/
+      autos << "#{self[:value]}/unix"
+    end
+    autos
   end
 end

@@ -31,5 +31,19 @@ describe Puppet::Type.type(:postfix_master) do
       catalog.add_resource key
       expect(key.autorequire.size).to eq(1)
     end
+    it 'should autorequire the setting' do
+      postfix_main = Puppet::Type.type(:postfix_main).new(:name => 'submission_mumble')
+      catalog.add_resource postfix_main
+      key = described_class.new(:name => 'submission/inet', :command => 'smtpd -o smtpd_mumble=$submission_mumble', :ensure => :present)
+      catalog.add_resource key
+      expect(key.autorequire.size).to eq(1)
+    end
+    it 'should autorequire the service' do
+      service = Puppet::Type.type(:postfix_master).new(:name => 'bounce/unix')
+      catalog.add_resource service
+      key = described_class.new(:name => 'submission/inet', :command => 'smtpd -o bounce_service_name=bounce', :ensure => :present)
+      catalog.add_resource key
+      expect(key.autorequire.size).to eq(1)
+    end
   end
 end

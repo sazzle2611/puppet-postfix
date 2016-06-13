@@ -1,4 +1,9 @@
+require 'puppet_x/bodgit/postfix/util'
+
 Puppet::Type.newtype(:postfix_master) do
+
+  include PuppetX::Bodgit::Postfix::Util
+
   @doc = ''
 
   ensurable do
@@ -75,6 +80,7 @@ Puppet::Type.newtype(:postfix_master) do
   newproperty(:wakeup) do
     desc ''
     newvalues('-', /^\d+[?]?$/)
+    defaultto('-')
     munge do |value|
       value.to_s
     end
@@ -83,6 +89,7 @@ Puppet::Type.newtype(:postfix_master) do
   newproperty(:limit) do
     desc ''
     newvalues('-', /^\d+$/)
+    defaultto('-')
     munge do |value|
       value.to_s
     end
@@ -99,7 +106,55 @@ Puppet::Type.newtype(:postfix_master) do
     desc ''
   end
 
+  def command_scan(command)
+    command.scan(/-o \s+ ([^=]+) = ([^ ]+)/x)
+  end
+
+  def value_split(value)
+    value.split(/,/)
+  end
+
   autorequire(:file) do
-    self[:target]
+    autos = [self[:target]]
+    if self[:command]
+      command_scan(self[:command]).each do |setting, value|
+        values = value_split(value).collect do |v|
+          expand(v)
+        end
+
+        autos += file_autorequires(values)
+      end
+    end
+    autos
+  end
+
+  autorequire(:postfix_main) do
+    autos = []
+    if self[:command]
+      settings, values = command_scan(self[:command]).transpose
+      if values
+        values.each do |value|
+          value_split(value).each do |v|
+            value_scan(v) do |x|
+              # Add the setting unless it's been redefined in this same command
+              autos << x unless settings.include?(x)
+            end
+          end
+        end
+      end
+    end
+    autos
+  end
+
+  autorequire(:postfix_master) do
+    autos = []
+    if self[:command]
+      command_scan(self[:command]).each do |setting, value|
+        if setting =~ /_service_name$/
+          autos << "#{value}/unix"
+        end
+      end
+    end
+    autos
   end
 end
