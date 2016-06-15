@@ -115,7 +115,8 @@ Puppet::Type.newtype(:postfix_master) do
   end
 
   autorequire(:file) do
-    autos = [self[:target]]
+    autos = []
+    autos << self[:target] if self[:target]
     if self[:command]
       command_scan(self[:command]).each do |setting, value|
         values = value_split(value).collect do |v|

@@ -38,6 +38,17 @@ describe Puppet::Type.type(:postfix_main) do
       catalog.add_resource key
       expect(key.autorequire.size).to eq(1)
     end
+    it 'should autorequire other settings' do
+      setting1 = Puppet::Type.type(:postfix_main).new(:name => 'foo', :value => 'foo')
+      catalog.add_resource setting1
+      setting2 = Puppet::Type.type(:postfix_main).new(:name => 'bar', :value => 'bar')
+      catalog.add_resource setting2
+      setting3 = Puppet::Type.type(:postfix_main).new(:name => 'baz', :value => 'baz')
+      catalog.add_resource setting3
+      key = described_class.new(:name => 'quux', :value => '$foo $(bar) ${baz}', :ensure => :present)
+      catalog.add_resource key
+      expect(key.autorequire.size).to eq(3)
+    end
     it 'should autorequire another setting and file' do
       file = Puppet::Type.type(:file).new(:name => '/etc/postfix/mynetworks')
       catalog.add_resource file

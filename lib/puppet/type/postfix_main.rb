@@ -50,7 +50,8 @@ Puppet::Type.newtype(:postfix_main) do
   end
 
   autorequire(:file) do
-    autos = [self[:target]]
+    autos = []
+    autos << self[:target] if self[:target]
     if self[:value]
       values = value_split(self[:value]).collect do |x|
         expand(x)
