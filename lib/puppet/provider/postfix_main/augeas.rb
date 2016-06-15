@@ -3,7 +3,7 @@ Puppet::Type.type(:postfix_main).provide(:augeas, :parent => Puppet::Type.type(:
 
   default_file { '/etc/postfix/main.cf' }
 
-  lens { 'Postfix_Main' }
+  lens { 'Postfix_Main.lns' }
 
   confine :feature => :augeas
 
