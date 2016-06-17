@@ -37,7 +37,7 @@ class postfix::config {
   }
 
   $config = delete_undef_values({
-    '2bounce_notice_recipient'                               => $::postfix::2bounce_notice_recipient,
+    '2bounce_notice_recipient'                               => $::postfix::twobounce_notice_recipient,
     'access_map_defer_code'                                  => $::postfix::access_map_defer_code,
     'access_map_reject_code'                                 => $::postfix::access_map_reject_code,
     'address_verify_cache_cleanup_interval'                  => $::postfix::address_verify_cache_cleanup_interval,
@@ -614,8 +614,8 @@ class postfix::config {
     },
     'lmtp_starttls_timeout'                                  => $::postfix::lmtp_starttls_timeout,
     'lmtp_tcp_port'                                          => $::postfix::lmtp_tcp_port,
-    'lmtp_tls_cafile'                                        => $::postfix::lmtp_tls_cafile,
-    'lmtp_tls_capath'                                        => $::postfix::lmtp_tls_capath,
+    'lmtp_tls_CAfile'                                        => $::postfix::lmtp_tls_cafile,
+    'lmtp_tls_CApath'                                        => $::postfix::lmtp_tls_capath,
     'lmtp_tls_block_early_mail_reply'                        => $::postfix::lmtp_tls_block_early_mail_reply ? {
       undef   => undef,
       false   => 'no',
@@ -1358,8 +1358,8 @@ class postfix::config {
       default => $::postfix::smtp_skip_quit_response,
     },
     'smtp_starttls_timeout'                                  => $::postfix::smtp_starttls_timeout,
-    'smtp_tls_cafile'                                        => $::postfix::smtp_tls_cafile,
-    'smtp_tls_capath'                                        => $::postfix::smtp_tls_capath,
+    'smtp_tls_CAfile'                                        => $::postfix::smtp_tls_cafile,
+    'smtp_tls_CApath'                                        => $::postfix::smtp_tls_capath,
     'smtp_tls_block_early_mail_reply'                        => $::postfix::smtp_tls_block_early_mail_reply ? {
       undef   => undef,
       false   => 'no',
@@ -1623,8 +1623,8 @@ class postfix::config {
     'smtpd_soft_error_limit'                                 => $::postfix::smtpd_soft_error_limit,
     'smtpd_starttls_timeout'                                 => $::postfix::smtpd_starttls_timeout,
     'smtpd_timeout'                                          => $::postfix::smtpd_timeout,
-    'smtpd_tls_cafile'                                       => $::postfix::smtpd_tls_cafile,
-    'smtpd_tls_capath'                                       => $::postfix::smtpd_tls_capath,
+    'smtpd_tls_CAfile'                                       => $::postfix::smtpd_tls_cafile,
+    'smtpd_tls_CApath'                                       => $::postfix::smtpd_tls_capath,
     'smtpd_tls_always_issue_session_ids'                     => $::postfix::smtpd_tls_always_issue_session_ids ? {
       undef   => undef,
       false   => 'no',
@@ -1760,7 +1760,7 @@ class postfix::config {
     'syslog_facility'                                        => $::postfix::syslog_facility,
     'syslog_name'                                            => $::postfix::syslog_name,
     'tcp_windowsize'                                         => $::postfix::tcp_windowsize,
-    'tls_append_default_ca'                                  => $::postfix::tls_append_default_ca ? {
+    'tls_append_default_CA'                                  => $::postfix::tls_append_default_ca ? {
       undef   => undef,
       false   => 'no',
       true    => 'yes',
@@ -1802,8 +1802,8 @@ class postfix::config {
       default => $::postfix::tlsproxy_enforce_tls,
     },
     'tlsproxy_service_name'                                  => $::postfix::tlsproxy_service_name,
-    'tlsproxy_tls_cafile'                                    => $::postfix::tlsproxy_tls_cafile,
-    'tlsproxy_tls_capath'                                    => $::postfix::tlsproxy_tls_capath,
+    'tlsproxy_tls_CAfile'                                    => $::postfix::tlsproxy_tls_cafile,
+    'tlsproxy_tls_CApath'                                    => $::postfix::tlsproxy_tls_capath,
     'tlsproxy_tls_always_issue_session_ids'                  => $::postfix::tlsproxy_tls_always_issue_session_ids ? {
       undef   => undef,
       false   => 'no',

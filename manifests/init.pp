@@ -6,7 +6,7 @@ class postfix (
   $package_name                                           = $::postfix::params::package_name,
   $service_name                                           = $::postfix::params::service_name,
   # main.cf parameters below
-  $2bounce_notice_recipient                               = undef,
+  $twobounce_notice_recipient                             = undef,
   $access_map_defer_code                                  = undef,
   $access_map_reject_code                                 = undef,
   $address_verify_cache_cleanup_interval                  = undef,
@@ -827,7 +827,7 @@ class postfix (
   validate_string($package_name)
   validate_string($service_name)
 
-  validate_string($2bounce_notice_recipient)
+  validate_string($twobounce_notice_recipient)
   validate_string($access_map_defer_code)
   validate_string($access_map_reject_code)
   validate_string($address_verify_cache_cleanup_interval)
