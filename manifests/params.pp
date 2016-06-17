@@ -121,7 +121,7 @@ class postfix::params {
       $command_directory                   = '/usr/sbin'
       $daemon_directory                    = '/usr/libexec/postfix'
       $data_directory                      = '/var/lib/postfix'
-      $debug_peer_level                    = 2
+      $debug_peer_level                    = '2'
       $debugger_command                    = 'PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin ddd $daemon_directory/$process_name $process_id & sleep 5'
       $html_directory                      = false
       $inet_interfaces                     = ['localhost']
@@ -134,7 +134,7 @@ class postfix::params {
       $queue_directory                     = '/var/spool/postfix'
       $sendmail_path                       = '/usr/sbin/sendmail.postfix'
       $setgid_group                        = 'postdrop'
-      $unknown_local_recipient_reject_code = 550
+      $unknown_local_recipient_reject_code = '550'
 
       case $::operatingsystemmajrelease { # lint:ignore:case_without_default
         '6': {
