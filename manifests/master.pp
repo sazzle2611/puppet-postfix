@@ -1,6 +1,7 @@
 #
 define postfix::master (
   $command,
+  $ensure       = 'present',
   $private      = undef,
   $unprivileged = undef,
   $chroot       = undef,
@@ -14,6 +15,7 @@ define postfix::master (
 
   validate_re($name, '^[a-z]+/(?:inet|unix|fifo|pass)$')
   validate_string($command)
+  validate_re($ensure, '^(?:present|absent)$')
   if $private {
     validate_re($private, '^[-ny]$')
   }
@@ -31,6 +33,7 @@ define postfix::master (
   }
 
   postfix_master { $name:
+    ensure       => $ensure,
     command      => $command,
     private      => $private,
     unprivileged => $unprivileged,

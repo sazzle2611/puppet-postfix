@@ -1,6 +1,7 @@
 #
 define postfix::lookup::ldap (
   $search_base,
+  $ensure                    = 'present',
   $server_host               = undef,
   $server_port               = undef,
   $timeout                   = undef,
@@ -41,6 +42,7 @@ define postfix::lookup::ldap (
   }
 
   validate_absolute_path($name)
+  validate_re($ensure, '^(?:present|absent)$')
   validate_string($search_base)
   validate_ldap_dn($search_base)
   if $server_host {
@@ -138,15 +140,20 @@ define postfix::lookup::ldap (
   }
   validate_string($tls_cipher_suite)
 
+  $_ensure = $ensure ? {
+    'absent' => 'absent',
+    default  => 'file',
+  }
+
   file { $name:
-    ensure  => file,
+    ensure  => $_ensure,
     owner   => 0,
     group   => 0,
     mode    => '0600',
     content => template('postfix/ldap.cf.erb'),
   }
 
-  if has_key($::postfix::lookup_packages, 'ldap') {
+  if $ensure != 'absent' and has_key($::postfix::lookup_packages, 'ldap') {
     $ldap_package = $::postfix::lookup_packages['ldap']
     ensure_packages([$ldap_package])
     Package[$ldap_package] -> File[$name]

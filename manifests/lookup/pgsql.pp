@@ -5,9 +5,10 @@ define postfix::lookup::pgsql (
   $password,
   $dbname,
   $query,
-  $result_format    = undef,
-  $domain           = undef,
-  $expansion_limit  = undef,
+  $ensure          = 'present',
+  $result_format   = undef,
+  $domain          = undef,
+  $expansion_limit = undef,
 ) {
 
   if ! defined(Class['::postfix']) {
@@ -15,6 +16,7 @@ define postfix::lookup::pgsql (
   }
 
   validate_absolute_path($name)
+  validate_re($ensure, '^(?:present|absent)$')
   validate_array($hosts)
   validate_string($user)
   validate_string($password)
@@ -28,15 +30,20 @@ define postfix::lookup::pgsql (
     validate_integer($expansion_limit, '', 0)
   }
 
+  $_ensure = $ensure ? {
+    'absent' => 'absent',
+    default  => 'file',
+  }
+
   file { $name:
-    ensure  => file,
+    ensure  => $_ensure,
     owner   => 0,
     group   => 0,
     mode    => '0600',
     content => template('postfix/pgsql.cf.erb'),
   }
 
-  if has_key($::postfix::lookup_packages, 'pgsql') {
+  if $ensure != 'absent' and has_key($::postfix::lookup_packages, 'pgsql') {
     $pgsql_package = $::postfix::lookup_packages['pgsql']
     ensure_packages([$pgsql_package])
     Package[$pgsql_package] -> File[$name]

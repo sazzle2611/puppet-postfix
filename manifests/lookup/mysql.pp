@@ -5,6 +5,7 @@ define postfix::lookup::mysql (
   $password,
   $dbname,
   $query,
+  $ensure           = 'present',
   $result_format    = undef,
   $domain           = undef,
   $expansion_limit  = undef,
@@ -22,6 +23,7 @@ define postfix::lookup::mysql (
   }
 
   validate_absolute_path($name)
+  validate_re($ensure, '^(?:present|absent)$')
   validate_array($hosts)
   validate_string($user)
   validate_string($password)
@@ -54,15 +56,20 @@ define postfix::lookup::mysql (
     validate_bool($tls_verify_cert)
   }
 
+  $_ensure = $ensure ? {
+    'absent' => 'absent',
+    default  => 'file',
+  }
+
   file { $name:
-    ensure  => file,
+    ensure  => $_ensure,
     owner   => 0,
     group   => 0,
     mode    => '0600',
     content => template('postfix/mysql.cf.erb'),
   }
 
-  if has_key($::postfix::lookup_packages, 'mysql') {
+  if $ensure != 'absent' and has_key($::postfix::lookup_packages, 'mysql') {
     $mysql_package = $::postfix::lookup_packages['mysql']
     ensure_packages([$mysql_package])
     Package[$mysql_package] -> File[$name]
