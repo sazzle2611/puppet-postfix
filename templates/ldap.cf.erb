@@ -35,7 +35,7 @@ leaf_result_attribute = <%= @leaf_result_attribute %>
 scope = <%= @scope %>
 <% end -%>
 <% if not @bind.nil? -%>
-bind = <%= [true, false].include?(@bind) ? @bind == true ? 'yes' : 'no' : @bind -%>
+bind = <%= [true, false].include?(@bind) ? @bind == true ? 'yes' : 'no' : @bind %>
 <% end -%>
 <% if @bind_dn -%>
 bind_dn = <%= @bind_dn %>
