@@ -1,4 +1,9 @@
-require 'puppet_x/bodgit/postfix/util'
+begin
+  require 'puppet_x/bodgit/postfix/util'
+rescue LoadError => detail
+  require 'pathname'
+  require Pathname.new(__FILE__).dirname + '../../' + 'puppet_x/bodgit/postfix/util'
+end
 
 Puppet::Type.newtype(:postfix_master) do
 
