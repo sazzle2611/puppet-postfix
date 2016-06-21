@@ -1275,18 +1275,18 @@ Postfix::Lookup::Ldap {
 }
 
 ::postfix::lookup::ldap { '/etc/postfix/virtualdomains.cf':
-  query_filter     => 'associatedDomain=%s',
-  result_attribute => 'associatedDomain',
+  query_filter     => '(associatedDomain=%s)',
+  result_attribute => ['associatedDomain'],
 }
 
 ::postfix::lookup::ldap { '/etc/postfix/virtualrecipients.cf':
-  query_filter     => 'mail=%s',
-  result_attribute => 'mail',
+  query_filter     => '(mail=%s)',
+  result_attribute => ['mail'],
 }
 
 ::postfix::lookup::ldap { '/etc/postfix/virtualaliases.cf':
-  query_filter     => 'mailacceptinggeneralid=%s',
-  result_attribute => 'mail',
+  query_filter     => '(mailacceptinggeneralid=%s)',
+  result_attribute => ['mail'],
 }
 ```
 
