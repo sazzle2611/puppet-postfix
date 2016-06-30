@@ -994,7 +994,6 @@ class postfix::config {
       default => join($::postfix::relay_domains, ', '),
     },
     'relay_domains_reject_code'                              => $::postfix::relay_domains_reject_code,
-    'relay_extra_recipient_limit'                            => $::postfix::relay_extra_recipient_limit,
     'relay_recipient_maps'                                   => $::postfix::relay_recipient_maps ? {
       undef   => undef,
       default => join($::postfix::relay_recipient_maps, ', '),
