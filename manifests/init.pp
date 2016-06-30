@@ -127,22 +127,7 @@ class postfix (
   $empty_address_relayhost_maps_lookup_key                = undef,
   $enable_long_queue_ids                                  = undef,
   $enable_original_recipient                              = undef,
-  $error_delivery_slot_cost                               = undef,
-  $error_delivery_slot_discount                           = undef,
-  $error_delivery_slot_loan                               = undef,
-  $error_destination_concurrency_failed_cohort_limit      = undef,
-  $error_destination_concurrency_limit                    = undef,
-  $error_destination_concurrency_negative_feedback        = undef,
-  $error_destination_concurrency_positive_feedback        = undef,
-  $error_destination_rate_delay                           = undef,
-  $error_destination_recipient_limit                      = undef,
-  $error_extra_recipient_limit                            = undef,
-  $error_initial_destination_concurrency                  = undef,
-  $error_minimum_delivery_slots                           = undef,
   $error_notice_recipient                                 = undef,
-  $error_recipient_limit                                  = undef,
-  $error_recipient_refill_delay                           = undef,
-  $error_recipient_refill_limit                           = undef,
   $error_service_name                                     = undef,
   $execution_directory_expansion_filter                   = undef,
   $expand_owner_alias                                     = undef,
@@ -195,30 +180,18 @@ class postfix (
   $lmtp_data_init_timeout                                 = undef,
   $lmtp_data_xfer_timeout                                 = undef,
   $lmtp_defer_if_no_mx_address_found                      = undef,
-  $lmtp_delivery_slot_cost                                = undef,
-  $lmtp_delivery_slot_discount                            = undef,
-  $lmtp_delivery_slot_loan                                = undef,
-  $lmtp_destination_concurrency_failed_cohort_limit       = undef,
-  $lmtp_destination_concurrency_limit                     = undef,
-  $lmtp_destination_concurrency_negative_feedback         = undef,
-  $lmtp_destination_concurrency_positive_feedback         = undef,
-  $lmtp_destination_rate_delay                            = undef,
-  $lmtp_destination_recipient_limit                       = undef,
   $lmtp_discard_lhlo_keyword_address_maps                 = undef,
   $lmtp_discard_lhlo_keywords                             = undef,
   $lmtp_dns_resolver_options                              = undef,
   $lmtp_enforce_tls                                       = undef,
-  $lmtp_extra_recipient_limit                             = undef,
   $lmtp_generic_maps                                      = undef,
   $lmtp_header_checks                                     = undef,
   $lmtp_host_lookup                                       = undef,
-  $lmtp_initial_destination_concurrency                   = undef,
   $lmtp_lhlo_name                                         = undef,
   $lmtp_lhlo_timeout                                      = undef,
   $lmtp_line_length_limit                                 = undef,
   $lmtp_mail_timeout                                      = undef,
   $lmtp_mime_header_checks                                = undef,
-  $lmtp_minimum_delivery_slots                            = undef,
   $lmtp_mx_address_limit                                  = undef,
   $lmtp_mx_session_limit                                  = undef,
   $lmtp_nested_header_checks                              = undef,
@@ -231,9 +204,6 @@ class postfix (
   $lmtp_quote_rfc821_envelope                             = undef,
   $lmtp_randomize_addresses                               = undef,
   $lmtp_rcpt_timeout                                      = undef,
-  $lmtp_recipient_limit                                   = undef,
-  $lmtp_recipient_refill_delay                            = undef,
-  $lmtp_recipient_refill_limit                            = undef,
   $lmtp_reply_filter                                      = undef,
   $lmtp_rset_timeout                                      = undef,
   $lmtp_sasl_auth_cache_name                              = undef,
@@ -285,23 +255,8 @@ class postfix (
   $lmtp_use_tls                                           = undef,
   $lmtp_xforward_timeout                                  = undef,
   $local_command_shell                                    = undef,
-  $local_delivery_slot_cost                               = undef,
-  $local_delivery_slot_discount                           = undef,
-  $local_delivery_slot_loan                               = undef,
-  $local_destination_concurrency_failed_cohort_limit      = undef,
-  $local_destination_concurrency_limit                    = undef,
-  $local_destination_concurrency_negative_feedback        = undef,
-  $local_destination_concurrency_positive_feedback        = undef,
-  $local_destination_rate_delay                           = undef,
-  $local_destination_recipient_limit                      = undef,
-  $local_extra_recipient_limit                            = undef,
   $local_header_rewrite_clients                           = undef,
-  $local_initial_destination_concurrency                  = undef,
-  $local_minimum_delivery_slots                           = undef,
-  $local_recipient_limit                                  = undef,
   $local_recipient_maps                                   = undef,
-  $local_recipient_refill_delay                           = undef,
-  $local_recipient_refill_limit                           = undef,
   $local_transport                                        = undef,
   $luser_relay                                            = undef,
   $mail_name                                              = undef,
@@ -452,24 +407,9 @@ class postfix (
   $reject_code                                            = undef,
   $reject_tempfail_action                                 = undef,
   $relay_clientcerts                                      = undef,
-  $relay_delivery_slot_cost                               = undef,
-  $relay_delivery_slot_discount                           = undef,
-  $relay_delivery_slot_loan                               = undef,
-  $relay_destination_concurrency_failed_cohort_limit      = undef,
-  $relay_destination_concurrency_limit                    = undef,
-  $relay_destination_concurrency_negative_feedback        = undef,
-  $relay_destination_concurrency_positive_feedback        = undef,
-  $relay_destination_rate_delay                           = undef,
-  $relay_destination_recipient_limit                      = undef,
   $relay_domains                                          = undef,
   $relay_domains_reject_code                              = undef,
-  $relay_extra_recipient_limit                            = undef,
-  $relay_initial_destination_concurrency                  = undef,
-  $relay_minimum_delivery_slots                           = undef,
-  $relay_recipient_limit                                  = undef,
   $relay_recipient_maps                                   = undef,
-  $relay_recipient_refill_delay                           = undef,
-  $relay_recipient_refill_limit                           = undef,
   $relay_transport                                        = undef,
   $relayhost                                              = undef,
   $relocated_maps                                         = undef,
@@ -479,21 +419,6 @@ class postfix (
   $resolve_dequoted_address                               = undef,
   $resolve_null_domain                                    = undef,
   $resolve_numeric_domain                                 = undef,
-  $retry_delivery_slot_cost                               = undef,
-  $retry_delivery_slot_discount                           = undef,
-  $retry_delivery_slot_loan                               = undef,
-  $retry_destination_concurrency_failed_cohort_limit      = undef,
-  $retry_destination_concurrency_limit                    = undef,
-  $retry_destination_concurrency_negative_feedback        = undef,
-  $retry_destination_concurrency_positive_feedback        = undef,
-  $retry_destination_rate_delay                           = undef,
-  $retry_destination_recipient_limit                      = undef,
-  $retry_extra_recipient_limit                            = undef,
-  $retry_initial_destination_concurrency                  = undef,
-  $retry_minimum_delivery_slots                           = undef,
-  $retry_recipient_limit                                  = undef,
-  $retry_recipient_refill_delay                           = undef,
-  $retry_recipient_refill_limit                           = undef,
   $rewrite_service_name                                   = undef,
   $sample_directory                                       = $::postfix::params::sample_directory,
   $send_cyrus_sasl_authzid                                = undef,
@@ -523,31 +448,19 @@ class postfix (
   $smtp_data_init_timeout                                 = undef,
   $smtp_data_xfer_timeout                                 = undef,
   $smtp_defer_if_no_mx_address_found                      = undef,
-  $smtp_delivery_slot_cost                                = undef,
-  $smtp_delivery_slot_discount                            = undef,
-  $smtp_delivery_slot_loan                                = undef,
-  $smtp_destination_concurrency_failed_cohort_limit       = undef,
-  $smtp_destination_concurrency_limit                     = undef,
-  $smtp_destination_concurrency_negative_feedback         = undef,
-  $smtp_destination_concurrency_positive_feedback         = undef,
-  $smtp_destination_rate_delay                            = undef,
-  $smtp_destination_recipient_limit                       = undef,
   $smtp_discard_ehlo_keyword_address_maps                 = undef,
   $smtp_discard_ehlo_keywords                             = undef,
   $smtp_dns_resolver_options                              = undef,
   $smtp_enforce_tls                                       = undef,
-  $smtp_extra_recipient_limit                             = undef,
   $smtp_fallback_relay                                    = undef,
   $smtp_generic_maps                                      = undef,
   $smtp_header_checks                                     = undef,
   $smtp_helo_name                                         = undef,
   $smtp_helo_timeout                                      = undef,
   $smtp_host_lookup                                       = undef,
-  $smtp_initial_destination_concurrency                   = undef,
   $smtp_line_length_limit                                 = undef,
   $smtp_mail_timeout                                      = undef,
   $smtp_mime_header_checks                                = undef,
-  $smtp_minimum_delivery_slots                            = undef,
   $smtp_mx_address_limit                                  = undef,
   $smtp_mx_session_limit                                  = undef,
   $smtp_nested_header_checks                              = undef,
@@ -561,9 +474,6 @@ class postfix (
   $smtp_quote_rfc821_envelope                             = undef,
   $smtp_randomize_addresses                               = undef,
   $smtp_rcpt_timeout                                      = undef,
-  $smtp_recipient_limit                                   = undef,
-  $smtp_recipient_refill_delay                            = undef,
-  $smtp_recipient_refill_limit                            = undef,
   $smtp_reply_filter                                      = undef,
   $smtp_rset_timeout                                      = undef,
   $smtp_sasl_auth_cache_name                              = undef,
@@ -795,28 +705,13 @@ class postfix (
   $virtual_alias_expansion_limit                          = undef,
   $virtual_alias_maps                                     = undef,
   $virtual_alias_recursion_limit                          = undef,
-  $virtual_delivery_slot_cost                             = undef,
-  $virtual_delivery_slot_discount                         = undef,
-  $virtual_delivery_slot_loan                             = undef,
-  $virtual_destination_concurrency_failed_cohort_limit    = undef,
-  $virtual_destination_concurrency_limit                  = undef,
-  $virtual_destination_concurrency_negative_feedback      = undef,
-  $virtual_destination_concurrency_positive_feedback      = undef,
-  $virtual_destination_rate_delay                         = undef,
-  $virtual_destination_recipient_limit                    = undef,
-  $virtual_extra_recipient_limit                          = undef,
   $virtual_gid_maps                                       = undef,
-  $virtual_initial_destination_concurrency                = undef,
   $virtual_mailbox_base                                   = undef,
   $virtual_mailbox_domains                                = undef,
   $virtual_mailbox_limit                                  = undef,
   $virtual_mailbox_lock                                   = undef,
   $virtual_mailbox_maps                                   = undef,
-  $virtual_minimum_delivery_slots                         = undef,
   $virtual_minimum_uid                                    = undef,
-  $virtual_recipient_limit                                = undef,
-  $virtual_recipient_refill_delay                         = undef,
-  $virtual_recipient_refill_limit                         = undef,
   $virtual_transport                                      = undef,
   $virtual_uid_maps                                       = undef,
 ) inherits ::postfix::params {
@@ -1062,22 +957,7 @@ class postfix (
       validate_string($enable_original_recipient)
     }
   }
-  validate_string($error_delivery_slot_cost)
-  validate_string($error_delivery_slot_discount)
-  validate_string($error_delivery_slot_loan)
-  validate_string($error_destination_concurrency_failed_cohort_limit)
-  validate_string($error_destination_concurrency_limit)
-  validate_string($error_destination_concurrency_negative_feedback)
-  validate_string($error_destination_concurrency_positive_feedback)
-  validate_string($error_destination_rate_delay)
-  validate_string($error_destination_recipient_limit)
-  validate_string($error_extra_recipient_limit)
-  validate_string($error_initial_destination_concurrency)
-  validate_string($error_minimum_delivery_slots)
   validate_string($error_notice_recipient)
-  validate_string($error_recipient_limit)
-  validate_string($error_recipient_refill_delay)
-  validate_string($error_recipient_refill_limit)
   validate_string($error_service_name)
   validate_string($execution_directory_expansion_filter)
   if $expand_owner_alias {
@@ -1190,15 +1070,6 @@ class postfix (
       validate_string($lmtp_defer_if_no_mx_address_found)
     }
   }
-  validate_string($lmtp_delivery_slot_cost)
-  validate_string($lmtp_delivery_slot_discount)
-  validate_string($lmtp_delivery_slot_loan)
-  validate_string($lmtp_destination_concurrency_failed_cohort_limit)
-  validate_string($lmtp_destination_concurrency_limit)
-  validate_string($lmtp_destination_concurrency_negative_feedback)
-  validate_string($lmtp_destination_concurrency_positive_feedback)
-  validate_string($lmtp_destination_rate_delay)
-  validate_string($lmtp_destination_recipient_limit)
   if $lmtp_discard_lhlo_keyword_address_maps {
     validate_array($lmtp_discard_lhlo_keyword_address_maps)
   }
@@ -1213,7 +1084,6 @@ class postfix (
       validate_string($lmtp_enforce_tls)
     }
   }
-  validate_string($lmtp_extra_recipient_limit)
   if $lmtp_generic_maps {
     validate_array($lmtp_generic_maps)
   }
@@ -1223,7 +1093,6 @@ class postfix (
   if $lmtp_host_lookup {
     validate_array($lmtp_host_lookup)
   }
-  validate_string($lmtp_initial_destination_concurrency)
   validate_string($lmtp_lhlo_name)
   validate_string($lmtp_lhlo_timeout)
   validate_string($lmtp_line_length_limit)
@@ -1231,7 +1100,6 @@ class postfix (
   if $lmtp_mime_header_checks {
     validate_array($lmtp_mime_header_checks)
   }
-  validate_string($lmtp_minimum_delivery_slots)
   validate_string($lmtp_mx_address_limit)
   validate_string($lmtp_mx_session_limit)
   if $lmtp_nested_header_checks {
@@ -1262,9 +1130,6 @@ class postfix (
     }
   }
   validate_string($lmtp_rcpt_timeout)
-  validate_string($lmtp_recipient_limit)
-  validate_string($lmtp_recipient_refill_delay)
-  validate_string($lmtp_recipient_refill_limit)
   validate_string($lmtp_reply_filter)
   validate_string($lmtp_rset_timeout)
   validate_string($lmtp_sasl_auth_cache_name)
@@ -1386,27 +1251,12 @@ class postfix (
   }
   validate_string($lmtp_xforward_timeout)
   validate_string($local_command_shell)
-  validate_string($local_delivery_slot_cost)
-  validate_string($local_delivery_slot_discount)
-  validate_string($local_delivery_slot_loan)
-  validate_string($local_destination_concurrency_failed_cohort_limit)
-  validate_string($local_destination_concurrency_limit)
-  validate_string($local_destination_concurrency_negative_feedback)
-  validate_string($local_destination_concurrency_positive_feedback)
-  validate_string($local_destination_rate_delay)
-  validate_string($local_destination_recipient_limit)
-  validate_string($local_extra_recipient_limit)
   if $local_header_rewrite_clients {
     validate_array($local_header_rewrite_clients)
   }
-  validate_string($local_initial_destination_concurrency)
-  validate_string($local_minimum_delivery_slots)
-  validate_string($local_recipient_limit)
   if $local_recipient_maps {
     validate_array($local_recipient_maps)
   }
-  validate_string($local_recipient_refill_delay)
-  validate_string($local_recipient_refill_limit)
   validate_string($local_transport)
   validate_string($luser_relay)
   validate_string($mail_name)
@@ -1679,28 +1529,13 @@ class postfix (
   if $relay_clientcerts {
     validate_array($relay_clientcerts)
   }
-  validate_string($relay_delivery_slot_cost)
-  validate_string($relay_delivery_slot_discount)
-  validate_string($relay_delivery_slot_loan)
-  validate_string($relay_destination_concurrency_failed_cohort_limit)
-  validate_string($relay_destination_concurrency_limit)
-  validate_string($relay_destination_concurrency_negative_feedback)
-  validate_string($relay_destination_concurrency_positive_feedback)
-  validate_string($relay_destination_rate_delay)
-  validate_string($relay_destination_recipient_limit)
   if $relay_domains {
     validate_array($relay_domains)
   }
   validate_string($relay_domains_reject_code)
-  validate_string($relay_extra_recipient_limit)
-  validate_string($relay_initial_destination_concurrency)
-  validate_string($relay_minimum_delivery_slots)
-  validate_string($relay_recipient_limit)
   if $relay_recipient_maps {
     validate_array($relay_recipient_maps)
   }
-  validate_string($relay_recipient_refill_delay)
-  validate_string($relay_recipient_refill_limit)
   validate_string($relay_transport)
   validate_string($relayhost)
   if $relocated_maps {
@@ -1732,21 +1567,6 @@ class postfix (
       validate_string($resolve_numeric_domain)
     }
   }
-  validate_string($retry_delivery_slot_cost)
-  validate_string($retry_delivery_slot_discount)
-  validate_string($retry_delivery_slot_loan)
-  validate_string($retry_destination_concurrency_failed_cohort_limit)
-  validate_string($retry_destination_concurrency_limit)
-  validate_string($retry_destination_concurrency_negative_feedback)
-  validate_string($retry_destination_concurrency_positive_feedback)
-  validate_string($retry_destination_rate_delay)
-  validate_string($retry_destination_recipient_limit)
-  validate_string($retry_extra_recipient_limit)
-  validate_string($retry_initial_destination_concurrency)
-  validate_string($retry_minimum_delivery_slots)
-  validate_string($retry_recipient_limit)
-  validate_string($retry_recipient_refill_delay)
-  validate_string($retry_recipient_refill_limit)
   validate_string($rewrite_service_name)
   validate_string($sample_directory)
   if $send_cyrus_sasl_authzid {
@@ -1814,15 +1634,6 @@ class postfix (
       validate_string($smtp_defer_if_no_mx_address_found)
     }
   }
-  validate_string($smtp_delivery_slot_cost)
-  validate_string($smtp_delivery_slot_discount)
-  validate_string($smtp_delivery_slot_loan)
-  validate_string($smtp_destination_concurrency_failed_cohort_limit)
-  validate_string($smtp_destination_concurrency_limit)
-  validate_string($smtp_destination_concurrency_negative_feedback)
-  validate_string($smtp_destination_concurrency_positive_feedback)
-  validate_string($smtp_destination_rate_delay)
-  validate_string($smtp_destination_recipient_limit)
   if $smtp_discard_ehlo_keyword_address_maps {
     validate_array($smtp_discard_ehlo_keyword_address_maps)
   }
@@ -1837,7 +1648,6 @@ class postfix (
       validate_string($smtp_enforce_tls)
     }
   }
-  validate_string($smtp_extra_recipient_limit)
   if $smtp_fallback_relay {
     validate_array($smtp_fallback_relay)
   }
@@ -1852,13 +1662,11 @@ class postfix (
   if $smtp_host_lookup {
     validate_array($smtp_host_lookup)
   }
-  validate_string($smtp_initial_destination_concurrency)
   validate_string($smtp_line_length_limit)
   validate_string($smtp_mail_timeout)
   if $smtp_mime_header_checks {
     validate_array($smtp_mime_header_checks)
   }
-  validate_string($smtp_minimum_delivery_slots)
   validate_string($smtp_mx_address_limit)
   validate_string($smtp_mx_session_limit)
   if $smtp_nested_header_checks {
@@ -1894,9 +1702,6 @@ class postfix (
     }
   }
   validate_string($smtp_rcpt_timeout)
-  validate_string($smtp_recipient_limit)
-  validate_string($smtp_recipient_refill_delay)
-  validate_string($smtp_recipient_refill_limit)
   validate_string($smtp_reply_filter)
   validate_string($smtp_rset_timeout)
   validate_string($smtp_sasl_auth_cache_name)
@@ -2410,20 +2215,9 @@ class postfix (
     validate_array($virtual_alias_maps)
   }
   validate_string($virtual_alias_recursion_limit)
-  validate_string($virtual_delivery_slot_cost)
-  validate_string($virtual_delivery_slot_discount)
-  validate_string($virtual_delivery_slot_loan)
-  validate_string($virtual_destination_concurrency_failed_cohort_limit)
-  validate_string($virtual_destination_concurrency_limit)
-  validate_string($virtual_destination_concurrency_negative_feedback)
-  validate_string($virtual_destination_concurrency_positive_feedback)
-  validate_string($virtual_destination_rate_delay)
-  validate_string($virtual_destination_recipient_limit)
-  validate_string($virtual_extra_recipient_limit)
   if $virtual_gid_maps {
     validate_array($virtual_gid_maps)
   }
-  validate_string($virtual_initial_destination_concurrency)
   validate_string($virtual_mailbox_base)
   if $virtual_mailbox_domains {
     validate_array($virtual_mailbox_domains)
@@ -2435,11 +2229,7 @@ class postfix (
   if $virtual_mailbox_maps {
     validate_array($virtual_mailbox_maps)
   }
-  validate_string($virtual_minimum_delivery_slots)
   validate_string($virtual_minimum_uid)
-  validate_string($virtual_recipient_limit)
-  validate_string($virtual_recipient_refill_delay)
-  validate_string($virtual_recipient_refill_limit)
   validate_string($virtual_transport)
   if $virtual_uid_maps {
     validate_array($virtual_uid_maps)

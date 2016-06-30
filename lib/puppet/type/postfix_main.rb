@@ -81,8 +81,78 @@ Puppet::Type.newtype(:postfix_main) do
 
   autorequire(:postfix_master) do
     autos = []
-    if self[:setting] =~ /_service_name$/
-      autos << "#{self[:value]}/unix"
+    case self[:setting]
+    when /_service_name$/
+      autos += [
+        "#{self[:value]}/inet",
+        "#{self[:value]}/unix",
+        "#{self[:value]}/fifo",
+        "#{self[:value]}/pass",
+      ]
+    when /
+      ^
+      ([^_]+)
+      _
+      (?:
+        delivery_slot_
+        (?:
+          cost
+          |
+          discount
+          |
+          loan
+        )
+        |
+        destination_
+        (?:
+          concurrency_
+          (?:
+            (?:
+              failed_cohort_
+            )?
+            limit
+            |
+            (?:
+              negative
+              |
+              positive
+            )
+            _feedback
+          )
+          |
+          rate_delay
+          |
+          recipient_limit
+        )
+        |
+        extra_recipient_limit
+        |
+        initial_destination_concurrency
+        |
+        minimum_delivery_slots
+        |
+        recipient_
+        (?:
+          limit
+          |
+          refill_
+          (?:
+            delay
+            |
+            limit
+          )
+        )
+      )
+      $
+      /x
+      if $1 != 'default'
+        autos += [
+          "#{$1}/inet",
+          "#{$1}/unix",
+          "#{$1}/fifo",
+          "#{$1}/pass",
+        ]
+      end
     end
     autos
   end

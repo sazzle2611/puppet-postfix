@@ -213,22 +213,7 @@ The following parameters map 1:1 to their equivalent in `main.cf`:
 * `empty_address_relayhost_maps_lookup_key`
 * `enable_long_queue_ids`
 * `enable_original_recipient`
-* `error_delivery_slot_cost`
-* `error_delivery_slot_discount`
-* `error_delivery_slot_loan`
-* `error_destination_concurrency_failed_cohort_limit`
-* `error_destination_concurrency_limit`
-* `error_destination_concurrency_negative_feedback`
-* `error_destination_concurrency_positive_feedback`
-* `error_destination_rate_delay`
-* `error_destination_recipient_limit`
-* `error_extra_recipient_limit`
-* `error_initial_destination_concurrency`
-* `error_minimum_delivery_slots`
 * `error_notice_recipient`
-* `error_recipient_limit`
-* `error_recipient_refill_delay`
-* `error_recipient_refill_limit`
 * `error_service_name`
 * `execution_directory_expansion_filter`
 * `expand_owner_alias`
@@ -281,30 +266,18 @@ The following parameters map 1:1 to their equivalent in `main.cf`:
 * `lmtp_data_init_timeout`
 * `lmtp_data_xfer_timeout`
 * `lmtp_defer_if_no_mx_address_found`
-* `lmtp_delivery_slot_cost`
-* `lmtp_delivery_slot_discount`
-* `lmtp_delivery_slot_loan`
-* `lmtp_destination_concurrency_failed_cohort_limit`
-* `lmtp_destination_concurrency_limit`
-* `lmtp_destination_concurrency_negative_feedback`
-* `lmtp_destination_concurrency_positive_feedback`
-* `lmtp_destination_rate_delay`
-* `lmtp_destination_recipient_limit`
 * `lmtp_discard_lhlo_keyword_address_maps`
 * `lmtp_discard_lhlo_keywords`
 * `lmtp_dns_resolver_options`
 * `lmtp_enforce_tls`
-* `lmtp_extra_recipient_limit`
 * `lmtp_generic_maps`
 * `lmtp_header_checks`
 * `lmtp_host_lookup`
-* `lmtp_initial_destination_concurrency`
 * `lmtp_lhlo_name`
 * `lmtp_lhlo_timeout`
 * `lmtp_line_length_limit`
 * `lmtp_mail_timeout`
 * `lmtp_mime_header_checks`
-* `lmtp_minimum_delivery_slots`
 * `lmtp_mx_address_limit`
 * `lmtp_mx_session_limit`
 * `lmtp_nested_header_checks`
@@ -317,9 +290,6 @@ The following parameters map 1:1 to their equivalent in `main.cf`:
 * `lmtp_quote_rfc821_envelope`
 * `lmtp_randomize_addresses`
 * `lmtp_rcpt_timeout`
-* `lmtp_recipient_limit`
-* `lmtp_recipient_refill_delay`
-* `lmtp_recipient_refill_limit`
 * `lmtp_reply_filter`
 * `lmtp_rset_timeout`
 * `lmtp_sasl_auth_cache_name`
@@ -371,23 +341,8 @@ The following parameters map 1:1 to their equivalent in `main.cf`:
 * `lmtp_use_tls`
 * `lmtp_xforward_timeout`
 * `local_command_shell`
-* `local_delivery_slot_cost`
-* `local_delivery_slot_discount`
-* `local_delivery_slot_loan`
-* `local_destination_concurrency_failed_cohort_limit`
-* `local_destination_concurrency_limit`
-* `local_destination_concurrency_negative_feedback`
-* `local_destination_concurrency_positive_feedback`
-* `local_destination_rate_delay`
-* `local_destination_recipient_limit`
-* `local_extra_recipient_limit`
 * `local_header_rewrite_clients`
-* `local_initial_destination_concurrency`
-* `local_minimum_delivery_slots`
-* `local_recipient_limit`
 * `local_recipient_maps`
-* `local_recipient_refill_delay`
-* `local_recipient_refill_limit`
 * `local_transport`
 * `luser_relay`
 * `mail_name`
@@ -538,24 +493,9 @@ The following parameters map 1:1 to their equivalent in `main.cf`:
 * `reject_code`
 * `reject_tempfail_action`
 * `relay_clientcerts`
-* `relay_delivery_slot_cost`
-* `relay_delivery_slot_discount`
-* `relay_delivery_slot_loan`
-* `relay_destination_concurrency_failed_cohort_limit`
-* `relay_destination_concurrency_limit`
-* `relay_destination_concurrency_negative_feedback`
-* `relay_destination_concurrency_positive_feedback`
-* `relay_destination_rate_delay`
-* `relay_destination_recipient_limit`
 * `relay_domains`
 * `relay_domains_reject_code`
-* `relay_extra_recipient_limit`
-* `relay_initial_destination_concurrency`
-* `relay_minimum_delivery_slots`
-* `relay_recipient_limit`
 * `relay_recipient_maps`
-* `relay_recipient_refill_delay`
-* `relay_recipient_refill_limit`
 * `relay_transport`
 * `relayhost`
 * `relocated_maps`
@@ -565,21 +505,6 @@ The following parameters map 1:1 to their equivalent in `main.cf`:
 * `resolve_dequoted_address`
 * `resolve_null_domain`
 * `resolve_numeric_domain`
-* `retry_delivery_slot_cost`
-* `retry_delivery_slot_discount`
-* `retry_delivery_slot_loan`
-* `retry_destination_concurrency_failed_cohort_limit`
-* `retry_destination_concurrency_limit`
-* `retry_destination_concurrency_negative_feedback`
-* `retry_destination_concurrency_positive_feedback`
-* `retry_destination_rate_delay`
-* `retry_destination_recipient_limit`
-* `retry_extra_recipient_limit`
-* `retry_initial_destination_concurrency`
-* `retry_minimum_delivery_slots`
-* `retry_recipient_limit`
-* `retry_recipient_refill_delay`
-* `retry_recipient_refill_limit`
 * `rewrite_service_name`
 * `sample_directory`
 * `send_cyrus_sasl_authzid`
@@ -609,31 +534,19 @@ The following parameters map 1:1 to their equivalent in `main.cf`:
 * `smtp_data_init_timeout`
 * `smtp_data_xfer_timeout`
 * `smtp_defer_if_no_mx_address_found`
-* `smtp_delivery_slot_cost`
-* `smtp_delivery_slot_discount`
-* `smtp_delivery_slot_loan`
-* `smtp_destination_concurrency_failed_cohort_limit`
-* `smtp_destination_concurrency_limit`
-* `smtp_destination_concurrency_negative_feedback`
-* `smtp_destination_concurrency_positive_feedback`
-* `smtp_destination_rate_delay`
-* `smtp_destination_recipient_limit`
 * `smtp_discard_ehlo_keyword_address_maps`
 * `smtp_discard_ehlo_keywords`
 * `smtp_dns_resolver_options`
 * `smtp_enforce_tls`
-* `smtp_extra_recipient_limit`
 * `smtp_fallback_relay`
 * `smtp_generic_maps`
 * `smtp_header_checks`
 * `smtp_helo_name`
 * `smtp_helo_timeout`
 * `smtp_host_lookup`
-* `smtp_initial_destination_concurrency`
 * `smtp_line_length_limit`
 * `smtp_mail_timeout`
 * `smtp_mime_header_checks`
-* `smtp_minimum_delivery_slots`
 * `smtp_mx_address_limit`
 * `smtp_mx_session_limit`
 * `smtp_nested_header_checks`
@@ -647,9 +560,6 @@ The following parameters map 1:1 to their equivalent in `main.cf`:
 * `smtp_quote_rfc821_envelope`
 * `smtp_randomize_addresses`
 * `smtp_rcpt_timeout`
-* `smtp_recipient_limit`
-* `smtp_recipient_refill_delay`
-* `smtp_recipient_refill_limit`
 * `smtp_reply_filter`
 * `smtp_rset_timeout`
 * `smtp_sasl_auth_cache_name`
@@ -881,28 +791,13 @@ The following parameters map 1:1 to their equivalent in `main.cf`:
 * `virtual_alias_expansion_limit`
 * `virtual_alias_maps`
 * `virtual_alias_recursion_limit`
-* `virtual_delivery_slot_cost`
-* `virtual_delivery_slot_discount`
-* `virtual_delivery_slot_loan`
-* `virtual_destination_concurrency_failed_cohort_limit`
-* `virtual_destination_concurrency_limit`
-* `virtual_destination_concurrency_negative_feedback`
-* `virtual_destination_concurrency_positive_feedback`
-* `virtual_destination_rate_delay`
-* `virtual_destination_recipient_limit`
-* `virtual_extra_recipient_limit`
 * `virtual_gid_maps`
-* `virtual_initial_destination_concurrency`
 * `virtual_mailbox_base`
 * `virtual_mailbox_domains`
 * `virtual_mailbox_limit`
 * `virtual_mailbox_lock`
 * `virtual_mailbox_maps`
-* `virtual_minimum_delivery_slots`
 * `virtual_minimum_uid`
-* `virtual_recipient_limit`
-* `virtual_recipient_refill_delay`
-* `virtual_recipient_refill_limit`
 * `virtual_transport`
 * `virtual_uid_maps`
 
@@ -1172,7 +1067,8 @@ autorequired. Lookup tables of the form `type:/path/to/file` will use the
 filename that is produced by the `postmap(1)` command. For example, a value of
 `hash:/etc/aliases` will attempt to autorequire `/etc/aliases.db`. Any setting
 that references a service defined in `master.cf` will attempt to autorequire
-it.
+it. This includes the various `${transport}_delivery_slot_cost`, etc.
+settings.
 
 ##### `target`
 
@@ -1395,6 +1291,25 @@ Postfix::Lookup::Ldap {
 This module takes the (somewhat laborious) approach of creating parameters for
 each `main.cf` setting rather than just pass in a large hash of settings,
 which should result in more control.
+
+The only settings deliberately excluded are the following:
+
+* `${transport}_delivery_slot_cost`
+* `${transport}_delivery_slot_discount`
+* `${transport}_delivery_slot_loan`
+* `${transport}_destination_concurrency_failed_cohort_limit`
+* `${transport}_destination_concurrency_limit`
+* `${transport}_destination_concurrency_negative_feedback`
+* `${transport}_destination_concurrency_positive_feedback`
+* `${transport}_destination_rate_delay`
+* `${transport}_destination_recipient_limit`
+* `${transport}_extra_recipient_limit`
+* `${transport}_minimum_delivery_slots`
+* `${transport}_recipient_limit`
+* `${transport}_recipient_refill_delay`
+* `${transport}_recipient_refill_limit`
+
+For these, use the [`postfix::main`](#defined-type-postfixmain) defined type.
 
 Because Postfix allows you to recursively define parameters in terms of other
 parameters it makes validating values impossible unless that convention is
