@@ -1,8 +1,10 @@
 begin
   require 'puppet_x/bodgit/postfix/util'
 rescue LoadError => detail
+  # :nocov:
   require 'pathname'
   require Pathname.new(__FILE__).dirname + '../../' + 'puppet_x/bodgit/postfix/util'
+  # :nocov:
 end
 
 Puppet::Type.newtype(:postfix_main) do
