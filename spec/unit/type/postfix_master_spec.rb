@@ -45,5 +45,14 @@ describe Puppet::Type.type(:postfix_master) do
       catalog.add_resource key
       expect(key.autorequire.size).to eq(1)
     end
+    it 'should autorequire the user and group' do
+      user = Puppet::Type.type(:user).new(:name => 'vmail')
+      catalog.add_resource user
+      group = Puppet::Type.type(:group).new(:name => 'vmail')
+      catalog.add_resource group
+      key = described_class.new(:name => 'dovecot/unix', :command => 'pipe user=vmail:vmail argv=/path/to/dovecot-lda', :ensure => :present)
+      catalog.add_resource key
+      expect(key.autorequire.size).to eq(2)
+    end
   end
 end

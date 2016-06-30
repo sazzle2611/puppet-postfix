@@ -17,6 +17,7 @@ Tested with Travis CI
 4. [Usage - Configuration options and additional functionality](#usage)
     * [Classes and Defined Types](#classes-and-defined-types)
         * [Class: postfix](#class-postfix)
+        * [Defined Type: postfix::main](#defined-type-postfixmain)
         * [Defined Type: postfix::master](#defined-type-postfixmaster)
         * [Defined Type: postfix::lookup::database](#defined-type-postfixlookupdatabase)
         * [Defined Type: postfix::lookup::ldap](#defined-type-postfixlookupldap)
@@ -905,6 +906,22 @@ The following parameters map 1:1 to their equivalent in `main.cf`:
 * `virtual_transport`
 * `virtual_uid_maps`
 
+#### Defined Type: `postfix::main`
+
+**Parameters within `postfix::main`:**
+
+##### `name`
+
+The name of the setting.
+
+##### `ensure`
+
+Standard ensurable parameter.
+
+##### `value`
+
+The value to associate with this setting.
+
 #### Defined Type: `postfix::master`
 
 **Parameters within `postfix::master`:**
@@ -1226,6 +1243,9 @@ follow the same autorequire rules as for
 it doesn't autorequire a setting that is redefined with `-o` in the same
 command.
 
+If the command uses `pipe(8)` then the value from the `user=` attribute is
+parsed and any existing user or group resource will be autorequired.
+
 ##### `target`
 
 The file in which to manage the service. Defaults to `/etc/postfix/master.cf`.
@@ -1259,10 +1279,12 @@ various lookup tables:
 
 ```puppet
 class { '::postfix':
-  virtual_transport       => 'lmtp:unix:/path/name',
+  virtual_mailbox_base    => '/var/mail/vhosts',
   virtual_mailbox_domains => ['ldap:/etc/postfix/virtualdomains.cf'],
   virtual_mailbox_maps    => ['ldap:/etc/postfix/virtualrecipients.cf'],
-  virtual_alias_maps      => ['ldap:/etc/postfix/virtualaliases.cf'],
+  virtual_minimum_uid     => 100,
+  virtual_uid_maps        => 'static:5000',
+  virtual_gid_maps        => 'static:5000',
 }
 
 # Specify connection defaults to enable sharing as per LDAP_README
@@ -1283,9 +1305,46 @@ Postfix::Lookup::Ldap {
   query_filter     => '(mail=%s)',
   result_attribute => ['mail'],
 }
+```
 
-::postfix::lookup::ldap { '/etc/postfix/virtualaliases.cf':
-  query_filter     => '(mailacceptinggeneralid=%s)',
+Extend the above example to use `dovecot-lda(1)` instead of `virtual(8)`:
+
+```puppet
+include ::dovecot
+
+class { '::postfix':
+  virtual_transport       => 'dovecot'
+  virtual_mailbox_domains => ['ldap:/etc/postfix/virtualdomains.cf'],
+  virtual_mailbox_maps    => ['ldap:/etc/postfix/virtualrecipients.cf'],
+}
+
+::postfix::main { 'dovecot_destination_recipient_limit':
+  value => 1,
+}
+
+::postfix::master { 'dovecot/unix':
+  chroot       => 'n',
+  command      => 'pipe flags=DRhu user=vmail:vmail argv=/path/to/dovecot-lda -f ${sender} -d ${recipient}',
+  unprivileged => 'n',
+  require      => Class['::dovecot'],
+}
+
+# Specify connection defaults to enable sharing as per LDAP_README
+Postfix::Lookup::Ldap {
+  server_host => ['ldap://192.0.2.1'],
+  search_base => 'dc=example,dc=com',
+  bind_dn     => 'cn=Manager,dc=example,dc=com',
+  bind_pw     => 'secret',
+  version     => 3,
+}
+
+::postfix::lookup::ldap { '/etc/postfix/virtualdomains.cf':
+  query_filter     => '(associatedDomain=%s)',
+  result_attribute => ['associatedDomain'],
+}
+
+::postfix::lookup::ldap { '/etc/postfix/virtualrecipients.cf':
+  query_filter     => '(mail=%s)',
   result_attribute => ['mail'],
 }
 ```
@@ -1309,7 +1368,10 @@ Postfix::Lookup::Ldap {
 
 #### Public Defined Types
 
-* [`postfix::master`](#defined-type-postfixmaster): Handles creating Postfix services.
+* [`postfix::main`](#defined-type-postfixmain): Handles managing non-standard
+  Postfix settings.
+* [`postfix::master`](#defined-type-postfixmaster): Handles creating
+  additional Postfix services.
 * [`postfix::lookup::database`](#defined-type-postfixlookupdatabase): Handles
   lookup tables using local files.
 * [`postfix::lookup::ldap`](#defined-type-postfixlookupldap): Handles lookup
@@ -1331,16 +1393,16 @@ Postfix::Lookup::Ldap {
 ## Limitations
 
 This module takes the (somewhat laborious) approach of creating parameters for
-each `main.cf` setting rather than just pass in a large hash of settings
-which should result in more control. Also, because Postfix allows you to
-recursively define parameters in terms of other parameters it makes validating
-values impossible unless that convention is discouraged. Currently this module
-allows recursive parameter expansion and so only validates that values are
-either strings or arrays (of strings).
+each `main.cf` setting rather than just pass in a large hash of settings,
+which should result in more control.
 
-Any setting that accepts the boolean `yes`/`no` values is mapped to a
-native Puppet boolean type. Any multi-valued setting accepts an array of
-values.
+Because Postfix allows you to recursively define parameters in terms of other
+parameters it makes validating values impossible unless that convention is
+forbidden. Currently this module allows recursive parameter expansion and so
+only validates that values are either strings or arrays (of strings).
+
+Any setting that accepts a boolean `yes`/`no` value also accepts native Puppet
+boolean values. Any multi-valued setting accepts an array of values.
 
 For referring to other settings, ensure that the `$` is escaped appropriately
 using either `\` or `''` to prevent Puppet expanding the variable itself.

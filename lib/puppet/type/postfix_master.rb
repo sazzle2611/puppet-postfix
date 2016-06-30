@@ -163,4 +163,24 @@ Puppet::Type.newtype(:postfix_master) do
     end
     autos
   end
+
+  autorequire(:user) do
+    autos = []
+    if self[:command] and self[:command] =~ /^pipe \s/x
+      if self[:command] =~ /\s user = ([^: ]+)/x
+        autos << $1
+      end
+    end
+    autos
+  end
+
+  autorequire(:group) do
+    autos = []
+    if self[:command] and self[:command] =~ /^pipe \s/x
+      if self[:command] =~ /\s user = (?:[^:]+) : ([^ ]+)/x
+        autos << $1
+      end
+    end
+    autos
+  end
 end
