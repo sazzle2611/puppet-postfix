@@ -47,7 +47,7 @@ Puppet::Type.type(:postfix_master).provide(:augeas, :parent => Puppet::Type.type
     augopen! do |aug|
       service = resource[:service]
       type = resource[:type]
-      aug.set("$target/#{service}/type", type)
+      aug.set("$target/#{service}[type = '#{type}']/type", type)
       %w{private unprivileged chroot wakeup limit command}.each do |attr|
         aug.set("$target/#{service}[type = '#{type}']/#{attr}", resource[attr.to_sym])
       end
