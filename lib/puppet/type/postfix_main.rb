@@ -30,12 +30,11 @@ Puppet::Type.newtype(:postfix_main) do
   end
 
   def self.title_patterns
-    identity = lambda { |x| x }
     [
       [
         /^(\S+)$/,
         [
-          [ :setting, identity ],
+          [ :setting ],
         ]
       ]
     ]

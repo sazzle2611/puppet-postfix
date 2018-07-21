@@ -39,19 +39,18 @@ Puppet::Type.newtype(:postfix_master) do
   end
 
   def self.title_patterns
-    identity = lambda { |x| x }
     [
       [
         /^(\S+)\/(\S+)$/,
         [
-          [ :service, identity ],
-          [ :type, identity ],
+          [ :service ],
+          [ :type    ],
         ]
       ],
       [
         /(.*)/,
         [
-          [ :name, identity ],
+          [ :name ],
         ]
       ]
     ]
@@ -114,7 +113,7 @@ Puppet::Type.newtype(:postfix_master) do
   end
 
   def command_scan(command)
-    command.scan(/-o \s+ ([^=]+) = ([^ ]+)/x)
+    command.scan(%r{-o \s+ ([^=]+) = ([^ ]+)}x)
   end
 
   def value_split(value)
