@@ -1,18 +1,33 @@
+# Define additional Postfix settings.
 #
+# Any settings not (yet) implemented in the main class or per-transport
+# settings can be defined here.
+#
+# @example An example setting
+#   include ::postfix
+#   ::postfix::main { 'dovecot_destination_recipient_limit':
+#     value => 1,
+#   }
+#
+# @param value
+# @param setting
+# @param ensure
+#
+# @see puppet_classes::postfix ::postfix
+# @see puppet_defined_types::postfix::master ::postfix::master
+#
+# @since 1.0.0
 define postfix::main (
-  $value,
-  $ensure = 'present',
+  String                    $value,
+  String                    $setting = $title,
+  Enum['present', 'absent'] $ensure  = 'present',
 ) {
 
   if ! defined(Class['::postfix']) {
-    fail('You must include the postfix base class before using any postfix defined resources') # lint:ignore:80chars
+    fail('You must include the postfix base class before using any postfix defined resources')
   }
 
-  validate_re($name, '^\S+$')
-  validate_string($value)
-  validate_re($ensure, '^(?:present|absent)$')
-
-  postfix_main { $name:
+  postfix_main { $setting:
     ensure  => $ensure,
     value   => $value,
     target  => "${::postfix::conf_dir}/main.cf",

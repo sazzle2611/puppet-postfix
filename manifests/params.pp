@@ -1,4 +1,4 @@
-#
+# @!visibility private
 class postfix::params {
 
   $conf_dir     = '/etc/postfix'
@@ -8,7 +8,7 @@ class postfix::params {
   case $::osfamily {
     'RedHat': {
       $lookup_packages                     = {}
-      $_default_services                   = {
+      $_services                           = {
         'anvil/unix'      => {
           'chroot'  => 'n',
           'command' => 'anvil',
@@ -123,6 +123,7 @@ class postfix::params {
       $data_directory                      = '/var/lib/postfix'
       $debug_peer_level                    = '2'
       $debugger_command                    = 'PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin ddd $daemon_directory/$process_name $process_id & sleep 5'
+      $default_database_type               = 'hash'
       $html_directory                      = false
       $inet_interfaces                     = ['localhost']
       $inet_protocols                      = ['all']
@@ -136,9 +137,9 @@ class postfix::params {
       $setgid_group                        = 'postdrop'
       $unknown_local_recipient_reject_code = '550'
 
-      case $::operatingsystemmajrelease { # lint:ignore:case_without_default
+      case $::operatingsystemmajrelease {
         '6': {
-          $default_services = merge($_default_services, {
+          $services         = merge($_services, {
             'pickup/fifo' => {
               'chroot'  => 'n',
               'command' => 'pickup',
@@ -162,7 +163,7 @@ class postfix::params {
           $sample_directory = '/usr/share/doc/postfix-2.6.6/samples'
         }
         default: {
-          $default_services = merge($_default_services, {
+          $services         = merge($_services, {
             'pickup/unix' => {
               'chroot'  => 'n',
               'command' => 'pickup',
@@ -193,7 +194,7 @@ class postfix::params {
       }
     }
     default: {
-      fail("The ${module_name} module is not supported on an ${::osfamily} based system.") # lint:ignore:80chars
+      fail("The ${module_name} module is not supported on an ${::osfamily} based system.")
     }
   }
 }

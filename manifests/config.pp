@@ -1,4 +1,4 @@
-#
+# @!visibility private
 class postfix::config {
 
   $conf_dir = $::postfix::conf_dir
@@ -537,7 +537,10 @@ class postfix::config {
       undef   => undef,
       default => join($::postfix::lmtp_sasl_mechanism_filter, ', '),
     },
-    'lmtp_sasl_password_maps'                                => $::postfix::lmtp_sasl_password_maps,
+    'lmtp_sasl_password_maps'                                => $::postfix::lmtp_sasl_password_maps ? {
+      undef   => undef,
+      default => join($::postfix::lmtp_sasl_password_maps, ', '),
+    },
     'lmtp_sasl_path'                                         => $::postfix::lmtp_sasl_path,
     'lmtp_sasl_security_options'                             => $::postfix::lmtp_sasl_security_options ? {
       undef   => undef,
@@ -1830,10 +1833,15 @@ class postfix::config {
     'virtual_uid_maps'                                       => $::postfix::virtual_uid_maps,
   })
 
-  $titles = keys($config)
-  $values = parsejson(inline_template('<%= @config.values.map { |x| { "value" => x } }.to_json %>'))
+  $config.each |String $setting, Any $value| {
+    postfix_main { $setting:
+      value  => $value,
+    }
+  }
 
-  create_resources(postfix_main, hash(zip($titles, $values)), {'ensure' => 'present'})
-
-  create_resources(postfix_master, $::postfix::default_services, {'ensure' => 'present'})
+  $::postfix::services.each |$resource, $attributes| {
+    postfix_master { $resource:
+      * => $attributes,
+    }
+  }
 }

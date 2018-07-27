@@ -11,18 +11,19 @@ Puppet::Type.newtype(:postfix_main) do
 
   include PuppetX::Bodgit::Postfix::Util
 
-  @doc = ''
+  @doc = 'Manages Postfix settings.
 
-  ensurable do
-    defaultvalues
-  end
+The resource name can be used as a shortcut for specifying the setting
+parameter.'
+
+  ensurable
 
   newparam(:name) do
-    desc ''
+    desc 'The name of the setting or a unique string.'
   end
 
   newparam(:setting) do
-    desc ''
+    desc 'The name of the setting.'
     isnamevar
     munge do |value|
       value.to_s
@@ -41,14 +42,28 @@ Puppet::Type.newtype(:postfix_main) do
   end
 
   newproperty(:value) do
-    desc ''
+    desc 'Value to change the setting to.
+
+If this value is refers to other settings and those settings are also managed
+by Puppet, they will be autorequired. If the value can be fully expanded and
+matches a file resource that exists in the catalogue then it will be
+autorequired. Lookup tables of the form `type:/path/to/file` will use the
+filename that is produced by the `postmap(1)` command. For example, a value of
+`hash:/etc/aliases` will attempt to autorequire `/etc/aliases.db`. Any setting
+that references a service defined in `master.cf` will attempt to autorequire
+it. This includes the various `${transport}_delivery_slot_cost`, etc.
+settings.'
     munge do |value|
       value.to_s
     end
   end
 
   newparam(:target) do
-    desc ''
+    desc 'The file in which to store the settings, defaults to
+`/etc/postfix/main.cf`.
+
+If a file resource exists in the catalogue for this value it will be
+autorequired.'
   end
 
   def value_split(value)

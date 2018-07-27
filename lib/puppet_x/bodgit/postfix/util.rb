@@ -1,15 +1,19 @@
+# @!visibility private
 module PuppetX
+  # @!visibility private
   module Bodgit
+    # @!visibility private
     module Postfix
+      # Postfix type utility methods
       module Util
 
         # Match the following provided it's not preceeded by a $:
         #
-        # * $foo_bar_baz
-        # * $(foo_bar_baz)
-        # * ${foo_bar_baz}
-        # * ${foo_bar_baz?value}
-        # * ${foo_bar_baz:value}
+        # * `$foo_bar_baz`
+        # * `$(foo_bar_baz)`
+        # * `${foo_bar_baz}`
+        # * `${foo_bar_baz?value}`
+        # * `${foo_bar_baz:value}`
         #
         # However, due to Ruby 1.8.7 we have to do this backwards as there's
         # no look-behind operator without pulling in Oniguruma. So anywhere
@@ -59,6 +63,7 @@ module PuppetX
           )
         /x
 
+        # Expand variables where possible
         def expand(value)
           v = value.reverse.clone
           loop do
@@ -81,6 +86,7 @@ module PuppetX
           v.reverse
         end
 
+        # Generate a list of potential candidates for file dependencies
         def file_autorequires(values)
           requires = []
           values.each do |v|
@@ -109,6 +115,7 @@ module PuppetX
           requires
         end
 
+        # Generate a list of variable names
         def value_scan(value)
           value.reverse.scan(PARAMETER_REGEXP).each do |s|
             s.compact!.reverse!

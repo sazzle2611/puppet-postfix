@@ -1,38 +1,43 @@
+# Define additional Postfix services.
 #
+# @example Define the Dovecot LDA service
+#   include ::postfix
+#   ::postfix::master { 'dovecot/unix':
+#     chroot       => 'n',
+#     command      => 'pipe flags=DRhu user=vmail:vmail argv=/path/to/dovecot-lda -f ${sender} -d ${recipient}',
+#     unprivileged => 'n',
+#     require      => Class['::dovecot'],
+#   }
+#
+# @param command
+# @param service
+# @param ensure
+# @param private
+# @param unprivileged
+# @param chroot
+# @param wakeup
+# @param limit
+#
+# @see puppet_classes::postfix ::postfix
+# @see puppet_defined_types::postfix::main ::postfix::main
+#
+# @since 1.0.0
 define postfix::master (
-  $command,
-  $ensure       = 'present',
-  $private      = undef,
-  $unprivileged = undef,
-  $chroot       = undef,
-  $wakeup       = undef,
-  $limit        = undef,
+  String                                                $command,
+  Pattern[/(?x) ^ [a-z]+ \/ (?:inet|unix|fifo|pass) $/] $service      = $title,
+  Enum['present', 'absent']                             $ensure       = 'present',
+  Optional[Enum['-', 'n', 'y']]                         $private      = undef,
+  Optional[Enum['-', 'n', 'y']]                         $unprivileged = undef,
+  Optional[Enum['-', 'n', 'y']]                         $chroot       = undef,
+  Optional[Pattern[/(?x) ^ (?: - | \d+ [?]? ) $/]]      $wakeup       = undef,
+  Optional[Pattern[/(?x) ^ (?: - | \d+ ) $/]]           $limit        = undef,
 ) {
 
   if ! defined(Class['::postfix']) {
-    fail('You must include the postfix base class before using any postfix defined resources') # lint:ignore:80chars
+    fail('You must include the postfix base class before using any postfix defined resources')
   }
 
-  validate_re($name, '^[a-z]+/(?:inet|unix|fifo|pass)$')
-  validate_string($command)
-  validate_re($ensure, '^(?:present|absent)$')
-  if $private {
-    validate_re($private, '^[-ny]$')
-  }
-  if $unprivileged {
-    validate_re($unprivileged, '^[-ny]$')
-  }
-  if $chroot {
-    validate_re($chroot, '^[-ny]$')
-  }
-  if $wakeup {
-    validate_re($wakeup, '^(?:-|\d+[?]?)$')
-  }
-  if $limit {
-    validate_re($limit, '^(?:-|\d+)$')
-  }
-
-  postfix_master { $name:
+  postfix_master { $service:
     ensure       => $ensure,
     command      => $command,
     private      => $private,

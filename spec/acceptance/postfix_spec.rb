@@ -6,6 +6,17 @@ describe 'postfix' do
 
     pp = <<-EOS
       include ::postfix
+
+      ::postfix::lookup::database { '/etc/aliases':
+        type => 'hash',
+      }
+
+      Mailalias <||> -> ::Postfix::Lookup::Database['/etc/aliases']
+
+      mailalias { 'foo':
+        recipient => ['bar'],
+        target    => '/etc/aliases',
+      }
     EOS
 
     apply_manifest(pp, :catch_failures => true)
@@ -13,32 +24,51 @@ describe 'postfix' do
   end
 
   describe package('postfix') do
-    it { should be_installed }
+    it { is_expected.to be_installed }
   end
 
   describe file('/etc/postfix') do
-    it { should be_directory }
-    it { should be_mode 755 }
-    it { should be_owned_by 'root' }
-    it { should be_grouped_into 'root' }
+    it { is_expected.to be_directory }
+    it { is_expected.to be_mode 755 }
+    it { is_expected.to be_owned_by 'root' }
+    it { is_expected.to be_grouped_into 'root' }
   end
 
   describe file('/etc/postfix/main.cf') do
-    it { should be_file }
-    it { should be_mode 644 }
-    it { should be_owned_by 'root' }
-    it { should be_grouped_into 'root' }
+    it { is_expected.to be_file }
+    it { is_expected.to be_mode 644 }
+    it { is_expected.to be_owned_by 'root' }
+    it { is_expected.to be_grouped_into 'root' }
   end
 
   describe file('/etc/postfix/master.cf') do
-    it { should be_file }
-    it { should be_mode 644 }
-    it { should be_owned_by 'root' }
-    it { should be_grouped_into 'root' }
+    it { is_expected.to be_file }
+    it { is_expected.to be_mode 644 }
+    it { is_expected.to be_owned_by 'root' }
+    it { is_expected.to be_grouped_into 'root' }
   end
 
   describe service('postfix') do
-    it { should be_enabled }
-    it { should be_running }
+    it { is_expected.to be_enabled }
+    it { is_expected.to be_running }
+  end
+
+  describe file('/etc/aliases') do
+    it { is_expected.to be_file }
+    it { is_expected.to be_mode 644 }
+    it { is_expected.to be_owned_by 'root' }
+    it { is_expected.to be_grouped_into 'root' }
+  end
+
+  describe file('/etc/aliases.db') do
+    it { is_expected.to be_file }
+    it { is_expected.to be_mode 644 }
+    it { is_expected.to be_owned_by 'root' }
+    it { is_expected.to be_grouped_into 'root' }
+  end
+
+  describe command('postmap -q foo hash:/etc/aliases') do
+    its(:exit_status) { is_expected.to eq 0 }
+    its(:stdout) { is_expected.to eq "bar\n" }
   end
 end

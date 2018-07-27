@@ -1,5 +1,5 @@
 Puppet::Type.type(:postfix_master).provide(:augeas, :parent => Puppet::Type.type(:augeasprovider).provider(:default)) do
-  desc ''
+  desc 'Uses Augeas API to update a master.cf service.'
 
   default_file { '/etc/postfix/master.cf' }
 

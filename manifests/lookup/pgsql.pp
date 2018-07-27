@@ -1,51 +1,54 @@
+# Define a PostgreSQL lookup table.
 #
+# @param hosts
+# @param user
+# @param password
+# @param dbname
+# @param query
+# @param ensure
+# @param path
+# @param result_format
+# @param domain
+# @param expansion_limit
+#
+# @see puppet_classes::postfix ::postfix
+#
+# @since 1.0.0
 define postfix::lookup::pgsql (
-  $hosts,
-  $user,
-  $password,
-  $dbname,
-  $query,
-  $ensure          = 'present',
-  $result_format   = undef,
-  $domain          = undef,
-  $expansion_limit = undef,
+  Array[Postfix::Type::Lookup::PgSQL::Host, 1] $hosts,
+  String                                       $user,
+  String                                       $password,
+  String                                       $dbname,
+  String                                       $query,
+  Enum['present', 'absent']                    $ensure          = 'present',
+  Stdlib::Absolutepath                         $path            = $title,
+  Optional[String]                             $result_format   = undef,
+  Optional[Array[String, 1]]                   $domain          = undef,
+  Optional[Integer[0]]                         $expansion_limit = undef,
 ) {
 
   if ! defined(Class['::postfix']) {
-    fail('You must include the postfix base class before using any postfix defined resources') # lint:ignore:80chars
+    fail('You must include the postfix base class before using any postfix defined resources')
   }
 
-  validate_absolute_path($name)
-  validate_re($ensure, '^(?:present|absent)$')
-  validate_array($hosts)
-  validate_string($user)
-  validate_string($password)
-  validate_string($dbname)
-  validate_string($query)
-  validate_string($result_format)
-  if $domain {
-    validate_array($domain)
-  }
-  if $expansion_limit {
-    validate_integer($expansion_limit, '', 0)
-  }
+  $_hosts = postfix::flatten_host($hosts)
 
   $_ensure = $ensure ? {
     'absent' => 'absent',
     default  => 'file',
   }
 
-  file { $name:
+  file { $path:
     ensure  => $_ensure,
     owner   => 0,
     group   => 0,
     mode    => '0600',
-    content => template('postfix/pgsql.cf.erb'),
+    content => template("${module_name}/pgsql.cf.erb"),
   }
 
   if $ensure != 'absent' and has_key($::postfix::lookup_packages, 'pgsql') {
     $pgsql_package = $::postfix::lookup_packages['pgsql']
     ensure_packages([$pgsql_package])
-    Package[$pgsql_package] -> File[$name]
+    Package[$pgsql_package] -> File[$path]
   }
 }

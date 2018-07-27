@@ -1,6 +1,6 @@
 # !!! Managed by Puppet !!!
 
-hosts = <%= @hosts.join(' ') %>
+hosts = <%= @_hosts.join(' ') %>
 user = <%= @user %>
 password = <%= @password %>
 dbname = <%= @dbname %>
@@ -32,6 +32,6 @@ tls_CAfile = <%= @tls_ca_cert_file %>
 <% if @tls_ca_cert_dir -%>
 tls_CApath = <%= @tls_ca_cert_dir %>
 <% end -%>
-<% if not @tls_verify_cert.nil? -%>
-tls_verify_cert = <%= @tls_verify_cert == true ? 'yes' : 'no' %>
+<% unless @tls_verify_cert.nil? -%>
+tls_verify_cert = <%= @tls_verify_cert ? 'yes' : 'no' %>
 <% end -%>

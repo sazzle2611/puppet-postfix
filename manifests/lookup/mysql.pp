@@ -1,77 +1,68 @@
+# Define a MySQL lookup table.
 #
+# @param hosts
+# @param user
+# @param password
+# @param dbname
+# @param query
+# @param ensure
+# @param path
+# @param result_format
+# @param domain
+# @param expansion_limit
+# @param option_file
+# @param option_group
+# @param tls_cert
+# @param tls_key
+# @param tls_ca_cert_file
+# @param tls_ca_cert_dir
+# @param tls_verify_cert
+#
+# @see puppet_classes::postfix ::postfix
+#
+# @since 1.0.0
 define postfix::lookup::mysql (
-  $hosts,
-  $user,
-  $password,
-  $dbname,
-  $query,
-  $ensure           = 'present',
-  $result_format    = undef,
-  $domain           = undef,
-  $expansion_limit  = undef,
-  $option_file      = undef,
-  $option_group     = undef,
-  $tls_cert         = undef,
-  $tls_key          = undef,
-  $tls_ca_cert_file = undef,
-  $tls_ca_cert_dir  = undef,
-  $tls_verify_cert  = undef,
+  Array[Postfix::Type::Lookup::MySQL::Host, 1] $hosts,
+  String                                       $user,
+  String                                       $password,
+  String                                       $dbname,
+  String                                       $query,
+  Enum['present', 'absent']                    $ensure           = 'present',
+  Stdlib::Absolutepath                         $path             = $title,
+  Optional[String]                             $result_format    = undef,
+  Optional[Array[String, 1]]                   $domain           = undef,
+  Optional[Integer[0]]                         $expansion_limit  = undef,
+  Optional[Stdlib::Absolutepath]               $option_file      = undef,
+  Optional[String]                             $option_group     = undef,
+  Optional[Stdlib::Absolutepath]               $tls_cert         = undef,
+  Optional[Stdlib::Absolutepath]               $tls_key          = undef,
+  Optional[Stdlib::Absolutepath]               $tls_ca_cert_file = undef,
+  Optional[Stdlib::Absolutepath]               $tls_ca_cert_dir  = undef,
+  Optional[Boolean]                            $tls_verify_cert  = undef,
 ) {
 
   if ! defined(Class['::postfix']) {
-    fail('You must include the postfix base class before using any postfix defined resources') # lint:ignore:80chars
+    fail('You must include the postfix base class before using any postfix defined resources')
   }
 
-  validate_absolute_path($name)
-  validate_re($ensure, '^(?:present|absent)$')
-  validate_array($hosts)
-  validate_string($user)
-  validate_string($password)
-  validate_string($dbname)
-  validate_string($query)
-  validate_string($result_format)
-  if $domain {
-    validate_array($domain)
-  }
-  if $expansion_limit {
-    validate_integer($expansion_limit, '', 0)
-  }
-  if $option_file {
-    validate_absolute_path($option_file)
-  }
-  validate_string($option_group)
-  if $tls_cert {
-    validate_absolute_path($tls_cert)
-  }
-  if $tls_key {
-    validate_absolute_path($tls_key)
-  }
-  if $tls_ca_cert_file {
-    validate_absolute_path($tls_ca_cert_file)
-  }
-  if $tls_ca_cert_dir {
-    validate_absolute_path($tls_ca_cert_dir)
-  }
-  if $tls_verify_cert {
-    validate_bool($tls_verify_cert)
-  }
+  $_hosts = postfix::flatten_host($hosts)
 
   $_ensure = $ensure ? {
     'absent' => 'absent',
     default  => 'file',
   }
 
-  file { $name:
+  file { $path:
     ensure  => $_ensure,
     owner   => 0,
     group   => 0,
     mode    => '0600',
-    content => template('postfix/mysql.cf.erb'),
+    content => template("${module_name}/mysql.cf.erb"),
   }
 
   if $ensure != 'absent' and has_key($::postfix::lookup_packages, 'mysql') {
     $mysql_package = $::postfix::lookup_packages['mysql']
     ensure_packages([$mysql_package])
-    Package[$mysql_package] -> File[$name]
+    Package[$mysql_package] -> File[$path]
   }
 }
