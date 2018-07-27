@@ -102,5 +102,12 @@ describe Puppet::Type.type(:postfix_main) do
       catalog.add_resource key
       expect(key.autorequire.size).to eq(1)
     end
+    it 'should autorequire a proxymap lookup table' do
+      file = Puppet::Type.type(:file).new(:name => '/etc/postfix/ldap-aliases.cf')
+      catalog.add_resource file
+      key = described_class.new(:name => 'mynetworks', :value => 'hash:/etc/aliases, proxy:ldap:/etc/postfix/ldap-aliases.cf', :ensure => :present)
+      catalog.add_resource key
+      expect(key.autorequire.size).to eq(1)
+    end
   end
 end

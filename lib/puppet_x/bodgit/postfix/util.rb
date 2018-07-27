@@ -94,7 +94,7 @@ module PuppetX
             when /^(?:\/[^\/]+)+\/?$/
               # File
               requires << v
-            when /^([a-z]+):((?:\/[^\/]+)+)$/
+            when /^(?:proxy:)?([a-z]+):((?:\/[^\/]+)+)$/
               # Lookup table
               case $1
               when 'btree', 'hash'
