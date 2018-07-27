@@ -1,28 +1,27 @@
-# Flatten an array of host structures to an array of strings.
+# Flatten a host structure to a string.
 #
-# @param hosts The array of hosts to flatten, `undef` is passed through.
+# @param host The host to flatten, `undef` is passed through.
 #
-# @return [Optional[Array[String, 1]]] The array of flattened strings.
+# @return [Optional[String]] The flattened string.
 #
 # @example
-#   postfix::flatten_host(['2001:db8::1', ['192.0.2.1', 389]])
+#   postfix::flatten_host('2001:db8::1')
+#   postfix::flatten_host(['192.0.2.1', 389])
 #
 # @since 2.0.0
-function postfix::flatten_host(Optional[Array[Variant[Postfix::Type::Lookup::LDAP::Host, Postfix::Type::Lookup::MySQL::Host, Postfix::Type::Lookup::PgSQL::Host], 1]] $hosts) {
+function postfix::flatten_host(Optional[Variant[Postfix::Type::Lookup::LDAP::Host, Postfix::Type::Lookup::MySQL::Host, Postfix::Type::Lookup::PgSQL::Host, Postfix::Type::Lookup::Memcache::Host]] $host) {
 
-  $hosts ? {
+  $host ? {
     undef   => undef,
-    default => $hosts.map |$x| {
-      type($x) ? {
-        Type[Tuple]           => join($x.map |$y| {
-          type($y) ? {
-            Type[Bodgitlib::Host] => bodgitlib::enclose_ipv6($y), # lint:ignore:unquoted_string_in_selector FIXME
-            default               => $y,
-          }
-        }, ':'),
-        Type[Bodgitlib::Host] => bodgitlib::enclose_ipv6($x), # lint:ignore:unquoted_string_in_selector FIXME
-        default               => $x,
-      }
+    default => type($host) ? {
+      Type[Tuple]           => join($host.map |$x| {
+        type($x) ? {
+          Type[Bodgitlib::Host] => bodgitlib::enclose_ipv6($x), # lint:ignore:unquoted_string_in_selector FIXME
+          default               => $x,
+        }
+      }, ':'),
+      Type[Bodgitlib::Host] => bodgitlib::enclose_ipv6($host), # lint:ignore:unquoted_string_in_selector FIXME
+      default               => $host,
     },
   }
 }

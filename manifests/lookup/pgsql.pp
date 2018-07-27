@@ -31,7 +31,7 @@ define postfix::lookup::pgsql (
     fail('You must include the postfix base class before using any postfix defined resources')
   }
 
-  $_hosts = postfix::flatten_host($hosts)
+  $_hosts = postfix::flatten_hosts($hosts)
 
   $_ensure = $ensure ? {
     'absent' => 'absent',

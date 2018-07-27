@@ -766,6 +766,7 @@
 # @see puppet_defined_types::postfix::master ::postfix::master
 # @see puppet_defined_types::postfix::lookup::database ::postfix::lookup::database
 # @see puppet_defined_types::postfix::lookup::ldap ::postfix::lookup::ldap
+# @see puppet_defined_types::postfix::lookup::memcache ::postfix::lookup::memcache
 # @see puppet_defined_types::postfix::lookup::mysql ::postfix::lookup::mysql
 # @see puppet_defined_types::postfix::lookup::pgsql ::postfix::lookup::pgsql
 # @see puppet_defined_types::postfix::lookup::sqlite ::postfix::lookup::sqlite

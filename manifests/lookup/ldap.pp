@@ -112,7 +112,7 @@ define postfix::lookup::ldap (
     fail('You must include the postfix base class before using any postfix defined resources')
   }
 
-  $_server_host = postfix::flatten_host($server_host)
+  $_server_host = postfix::flatten_hosts($server_host)
 
   $_ensure = $ensure ? {
     'absent' => 'absent',
