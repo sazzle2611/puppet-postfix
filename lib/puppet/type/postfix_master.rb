@@ -11,18 +11,21 @@ Puppet::Type.newtype(:postfix_master) do
 
   include PuppetX::Bodgit::Postfix::Util
 
-  @doc = ''
+  @doc = 'Manages Postfix services.
 
-  ensurable do
-    defaultvalues
-  end
+The resource name can be used as a shortcut for specifying the service and
+type parameters by using the form `<service>/<type>` otherwise it can be left
+as a normal string.'
+
+  ensurable
 
   newparam(:name) do
-    desc ''
+    desc 'The name of the service and type separated by `/`, or a unique
+string.'
   end
 
   newparam(:service) do
-    desc ''
+    desc 'The service name.'
     isnamevar
     munge do |value|
       value.to_s
@@ -30,7 +33,7 @@ Puppet::Type.newtype(:postfix_master) do
   end
 
   newparam(:type) do
-    desc ''
+    desc 'The service type.'
     isnamevar
     newvalues('inet', 'unix', 'fifo', 'pass')
     munge do |value|
@@ -39,26 +42,25 @@ Puppet::Type.newtype(:postfix_master) do
   end
 
   def self.title_patterns
-    identity = lambda { |x| x }
     [
       [
         /^(\S+)\/(\S+)$/,
         [
-          [ :service, identity ],
-          [ :type, identity ],
+          [ :service ],
+          [ :type    ],
         ]
       ],
       [
         /(.*)/,
         [
-          [ :name, identity ],
+          [ :name ],
         ]
       ]
     ]
   end
 
   newproperty(:private) do
-    desc ''
+    desc 'Whether or not access is restricted.'
     newvalues('-', 'n', 'y')
     defaultto('-')
     munge do |value|
@@ -67,7 +69,7 @@ Puppet::Type.newtype(:postfix_master) do
   end
 
   newproperty(:unprivileged) do
-    desc ''
+    desc 'Whether the service runs with root privileges or not.'
     newvalues('-', 'n', 'y')
     defaultto('-')
     munge do |value|
@@ -76,7 +78,7 @@ Puppet::Type.newtype(:postfix_master) do
   end
 
   newproperty(:chroot) do
-    desc ''
+    desc 'Whether the service runs chrooted.'
     newvalues('-', 'n', 'y')
     defaultto('-')
     munge do |value|
@@ -85,7 +87,7 @@ Puppet::Type.newtype(:postfix_master) do
   end
 
   newproperty(:wakeup) do
-    desc ''
+    desc 'Wake up time.'
     newvalues('-', /^\d+[?]?$/)
     defaultto('-')
     munge do |value|
@@ -94,7 +96,7 @@ Puppet::Type.newtype(:postfix_master) do
   end
 
   newproperty(:limit) do
-    desc ''
+    desc 'Process limit.'
     newvalues('-', /^\d+$/)
     defaultto('-')
     munge do |value|
@@ -103,18 +105,32 @@ Puppet::Type.newtype(:postfix_master) do
   end
 
   newproperty(:command) do
-    desc ''
+    desc 'The command name and arguments.
+
+The command to run. If the command includes any `-o` options then these
+follow the same autorequire rules as for
+[`postfix_main`](#native-type-postfix_main) resources with the exception that
+it doesn\'t autorequire a setting that is redefined with `-o` in the same
+command.
+
+If the command uses `pipe(8)` then the value from the `user=` attribute is
+parsed and any existing user or group resource will be autorequired.'
+
     munge do |value|
       value.to_s
     end
   end
 
   newparam(:target) do
-    desc ''
+    desc 'The file in which to store the services, defaults to
+`/etc/postfix/master.cf`.
+
+If a file resource exists in the catalogue for this value it will be
+autorequired.'
   end
 
   def command_scan(command)
-    command.scan(/-o \s+ ([^=]+) = ([^ ]+)/x)
+    command.scan(%r{-o \s+ ([^=]+) = ([^ ]+)}x)
   end
 
   def value_split(value)

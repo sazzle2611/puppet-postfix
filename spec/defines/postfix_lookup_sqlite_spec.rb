@@ -19,16 +19,17 @@ describe 'postfix::lookup::sqlite' do
       end
 
       context 'without postfix class included' do
-        it { expect { should compile }.to raise_error(/must include the postfix base class/) }
+        it { expect { is_expected.to compile }.to raise_error(/must include the postfix base class/) }
       end
 
-      context 'with postfix class included', :compile do
+      context 'with postfix class included' do
         let(:pre_condition) do
           'include ::postfix'
         end
 
-        it { should contain_file('/etc/postfix/test.cf') }
-        it { should contain_postfix__lookup__sqlite('/etc/postfix/test.cf') }
+        it { is_expected.to compile.with_all_deps }
+        it { is_expected.to contain_file('/etc/postfix/test.cf') }
+        it { is_expected.to contain_postfix__lookup__sqlite('/etc/postfix/test.cf') }
       end
     end
   end

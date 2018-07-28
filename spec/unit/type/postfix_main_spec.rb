@@ -31,10 +31,17 @@ describe Puppet::Type.type(:postfix_main) do
       catalog.add_resource key
       expect(key.autorequire.size).to eq(1)
     end
-    it 'should autorequire the service' do
+    it 'should autorequire the service by name' do
       service = Puppet::Type.type(:postfix_master).new(:name => 'bounce/unix')
       catalog.add_resource service
       key = described_class.new(:name => 'bounce_service_name', :value => 'bounce', :ensure => :present)
+      catalog.add_resource key
+      expect(key.autorequire.size).to eq(1)
+    end
+    it 'should autorequire the service by setting' do
+      service = Puppet::Type.type(:postfix_master).new(:name => 'dovecot/unix')
+      catalog.add_resource service
+      key = described_class.new(:name => 'dovecot_destination_recipient_limit', :value => '1', :ensure => :present)
       catalog.add_resource key
       expect(key.autorequire.size).to eq(1)
     end
@@ -92,6 +99,13 @@ describe Puppet::Type.type(:postfix_main) do
       file = Puppet::Type.type(:file).new(:name => '/etc/postfix/ldap-aliases.cf')
       catalog.add_resource file
       key = described_class.new(:name => 'mynetworks', :value => 'hash:/etc/aliases, ldap:/etc/postfix/ldap-aliases.cf', :ensure => :present)
+      catalog.add_resource key
+      expect(key.autorequire.size).to eq(1)
+    end
+    it 'should autorequire a proxymap lookup table' do
+      file = Puppet::Type.type(:file).new(:name => '/etc/postfix/ldap-aliases.cf')
+      catalog.add_resource file
+      key = described_class.new(:name => 'mynetworks', :value => 'hash:/etc/aliases, proxy:ldap:/etc/postfix/ldap-aliases.cf', :ensure => :present)
       catalog.add_resource key
       expect(key.autorequire.size).to eq(1)
     end

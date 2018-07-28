@@ -1,71 +1,108 @@
+# Define lookup tables using static database files.
 #
+# @example Define a `transport(5)` table
+#   ::postfix::lookup::database { '/etc/postfix/transport':
+#     content => @(EOS/L),
+#       example.com :
+#       | EOS
+#     type    => 'hash',
+#   }
+#
+# @example Manage the `aliases(5)` table with `mailalias` resources
+#   ::postfix::lookup::database { '/etc/aliases':
+#     type => 'hash',
+#   }
+#   Mailalias <||> -> ::Postfix::Lookup::Database['/etc/aliases']
+#
+# @param ensure
+# @param path
+# @param type
+# @param content
+# @param source
+#
+# @see puppet_classes::postfix ::postfix
+#
+# @since 1.0.0
 define postfix::lookup::database (
-  $ensure  = 'present',
-  $content = undef,
-  $source  = undef,
-  $type    = $::postfix::default_database_type,
+  Enum['present', 'absent']       $ensure  = 'present',
+  Stdlib::Absolutepath            $path    = $title,
+  Postfix::Type::Lookup::Database $type    = $::postfix::default_database_type,
+  Optional[String]                $content = undef,
+  Optional[String]                $source  = undef,
 ) {
 
   if ! defined(Class['::postfix']) {
-    fail('You must include the postfix base class before using any postfix defined resources') # lint:ignore:80chars
+    fail('You must include the postfix base class before using any postfix defined resources')
   }
 
-  validate_absolute_path($name)
-  validate_re($ensure, '^(?:present|absent)$')
-  validate_re($type, '^(?:btree|cdb|s?dbm|(text)?hash|cidr|pcre|regexp|lmdb)$')
   if $content and $source {
-    fail("You must provide either 'content' or 'source', they are mutually exclusive") # lint:ignore:80chars
+    fail('Only one of $content or $source should be specified.')
   }
-  validate_string($content)
-  validate_string($source)
 
   $_ensure = $ensure ? {
     'absent' => 'absent',
     default  => 'file',
   }
 
-  file { $name:
+  file { $path:
     ensure  => $_ensure,
     owner   => 0,
     group   => 0,
-    mode    => '0600',
+    mode    => '0644',
     content => $content,
     source  => $source,
+  }
+
+  # Changes to files that aren't hashed generally don't get picked up without
+  # a reload so trigger one
+  if $type =~ Postfix::Type::Lookup::Database::Flat {
+    File[$path] ~> Class['::postfix::service'] # lint:ignore:trailing_comma FIXME
   }
 
   if $ensure != 'absent' and has_key($::postfix::lookup_packages, $type) {
     $lookup_package = $::postfix::lookup_packages[$type]
     ensure_packages([$lookup_package])
-    Package[$lookup_package] -> File[$name]
+    Package[$lookup_package] -> File[$path]
   }
 
-  if $type in ['btree', 'cdb', 'dbm', 'hash', 'lmdb', 'sdbm'] {
+  if $type =~ Postfix::Type::Lookup::Database::Hashed {
 
-    case $type { # lint:ignore:case_without_default
+    case $type {
       'btree', 'hash': {
-        $files = ["${name}.db"]
+        $files = ["${path}.db"] # lint:ignore:trailing_comma FIXME
       }
       'cdb': {
-        $files = ["${name}.cdb"]
+        $files = ["${path}.cdb"]
       }
       'dbm', 'sdbm': {
-        $files = ["${name}.pag", "${name}.dir"]
+        $files = ["${path}.pag", "${path}.dir"]
       }
       'lmdb': {
-        $files = ["${name}.lmdb"]
+        $files = ["${path}.lmdb"]
+      }
+      default: {
+        # noop
       }
     }
 
     file { $files:
       ensure => $_ensure,
+      before => Class['::postfix::service'],
     }
 
     if $ensure != 'absent' {
-      exec { "postmap ${type}:${name}":
-        path        => $::path,
-        refreshonly => true,
-        subscribe   => File[$name],
-        before      => File[$files],
+
+      # The exec resource fires unless each target hashed file exists and the
+      # mtime of each is greater than the mtime of the source file
+      $unless = join($files.reduce([]) |$memo, $x| {
+        $memo + ["[ -f ${x} ]", "[ $(stat -c '%Y' ${x}) -gt $(stat -c '%Y' ${path}) ]"]
+      }, ' && ')
+
+      exec { "postmap ${type}:${path}":
+        path    => $::path,
+        unless  => $unless,
+        require => File[$path],
+        before  => File[$files],
       }
     }
   }

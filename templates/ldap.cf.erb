@@ -1,8 +1,8 @@
 # !!! Managed by Puppet !!!
 
 search_base = <%= @search_base %>
-<% if @server_host -%>
-server_host = <%= @server_host.join(', ') %>
+<% if @_server_host -%>
+server_host = <%= @_server_host.join(', ') %>
 <% end -%>
 <% if @server_port -%>
 server_port = <%= @server_port %>
@@ -23,19 +23,19 @@ domain = <%= @domain.join(', ') %>
 result_attribute = <%= @result_attribute.join(', ') %>
 <% end -%>
 <% if @special_result_attribute -%>
-special_result_attribute = <%= @special_result_attribute %>
+special_result_attribute = <%= @special_result_attribute.join(', ') %>
 <% end -%>
 <% if @terminal_result_attribute -%>
-terminal_result_attribute = <%= @terminal_result_attribute %>
+terminal_result_attribute = <%= @terminal_result_attribute.join(', ') %>
 <% end -%>
 <% if @leaf_result_attribute -%>
-leaf_result_attribute = <%= @leaf_result_attribute %>
+leaf_result_attribute = <%= @leaf_result_attribute.join(', ') %>
 <% end -%>
 <% if @scope -%>
 scope = <%= @scope %>
 <% end -%>
-<% if not @bind.nil? -%>
-bind = <%= [true, false].include?(@bind) ? @bind == true ? 'yes' : 'no' : @bind %>
+<% unless @bind.nil? -%>
+bind = <%= [true, false].include?(@bind) ? @bind ? 'yes' : 'no' : @bind %>
 <% end -%>
 <% if @bind_dn -%>
 bind_dn = <%= @bind_dn %>
@@ -55,8 +55,8 @@ size_limit = <%= @size_limit %>
 <% if @deference -%>
 dereference = <%= @dereference %>
 <% end -%>
-<% if not @chase_referrals.nil? -%>
-chase_referrals = <%= @chase_referrals == true ? 'yes' : 'no' %>
+<% unless @chase_referrals.nil? -%>
+chase_referrals = <%= @chase_referrals ? 'yes' : 'no' %>
 <% end -%>
 <% if @version -%>
 version = <%= @version %>
@@ -76,8 +76,8 @@ sasl_authz_id = <%= @sasl_authz_id %>
 <% if @sasl_minssf -%>
 sasl_minssf = <%= @sasl_minssf %>
 <% end -%>
-<% if not @start_tls.nil? -%>
-start_tls = <%= @start_tls == true ? 'yes' : 'no' %>
+<% unless @start_tls.nil? -%>
+start_tls = <%= @start_tls ? 'yes' : 'no' %>
 <% end -%>
 <% if @tls_ca_cert_dir -%>
 tls_ca_cert_dir = <%= @tls_ca_cert_dir %>
@@ -91,8 +91,8 @@ tls_cert = <%= @tls_cert %>
 <% if @tls_key -%>
 tls_key = <%= @tls_key %>
 <% end -%>
-<% if not @tls_require_cert.nil? -%>
-tls_require_cert = <%= @tls_require_cert == true ? 'yes' : 'no' %>
+<% unless @tls_require_cert.nil? -%>
+tls_require_cert = <%= @tls_require_cert ? 'yes' : 'no' %>
 <% end -%>
 <% if @tls_random_file -%>
 tls_random_file = <%= @tls_random_file %>

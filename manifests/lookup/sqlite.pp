@@ -1,27 +1,28 @@
+# Define an SQLite lookup table.
 #
+# @param dbpath
+# @param query
+# @param ensure
+# @param path
+# @param result_format
+# @param domain
+# @param expansion_limit
+#
+# @see puppet_classes::postfix ::postfix
+#
+# @since 1.0.0
 define postfix::lookup::sqlite (
-  $dbpath,
-  $query,
-  $ensure          = 'present',
-  $result_format   = undef,
-  $domain          = undef,
-  $expansion_limit = undef,
+  Stdlib::Absolutepath       $dbpath,
+  String                     $query,
+  Enum['present', 'absent']  $ensure          = 'present',
+  Stdlib::Absolutepath       $path            = $title,
+  Optional[String]           $result_format   = undef,
+  Optional[Array[String, 1]] $domain          = undef,
+  Optional[Integer[0]]       $expansion_limit = undef,
 ) {
 
   if ! defined(Class['::postfix']) {
-    fail('You must include the postfix base class before using any postfix defined resources') # lint:ignore:80chars
-  }
-
-  validate_absolute_path($name)
-  validate_re($ensure, '^(?:present|absent)$')
-  validate_absolute_path($dbpath)
-  validate_string($query)
-  validate_string($result_format)
-  if $domain {
-    validate_array($domain)
-  }
-  if $expansion_limit {
-    validate_integer($expansion_limit, '', 0)
+    fail('You must include the postfix base class before using any postfix defined resources')
   }
 
   $_ensure = $ensure ? {
@@ -29,17 +30,17 @@ define postfix::lookup::sqlite (
     default  => 'file',
   }
 
-  file { $name:
+  file { $path:
     ensure  => $_ensure,
     owner   => 0,
     group   => 0,
     mode    => '0600',
-    content => template('postfix/sqlite.cf.erb'),
+    content => template("${module_name}/sqlite.cf.erb"),
   }
 
   if $ensure != 'absent' and has_key($::postfix::lookup_packages, 'sqlite') {
     $sqlite_package = $::postfix::lookup_packages['sqlite']
     ensure_packages([$sqlite_package])
-    Package[$sqlite_package] -> File[$name]
+    Package[$sqlite_package] -> File[$path]
   }
 }
