@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Defined Type: postfix::lookup::ldap
+  
+    &mdash; Documentation by YARD 0.9.14
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "puppet_defined_types::postfix::lookup::ldap";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../puppet_defined_type_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (p)</a> &raquo;
+    <span class='title'><span class='object_link'>Defined Types</span></span>
+     &raquo; 
+    <span class="title">postfix::lookup::ldap</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="puppet_class_list_link"
+        href="../puppet_class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Defined Type: postfix::lookup::ldap</h1>
+<div class="box_info">
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>
+      manifests/lookup/ldap.pp
+    </dd>
+  </dl>
+</div>
+
+<h2>Overview</h2>
+<div class="docstring">
+  <div class="discussion">
+    
+<p>Define an LDAP lookup table.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Configure Postfix for virtual mailbox hosting using LDAP to provide the
+various lookup tables</p>
+</div></p>
+      
+      <pre class="example code"><code>class { &#39;::postfix&#39;:
+  virtual_mailbox_base    =&gt; &#39;/var/mail/vhosts&#39;,
+  virtual_mailbox_domains =&gt; [&#39;ldap:/etc/postfix/virtualdomains.cf&#39;],
+  virtual_mailbox_maps    =&gt; [&#39;ldap:/etc/postfix/virtualrecipients.cf&#39;],
+  virtual_minimum_uid     =&gt; 100,
+  virtual_uid_maps        =&gt; &#39;static:5000&#39;,
+  virtual_gid_maps        =&gt; &#39;static:5000&#39;,
+}
+
+# Specify connection defaults to enable sharing as per LDAP_README
+Postfix::Lookup::Ldap {
+  server_host =&gt; [&#39;ldap://192.0.2.1&#39;],
+  search_base =&gt; &#39;dc=example,dc=com&#39;,
+  bind_dn     =&gt; &#39;cn=Manager,dc=example,dc=com&#39;,
+  bind_pw     =&gt; &#39;secret&#39;,
+  version     =&gt; 3,
+}
+
+::postfix::lookup::ldap { &#39;/etc/postfix/virtualdomains.cf&#39;:
+  query_filter     =&gt; &#39;(associatedDomain=%s)&#39;,
+  result_attribute =&gt; [&#39;associatedDomain&#39;],
+}
+
+::postfix::lookup::ldap { &#39;/etc/postfix/virtualrecipients.cf&#39;:
+  query_filter     =&gt; &#39;(mail=%s)&#39;,
+  result_attribute =&gt; [&#39;mail&#39;],
+}</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>search_base</span>
+      
+      
+        <span class='type'>(<tt>Bodgitlib::LDAP::DN</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Stdlib::Absolutepath</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$title</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ensure</span>
+      
+      
+        <span class='type'>(<tt>Enum['present', 'absent']</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;present&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>server_host</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Postfix::Type::Lookup::LDAP::Host, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>server_port</span>
+      
+      
+        <span class='type'>(<tt>Optional[Bodgitlib::Port]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>timeout</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>query_filter</span>
+      
+      
+        <span class='type'>(<tt>Optional[Bodgitlib::LDAP::Filter]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>result_format</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>domain</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[String, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>result_attribute</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[String, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>special_result_attribute</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[String, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>terminal_result_attribute</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[String, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>leaf_result_attribute</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[String, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>scope</span>
+      
+      
+        <span class='type'>(<tt>Optional[Bodgitlib::LDAP::Scope]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bind</span>
+      
+      
+        <span class='type'>(<tt>Optional[Variant[Boolean, Enum['sasl', 'none', 'simple']]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bind_dn</span>
+      
+      
+        <span class='type'>(<tt>Optional[Bodgitlib::LDAP::DN]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>bind_pw</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>recursion_limit</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>expansion_limit</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>size_limit</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dereference</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0, 3]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>chase_referrals</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>version</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[2, 3]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>debuglevel</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sasl_mechs</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[String, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sasl_realm</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sasl_authz_id</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sasl_minssf</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_tls</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tls_ca_cert_dir</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tls_ca_cert_file</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tls_cert</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tls_key</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tls_require_cert</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tls_random_file</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tls_cipher_suite</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="../puppet_classes/postfix.html" title="puppet_classes::postfix (puppet_class)">::postfix</a></span></li>
+    
+  </ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>1.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><div class="method_details_list">
+  <table class="source_code">
+    <tr>
+      <td>
+        <pre class="lines">
+
+
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135</pre>
+      </td>
+      <td>
+        <pre class="code"><span class="info file"># File 'manifests/lookup/ldap.pp', line 72</span>
+
+define postfix::lookup::ldap (
+  Bodgitlib::LDAP::DN                                        $search_base,
+  Stdlib::Absolutepath                                       $path                      = $title,
+  Enum[&#39;present&#39;, &#39;absent&#39;]                                  $ensure                    = &#39;present&#39;,
+  Optional[Array[Postfix::Type::Lookup::LDAP::Host, 1]]      $server_host               = undef,
+  Optional[Bodgitlib::Port]                                  $server_port               = undef,
+  Optional[Integer[0]]                                       $timeout                   = undef,
+  Optional[Bodgitlib::LDAP::Filter]                          $query_filter              = undef,
+  Optional[String]                                           $result_format             = undef,
+  Optional[Array[String, 1]]                                 $domain                    = undef,
+  Optional[Array[String, 1]]                                 $result_attribute          = undef,
+  Optional[Array[String, 1]]                                 $special_result_attribute  = undef,
+  Optional[Array[String, 1]]                                 $terminal_result_attribute = undef,
+  Optional[Array[String, 1]]                                 $leaf_result_attribute     = undef,
+  Optional[Bodgitlib::LDAP::Scope]                           $scope                     = undef,
+  Optional[Variant[Boolean, Enum[&#39;sasl&#39;, &#39;none&#39;, &#39;simple&#39;]]] $bind                      = undef,
+  Optional[Bodgitlib::LDAP::DN]                              $bind_dn                   = undef,
+  Optional[String]                                           $bind_pw                   = undef,
+  Optional[Integer[1]]                                       $recursion_limit           = undef,
+  Optional[Integer[0]]                                       $expansion_limit           = undef,
+  Optional[Integer[0]]                                       $size_limit                = undef,
+  Optional[Integer[0, 3]]                                    $dereference               = undef,
+  Optional[Boolean]                                          $chase_referrals           = undef,
+  Optional[Integer[2, 3]]                                    $version                   = undef,
+  Optional[Integer[0]]                                       $debuglevel                = undef,
+  Optional[Array[String, 1]]                                 $sasl_mechs                = undef,
+  Optional[String]                                           $sasl_realm                = undef,
+  Optional[String]                                           $sasl_authz_id             = undef,
+  Optional[Integer[0]]                                       $sasl_minssf               = undef,
+  Optional[Boolean]                                          $start_tls                 = undef,
+  Optional[Stdlib::Absolutepath]                             $tls_ca_cert_dir           = undef,
+  Optional[Stdlib::Absolutepath]                             $tls_ca_cert_file          = undef,
+  Optional[Stdlib::Absolutepath]                             $tls_cert                  = undef,
+  Optional[Stdlib::Absolutepath]                             $tls_key                   = undef,
+  Optional[Boolean]                                          $tls_require_cert          = undef,
+  Optional[Stdlib::Absolutepath]                             $tls_random_file           = undef,
+  Optional[String]                                           $tls_cipher_suite          = undef,
+) {
+
+  if ! defined(Class[&#39;::postfix&#39;]) {
+    fail(&#39;You must include the postfix base class before using any postfix defined resources&#39;)
+  }
+
+  $_server_host = postfix::flatten_hosts($server_host)
+
+  $_ensure = $ensure ? {
+    &#39;absent&#39; =&gt; &#39;absent&#39;,
+    default  =&gt; &#39;file&#39;,
+  }
+
+  file { $path:
+    ensure  =&gt; $_ensure,
+    owner   =&gt; 0,
+    group   =&gt; 0,
+    mode    =&gt; &#39;0600&#39;,
+    content =&gt; template(&quot;${module_name}/ldap.cf.erb&quot;),
+  }
+
+  if $ensure != &#39;absent&#39; and has_key($::postfix::lookup_packages, &#39;ldap&#39;) {
+    $ldap_package = $::postfix::lookup_packages[&#39;ldap&#39;]
+    ensure_packages([$ldap_package])
+    Package[$ldap_package] -&gt; File[$path]
+  }
+}</pre>
+      </td>
+    </tr>
+  </table>
+</div>
+</div>
+
+      <div id="footer">
+     Generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>.
+</div>
+
+    </div>
+  </body>
+</html>
