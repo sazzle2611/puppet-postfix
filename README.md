@@ -160,7 +160,7 @@ The only settings deliberately excluded are the following:
 * `${transport}_recipient_refill_delay`
 * `${transport}_recipient_refill_limit`
 
-For these, use the [`postfix::main`](#defined-type-postfixmain) defined type.
+For these, use the `postfix::main` defined type.
 
 Because Postfix allows you to recursively define parameters in terms of other
 parameters it makes validating values impossible unless that convention is
