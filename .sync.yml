@@ -6,6 +6,10 @@ appveyor.yml:
 .gitlab-ci.yml:
   delete: true
 .travis.yml:
+  before_install_pre:
+    - 'sudo add-apt-repository -y ppa:raphink/augeas'
+    - 'sudo apt-get update'
+    - 'sudo apt-get install augeas-tools augeas-lenses libaugeas0 libaugeas-dev libxml2-dev'
   notifications:
     email: true
   simplecov: true
