@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe Puppet::Type.type(:postfix_master) do
-
-  it "should have :name, :service & :type as its keyattributes" do
+  it 'has :name, :service & :type as its keyattributes' do
     expect(described_class.key_attributes).to eq([:name, :service, :type])
   end
 
@@ -21,36 +20,37 @@ describe Puppet::Type.type(:postfix_master) do
   end
 
   describe 'autorequire' do
-    let(:catalog) {
-      catalog = Puppet::Resource::Catalog.new
-    }
-    it 'should autorequire the targeted file' do
-      file = Puppet::Type.type(:file).new(:name => '/etc/postfix/master.cf')
+    let(:catalog) do
+      Puppet::Resource::Catalog.new
+    end
+
+    it 'autorequires the targeted file' do
+      file = Puppet::Type.type(:file).new(name: '/etc/postfix/master.cf')
       catalog.add_resource file
-      key = described_class.new(:name => 'submission/inet', :target => '/etc/postfix/master.cf', :command => 'smtpd', :ensure => :present)
+      key = described_class.new(name: 'submission/inet', target: '/etc/postfix/master.cf', command: 'smtpd', ensure: :present)
       catalog.add_resource key
       expect(key.autorequire.size).to eq(1)
     end
-    it 'should autorequire the setting' do
-      postfix_main = Puppet::Type.type(:postfix_main).new(:name => 'submission_mumble')
+    it 'autorequires the setting' do
+      postfix_main = Puppet::Type.type(:postfix_main).new(name: 'submission_mumble')
       catalog.add_resource postfix_main
-      key = described_class.new(:name => 'submission/inet', :command => 'smtpd -o smtpd_mumble=$submission_mumble', :ensure => :present)
+      key = described_class.new(name: 'submission/inet', command: 'smtpd -o smtpd_mumble=$submission_mumble', ensure: :present)
       catalog.add_resource key
       expect(key.autorequire.size).to eq(1)
     end
-    it 'should autorequire the service' do
-      service = Puppet::Type.type(:postfix_master).new(:name => 'bounce/unix')
+    it 'autorequires the service' do
+      service = Puppet::Type.type(:postfix_master).new(name: 'bounce/unix')
       catalog.add_resource service
-      key = described_class.new(:name => 'submission/inet', :command => 'smtpd -o bounce_service_name=bounce', :ensure => :present)
+      key = described_class.new(name: 'submission/inet', command: 'smtpd -o bounce_service_name=bounce', ensure: :present)
       catalog.add_resource key
       expect(key.autorequire.size).to eq(1)
     end
-    it 'should autorequire the user and group' do
-      user = Puppet::Type.type(:user).new(:name => 'vmail')
+    it 'autorequires the user and group' do
+      user = Puppet::Type.type(:user).new(name: 'vmail')
       catalog.add_resource user
-      group = Puppet::Type.type(:group).new(:name => 'vmail')
+      group = Puppet::Type.type(:group).new(name: 'vmail')
       catalog.add_resource group
-      key = described_class.new(:name => 'dovecot/unix', :command => 'pipe user=vmail:vmail argv=/path/to/dovecot-lda', :ensure => :present)
+      key = described_class.new(name: 'dovecot/unix', command: 'pipe user=vmail:vmail argv=/path/to/dovecot-lda', ensure: :present)
       catalog.add_resource key
       expect(key.autorequire.size).to eq(2)
     end

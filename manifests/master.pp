@@ -33,7 +33,7 @@ define postfix::master (
   Optional[Pattern[/(?x) ^ (?: - | \d+ ) $/]]           $limit        = undef,
 ) {
 
-  if ! defined(Class['::postfix']) {
+  if ! defined(Class['postfix']) {
     fail('You must include the postfix base class before using any postfix defined resources')
   }
 
@@ -46,7 +46,7 @@ define postfix::master (
     wakeup       => $wakeup,
     limit        => $limit,
     target       => "${::postfix::conf_dir}/master.cf",
-    require      => Class['::postfix::config'],
-    notify       => Class['::postfix::service'],
+    require      => Class['postfix::config'],
+    notify       => Class['postfix::service'],
   }
 }

@@ -23,13 +23,13 @@ describe 'postfix::lookup::database' do
         context 'and a hashed database' do
           let(:params) do
             {
-              :type    => 'dbm',
-              :content => "postmaster\tpostmaster@example.com\n",
+              type:    'dbm',
+              content: "postmaster\tpostmaster@example.com\n",
             }
           end
 
           it { is_expected.to compile.with_all_deps }
-          it { is_expected.to contain_exec('postmap dbm:/etc/postfix/test').with_unless("[ -f /etc/postfix/test.pag ] && [ $(stat -c '%Y' /etc/postfix/test.pag) -gt $(stat -c '%Y' /etc/postfix/test) ] && [ -f /etc/postfix/test.dir ] && [ $(stat -c '%Y' /etc/postfix/test.dir) -gt $(stat -c '%Y' /etc/postfix/test) ]") }
+          it { is_expected.to contain_exec('postmap dbm:/etc/postfix/test').with_unless("[ -f /etc/postfix/test.pag ] && [ $(stat -c '%Y' /etc/postfix/test.pag) -gt $(stat -c '%Y' /etc/postfix/test) ] && [ -f /etc/postfix/test.dir ] && [ $(stat -c '%Y' /etc/postfix/test.dir) -gt $(stat -c '%Y' /etc/postfix/test) ]") } # rubocop:disable LineLength
           it { is_expected.to contain_file('/etc/postfix/test') }
           it { is_expected.to contain_file('/etc/postfix/test.pag') }
           it { is_expected.to contain_file('/etc/postfix/test.dir') }
@@ -39,8 +39,8 @@ describe 'postfix::lookup::database' do
         context 'and a flat database' do
           let(:params) do
             {
-              :type    => 'texthash',
-              :content => "postmaster\tpostmaster@example.com\n",
+              type:    'texthash',
+              content: "postmaster\tpostmaster@example.com\n",
             }
           end
 

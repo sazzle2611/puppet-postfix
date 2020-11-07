@@ -1,3 +1,13 @@
 fixtures:
   symlinks:
     postfix: "#{source_dir}"
+  forge_modules:
+    augeasproviders_core:
+      repo: "herculesteam/augeasproviders_core"
+      ref: "2.6.0"
+    bodgitlib:
+      repo: "bodgit/bodgitlib"
+      ref: "3.0.0"
+    stdlib:
+      repo: "puppetlabs/stdlib"
+      ref: "6.5.0"

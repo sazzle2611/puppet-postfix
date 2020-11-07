@@ -1,11 +1,11 @@
-Puppet::Type.type(:postfix_main).provide(:augeas, :parent => Puppet::Type.type(:augeasprovider).provider(:default)) do
+Puppet::Type.type(:postfix_main).provide(:augeas, parent: Puppet::Type.type(:augeasprovider).provider(:default)) do
   desc 'Uses Augeas API to update a main.cf setting.'
 
   default_file { '/etc/postfix/main.cf' }
 
   lens { 'Postfix_Main.lns' }
 
-  confine :feature => :augeas
+  confine feature: :augeas
 
   resource_path do |resource|
     setting = resource[:setting]
@@ -19,10 +19,10 @@ Puppet::Type.type(:postfix_main).provide(:augeas, :parent => Puppet::Type.type(:
         setting = path_label(aug, spath)
         value   = aug.get(spath)
         entry = {
-          :name    => setting,
-          :ensure  => :present,
-          :setting => setting,
-          :value   => value,
+          name:    setting,
+          ensure:  :present,
+          setting: setting,
+          value:   value,
         }
         resources << new(entry)
       end
@@ -44,5 +44,5 @@ Puppet::Type.type(:postfix_main).provide(:augeas, :parent => Puppet::Type.type(:
     end
   end
 
-  attr_aug_accessor(:value, {:label => :resource})
+  attr_aug_accessor(:value, label: :resource)
 end

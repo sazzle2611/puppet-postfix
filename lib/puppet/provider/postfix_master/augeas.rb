@@ -1,11 +1,11 @@
-Puppet::Type.type(:postfix_master).provide(:augeas, :parent => Puppet::Type.type(:augeasprovider).provider(:default)) do
+Puppet::Type.type(:postfix_master).provide(:augeas, parent: Puppet::Type.type(:augeasprovider).provider(:default)) do
   desc 'Uses Augeas API to update a master.cf service.'
 
   default_file { '/etc/postfix/master.cf' }
 
   lens { 'Postfix_Master.lns' }
 
-  confine :feature => :augeas
+  confine feature: :augeas
 
   resource_path do |resource|
     service = resource[:service]
@@ -26,16 +26,16 @@ Puppet::Type.type(:postfix_master).provide(:augeas, :parent => Puppet::Type.type
         limit        = aug.get("#{spath}/limit")
         command      = aug.get("#{spath}/command")
         entry = {
-          :name         => "#{service}/#{type}",
-          :ensure       => :present,
-          :service      => service,
-          :type         => type,
-          :private      => private,
-          :unprivileged => unprivileged,
-          :chroot       => chroot,
-          :wakeup       => wakeup,
-          :limit        => limit,
-          :command      => command,
+          name:         "#{service}/#{type}",
+          ensure:       :present,
+          service:      service,
+          type:         type,
+          private:      private,
+          unprivileged: unprivileged,
+          chroot:       chroot,
+          wakeup:       wakeup,
+          limit:        limit,
+          command:      command,
         }
         resources << new(entry)
       end
@@ -48,7 +48,7 @@ Puppet::Type.type(:postfix_master).provide(:augeas, :parent => Puppet::Type.type
       service = resource[:service]
       type = resource[:type]
       aug.set("$target/#{service}[type = '#{type}']/type", type)
-      %w{private unprivileged chroot wakeup limit command}.each do |attr|
+      ['private', 'unprivileged', 'chroot', 'wakeup', 'limit', 'command'].each do |attr|
         aug.set("$target/#{service}[type = '#{type}']/#{attr}", resource[attr.to_sym])
       end
     end
