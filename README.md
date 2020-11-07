@@ -21,7 +21,7 @@ Tested with Travis CI
 This module manages Postfix.
 
 CentOS, RHEL, Scientific and Oracle Enterprise Linux is supported using Puppet
-4.6.0 or later.
+5 or later.
 
 ## Setup
 
@@ -173,7 +173,7 @@ boolean values. Any multi-valued setting accepts an array of values.
 For referring to other settings, ensure that the `$` is escaped appropriately
 using either `\` or `''` to prevent Puppet expanding the variable itself.
 
-This module has been built on and tested against Puppet 4.6.0 and higher.
+This module has been built on and tested against Puppet 5 and higher.
 
 The module has been tested on:
 
