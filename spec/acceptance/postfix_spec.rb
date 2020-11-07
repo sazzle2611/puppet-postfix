@@ -1,9 +1,7 @@
 require 'spec_helper_acceptance'
 
 describe 'postfix' do
-
-  it 'should work with no errors' do
-
+  it 'works with no errors' do
     pp = <<-EOS
       include ::postfix
 
@@ -19,8 +17,8 @@ describe 'postfix' do
       }
     EOS
 
-    apply_manifest(pp, :catch_failures => true)
-    apply_manifest(pp, :catch_changes  => true)
+    apply_manifest(pp, catch_failures: true)
+    apply_manifest(pp, catch_changes:  true)
   end
 
   describe package('postfix') do

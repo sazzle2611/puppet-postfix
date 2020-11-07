@@ -1,12 +1,11 @@
 # @!visibility private
-module PuppetX
+module PuppetX # rubocop:disable ClassAndModuleChildren
   # @!visibility private
-  module Bodgit
+  module Bodgit # rubocop:disable ClassAndModuleChildren
     # @!visibility private
-    module Postfix
+    module Postfix # rubocop:disable ClassAndModuleChildren
       # Postfix type utility methods
       module Util
-
         # Match the following provided it's not preceeded by a $:
         #
         # * `$foo_bar_baz`
@@ -19,7 +18,7 @@ module PuppetX
         # no look-behind operator without pulling in Oniguruma. So anywhere
         # this Regexp is used the target string needs to be reversed and then
         # any captures need to be un-reversed again.
-        PARAMETER_REGEXP = /
+        PARAMETER_REGEXP = %r{
           (?:
             (
               [[:alnum:]]+
@@ -61,24 +60,25 @@ module PuppetX
           (?!
             \$
           )
-        /x
+        }x
 
         # Expand variables where possible
         def expand(value)
           v = value.reverse.clone
           loop do
             old = v.clone
-            v.gsub!(PARAMETER_REGEXP) do |s|
+            v.gsub!(PARAMETER_REGEXP) do |_s|
               replacement = $&
               # We want all non-nil $1..n captures
-              match = $~.to_a[1..-1].compact.reverse.collect { |x| x.reverse }
-              catalog.resources.select { |r|
-                r.is_a?(Puppet::Type.type(:postfix_main)) and r.should(:ensure) == :present
-              }.each { |r|
-                if r.name.eql?(match[0]) and not match[1]
+              match = $LAST_MATCH_INFO.to_a[1..-1].compact.reverse.map { |x| x.reverse }
+              types = catalog.resources.select do |r|
+                r.is_a?(Puppet::Type.type(:postfix_main)) && r.should(:ensure) == :present
+              end
+              types.each do |r|
+                if r.name.eql?(match[0]) && !(match[1])
                   replacement = r.should(:value).reverse
                 end
-              }
+              end
               replacement
             end
             break if old.eql?(v)
@@ -91,24 +91,24 @@ module PuppetX
           requires = []
           values.each do |v|
             case v
-            when /^(?:\/[^\/]+)+\/?$/
+            when %r{^(?:\/[^\/]+)+\/?$}
               # File
               requires << v
-            when /^(?:proxy:)?([a-z]+):((?:\/[^\/]+)+)$/
+            when %r{^(?:proxy:)?([a-z]+):((?:\/[^\/]+)+)$}
               # Lookup table
-              case $1
+              case Regexp.last_match(1)
               when 'btree', 'hash'
-                requires << "#{$2}.db"
+                requires << "#{Regexp.last_match(2)}.db"
               when 'cdb'
-                requires << "#{$2}.cdb"
+                requires << "#{Regexp.last_match(2)}.cdb"
               when 'dbm', 'sdbm'
-                requires << "#{$2}.dir"
-                requires << "#{$2}.pag"
+                requires << "#{Regexp.last_match(2)}.dir"
+                requires << "#{Regexp.last_match(2)}.pag"
               when 'lmdb'
-                requires << "#{$2}.lmdb"
+                requires << "#{Regexp.last_match(2)}.lmdb"
               else
                 # Apart from the above exceptions, target the source file
-                requires << $2
+                requires << Regexp.last_match(2)
               end
             end
           end

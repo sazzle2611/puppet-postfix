@@ -3,7 +3,6 @@ require 'spec_helper'
 provider_class = Puppet::Type.type(:postfix_main).provider(:augeas)
 
 describe provider_class do
-
   before :each do
     Puppet::Type.type(:postfix_main).stubs(:defaultprovider).returns described_class
     FileTest.stubs(:exist?).returns false
@@ -14,13 +13,13 @@ describe provider_class do
     let(:tmptarget) { aug_fixture('empty') }
     let(:target) { tmptarget.path }
 
-    it 'should create simple new entry' do
+    it 'creates a simple new entry' do
       apply!(Puppet::Type.type(:postfix_main).new(
-        :name     => 'inet_interfaces',
-        :setting  => 'inet_interfaces',
-        :value    => 'localhost',
-        :target   => target,
-        :provider => 'augeas',
+               name:     'inet_interfaces',
+               setting:  'inet_interfaces',
+               value:    'localhost',
+               target:   target,
+               provider: 'augeas',
       ))
 
       aug_open(target, 'Postfix_Main.lns') do |aug|
@@ -33,33 +32,33 @@ describe provider_class do
     let(:tmptarget) { aug_fixture('full') }
     let(:target) { tmptarget.path }
 
-    it 'should list instances' do
+    it 'lists instances' do
       provider_class.stubs(:target).returns(target)
-      inst = provider_class.instances.map { |p|
+      inst = provider_class.instances.map do |p|
         {
-          :name         => p.get(:name),
-          :ensure       => p.get(:ensure),
-          :setting      => p.get(:setting),
-          :value        => p.get(:value),
+          name:    p.get(:name),
+          ensure:  p.get(:ensure),
+          setting: p.get(:setting),
+          value:   p.get(:value),
         }
-      }
+      end
 
       expect(inst.size).to eq(21)
-      expect(inst[0]).to eq({:name => 'queue_directory', :ensure => :present, :setting => 'queue_directory', :value => '/var/spool/postfix'})
+      expect(inst[0]).to eq(name: 'queue_directory', ensure: :present, setting: 'queue_directory', value: '/var/spool/postfix')
     end
 
     describe 'when deleting settings' do
-      it 'should delete a setting' do
+      it 'deletes a setting' do
         expr = 'inet_interfaces'
         aug_open(target, 'Postfix_Main.lns') do |aug|
           expect(aug.match(expr)).not_to eq([])
         end
 
         apply!(Puppet::Type.type(:postfix_main).new(
-          :name     => 'inet_interfaces',
-          :ensure   => 'absent',
-          :target   => target,
-          :provider => 'augeas',
+                 name: 'inet_interfaces',
+                 ensure: 'absent',
+                 target: target,
+                 provider: 'augeas',
         ))
 
         aug_open(target, 'Postfix_Main.lns') do |aug|

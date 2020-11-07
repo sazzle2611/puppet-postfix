@@ -1,6 +1,6 @@
 begin
   require 'puppet_x/bodgit/postfix/util'
-rescue LoadError => detail
+rescue LoadError
   # :nocov:
   require 'pathname'
   require Pathname.new(__FILE__).dirname + '../../' + 'puppet_x/bodgit/postfix/util'
@@ -8,7 +8,6 @@ rescue LoadError => detail
 end
 
 Puppet::Type.newtype(:postfix_main) do
-
   include PuppetX::Bodgit::Postfix::Util
 
   @doc = 'Manages Postfix settings.
@@ -33,11 +32,11 @@ parameter.'
   def self.title_patterns
     [
       [
-        /^(\S+)$/,
+        %r{^(\S+)$},
         [
-          [ :setting ],
-        ]
-      ]
+          [:setting],
+        ],
+      ],
     ]
   end
 
@@ -67,14 +66,14 @@ autorequired.'
   end
 
   def value_split(value)
-    value.split(/[\s,]+/)
+    value.split(%r{[\s,]+})
   end
 
   autorequire(:file) do
     autos = []
     autos << self[:target] if self[:target]
     if self[:value]
-      values = value_split(self[:value]).collect do |x|
+      values = value_split(self[:value]).map do |x|
         expand(x)
       end
 
@@ -98,14 +97,14 @@ autorequired.'
   autorequire(:postfix_master) do
     autos = []
     case self[:setting]
-    when /_service_name$/
+    when %r{_service_name$}
       autos += [
         "#{self[:value]}/inet",
         "#{self[:value]}/unix",
         "#{self[:value]}/fifo",
         "#{self[:value]}/pass",
       ]
-    when /
+    when %r{
       ^
       ([^_]+)
       _
@@ -160,13 +159,13 @@ autorequired.'
         )
       )
       $
-      /x
-      if $1 != 'default'
+      }x
+      if Regexp.last_match(1) != 'default'
         autos += [
-          "#{$1}/inet",
-          "#{$1}/unix",
-          "#{$1}/fifo",
-          "#{$1}/pass",
+          "#{Regexp.last_match(1)}/inet",
+          "#{Regexp.last_match(1)}/unix",
+          "#{Regexp.last_match(1)}/fifo",
+          "#{Regexp.last_match(1)}/pass",
         ]
       end
     end

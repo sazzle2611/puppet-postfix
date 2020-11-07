@@ -1,6 +1,6 @@
 begin
   require 'puppet_x/bodgit/postfix/util'
-rescue LoadError => detail
+rescue LoadError
   # :nocov:
   require 'pathname'
   require Pathname.new(__FILE__).dirname + '../../' + 'puppet_x/bodgit/postfix/util'
@@ -8,7 +8,6 @@ rescue LoadError => detail
 end
 
 Puppet::Type.newtype(:postfix_master) do
-
   include PuppetX::Bodgit::Postfix::Util
 
   @doc = 'Manages Postfix services.
@@ -44,18 +43,18 @@ string.'
   def self.title_patterns
     [
       [
-        /^(\S+)\/(\S+)$/,
+        %r{^(\S+)\/(\S+)$},
         [
-          [ :service ],
-          [ :type    ],
-        ]
+          [:service],
+          [:type],
+        ],
       ],
       [
-        /(.*)/,
+        %r{(.*)},
         [
-          [ :name ],
-        ]
-      ]
+          [:name],
+        ],
+      ],
     ]
   end
 
@@ -88,7 +87,7 @@ string.'
 
   newproperty(:wakeup) do
     desc 'Wake up time.'
-    newvalues('-', /^\d+[?]?$/)
+    newvalues('-', %r{^\d+[?]?$})
     defaultto('-')
     munge do |value|
       value.to_s
@@ -97,7 +96,7 @@ string.'
 
   newproperty(:limit) do
     desc 'Process limit.'
-    newvalues('-', /^\d+$/)
+    newvalues('-', %r{^\d+$})
     defaultto('-')
     munge do |value|
       value.to_s
@@ -134,15 +133,15 @@ autorequired.'
   end
 
   def value_split(value)
-    value.split(/,/)
+    value.split(%r{,})
   end
 
   autorequire(:file) do
     autos = []
     autos << self[:target] if self[:target]
     if self[:command]
-      command_scan(self[:command]).each do |setting, value|
-        values = value_split(value).collect do |v|
+      command_scan(self[:command]).each do |_setting, value|
+        values = value_split(value).map do |v|
           expand(v)
         end
 
@@ -174,7 +173,7 @@ autorequired.'
     autos = []
     if self[:command]
       command_scan(self[:command]).each do |setting, value|
-        if setting =~ /_service_name$/
+        if setting =~ %r{_service_name$}
           autos << "#{value}/unix"
         end
       end
@@ -184,9 +183,9 @@ autorequired.'
 
   autorequire(:user) do
     autos = []
-    if self[:command] and self[:command] =~ /^pipe \s/x
-      if self[:command] =~ /\s user = ([^: ]+)/x
-        autos << $1
+    if self[:command] && self[:command] =~ %r{^pipe \s}x
+      if self[:command] =~ %r{\s user = ([^: ]+)}x
+        autos << Regexp.last_match(1)
       end
     end
     autos
@@ -194,9 +193,9 @@ autorequired.'
 
   autorequire(:group) do
     autos = []
-    if self[:command] and self[:command] =~ /^pipe \s/x
-      if self[:command] =~ /\s user = (?:[^:]+) : ([^ ]+)/x
-        autos << $1
+    if self[:command] && self[:command] =~ %r{^pipe \s}x
+      if self[:command] =~ %r{\s user = (?:[^:]+) : ([^ ]+)}x
+        autos << Regexp.last_match(1)
       end
     end
     autos

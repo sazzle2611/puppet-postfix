@@ -7,8 +7,8 @@ describe 'postfix::lookup::ldap' do
 
   let(:params) do
     {
-      :search_base => 'dc=example,dc=com',
-      :server_host => [
+      search_base: 'dc=example,dc=com',
+      server_host: [
         '192.0.2.1',
         [
           '192.0.2.1',
@@ -45,7 +45,7 @@ describe 'postfix::lookup::ldap' do
         end
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_file('/etc/postfix/test.cf').with_content(<<-EOS.gsub(/^ {10}/, '')) }
+        it { is_expected.to contain_file('/etc/postfix/test.cf').with_content(<<-EOS.gsub(%r{^ {10}}, '')) }
           # !!! Managed by Puppet !!!
 
           search_base = dc=example,dc=com
