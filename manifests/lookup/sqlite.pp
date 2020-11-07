@@ -21,7 +21,7 @@ define postfix::lookup::sqlite (
   Optional[Integer[0]]       $expansion_limit = undef,
 ) {
 
-  if ! defined(Class['::postfix']) {
+  if ! defined(Class['postfix']) {
     fail('You must include the postfix base class before using any postfix defined resources')
   }
 

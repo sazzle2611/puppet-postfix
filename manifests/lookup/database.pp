@@ -31,7 +31,7 @@ define postfix::lookup::database (
   Optional[String]                $source  = undef,
 ) {
 
-  if ! defined(Class['::postfix']) {
+  if ! defined(Class['postfix']) {
     fail('You must include the postfix base class before using any postfix defined resources')
   }
 
@@ -56,7 +56,7 @@ define postfix::lookup::database (
   # Changes to files that aren't hashed generally don't get picked up without
   # a reload so trigger one
   if $type =~ Postfix::Type::Lookup::Database::Flat {
-    File[$path] ~> Class['::postfix::service'] # lint:ignore:trailing_comma FIXME
+    File[$path] ~> Class['postfix::service']
   }
 
   if $ensure != 'absent' and has_key($::postfix::lookup_packages, $type) {
@@ -69,7 +69,7 @@ define postfix::lookup::database (
 
     case $type {
       'btree', 'hash': {
-        $files = ["${path}.db"] # lint:ignore:trailing_comma FIXME
+        $files = ["${path}.db"]
       }
       'cdb': {
         $files = ["${path}.cdb"]
@@ -87,7 +87,7 @@ define postfix::lookup::database (
 
     file { $files:
       ensure => $_ensure,
-      before => Class['::postfix::service'],
+      before => Class['postfix::service'],
     }
 
     if $ensure != 'absent' {

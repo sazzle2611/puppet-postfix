@@ -1487,12 +1487,12 @@ class postfix (
   Optional[String]                    $virtual_minimum_uid                                    = undef,
   Optional[String]                    $virtual_transport                                      = undef,
   Optional[Array[String, 1]]          $virtual_uid_maps                                       = undef,
-) inherits ::postfix::params {
+) inherits postfix::params {
 
-  contain ::postfix::install
-  contain ::postfix::config
-  contain ::postfix::service
+  contain postfix::install
+  contain postfix::config
+  contain postfix::service
 
-  Class['::postfix::install'] -> Class['::postfix::config']
-    ~> Class['::postfix::service']
+  Class['postfix::install'] -> Class['postfix::config']
+    ~> Class['postfix::service']
 }

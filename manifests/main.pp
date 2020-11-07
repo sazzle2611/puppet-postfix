@@ -23,7 +23,7 @@ define postfix::main (
   Enum['present', 'absent'] $ensure  = 'present',
 ) {
 
-  if ! defined(Class['::postfix']) {
+  if ! defined(Class['postfix']) {
     fail('You must include the postfix base class before using any postfix defined resources')
   }
 
@@ -31,7 +31,7 @@ define postfix::main (
     ensure  => $ensure,
     value   => $value,
     target  => "${::postfix::conf_dir}/main.cf",
-    require => Class['::postfix::config'],
-    notify  => Class['::postfix::service'],
+    require => Class['postfix::config'],
+    notify  => Class['postfix::service'],
   }
 }

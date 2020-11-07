@@ -41,7 +41,7 @@ define postfix::lookup::mysql (
   Optional[Boolean]                            $tls_verify_cert  = undef,
 ) {
 
-  if ! defined(Class['::postfix']) {
+  if ! defined(Class['postfix']) {
     fail('You must include the postfix base class before using any postfix defined resources')
   }
 

@@ -108,7 +108,7 @@ define postfix::lookup::ldap (
   Optional[String]                                           $tls_cipher_suite          = undef,
 ) {
 
-  if ! defined(Class['::postfix']) {
+  if ! defined(Class['postfix']) {
     fail('You must include the postfix base class before using any postfix defined resources')
   }
 
