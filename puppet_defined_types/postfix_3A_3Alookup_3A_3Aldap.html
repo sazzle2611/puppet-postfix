@@ -6,15 +6,15 @@
 <title>
   Defined Type: postfix::lookup::ldap
   
-    &mdash; Documentation by YARD 0.9.14
+    &mdash; Documentation by YARD 0.9.25
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "puppet_defined_types::postfix::lookup::ldap";
   relpath = '../';
 </script>
@@ -77,6 +77,8 @@
 
   </div>
 </div>
+
+
 <div class="tags">
   
   <div class="examples">
@@ -589,6 +591,7 @@ Postfix::Lookup::Ldap {
 </ul>
 
 
+
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
@@ -726,7 +729,7 @@ define postfix::lookup::ldap (
   Optional[String]                                           $tls_cipher_suite          = undef,
 ) {
 
-  if ! defined(Class[&#39;::postfix&#39;]) {
+  if ! defined(Class[&#39;postfix&#39;]) {
     fail(&#39;You must include the postfix base class before using any postfix defined resources&#39;)
   }
 

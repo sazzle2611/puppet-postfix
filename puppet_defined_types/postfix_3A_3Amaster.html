@@ -6,15 +6,15 @@
 <title>
   Defined Type: postfix::master
   
-    &mdash; Documentation by YARD 0.9.14
+    &mdash; Documentation by YARD 0.9.25
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "puppet_defined_types::postfix::master";
   relpath = '../';
 </script>
@@ -77,6 +77,8 @@
 
   </div>
 </div>
+
+
 <div class="tags">
   
   <div class="examples">
@@ -115,7 +117,7 @@
         <span class='name'>service</span>
       
       
-        <span class='type'>(<tt>Pattern[/(?x) ^ [a-z]+ \/ (?:inet|unix|fifo|pass) $/]</tt>)</span>
+        <span class='type'>(<tt>Pattern[/(?x) ^ [^\/]+ \/ (?:inet|unix|fifo|pass) $/]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>$title</tt>)</em>
@@ -204,6 +206,7 @@
 </ul>
 
 
+
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
@@ -270,7 +273,7 @@
 
 define postfix::master (
   String                                                $command,
-  Pattern[/(?x) ^ [a-z]+ \/ (?:inet|unix|fifo|pass) $/] $service      = $title,
+  Pattern[/(?x) ^ [^\/]+ \/ (?:inet|unix|fifo|pass) $/] $service      = $title,
   Enum[&#39;present&#39;, &#39;absent&#39;]                             $ensure       = &#39;present&#39;,
   Optional[Enum[&#39;-&#39;, &#39;n&#39;, &#39;y&#39;]]                         $private      = undef,
   Optional[Enum[&#39;-&#39;, &#39;n&#39;, &#39;y&#39;]]                         $unprivileged = undef,
@@ -279,7 +282,7 @@ define postfix::master (
   Optional[Pattern[/(?x) ^ (?: - | \d+ ) $/]]           $limit        = undef,
 ) {
 
-  if ! defined(Class[&#39;::postfix&#39;]) {
+  if ! defined(Class[&#39;postfix&#39;]) {
     fail(&#39;You must include the postfix base class before using any postfix defined resources&#39;)
   }
 
@@ -292,8 +295,8 @@ define postfix::master (
     wakeup       =&gt; $wakeup,
     limit        =&gt; $limit,
     target       =&gt; &quot;${::postfix::conf_dir}/master.cf&quot;,
-    require      =&gt; Class[&#39;::postfix::config&#39;],
-    notify       =&gt; Class[&#39;::postfix::service&#39;],
+    require      =&gt; Class[&#39;postfix::config&#39;],
+    notify       =&gt; Class[&#39;postfix::service&#39;],
   }
 }</pre>
       </td>

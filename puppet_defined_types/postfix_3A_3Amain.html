@@ -6,15 +6,15 @@
 <title>
   Defined Type: postfix::main
   
-    &mdash; Documentation by YARD 0.9.14
+    &mdash; Documentation by YARD 0.9.25
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "puppet_defined_types::postfix::main";
   relpath = '../';
 </script>
@@ -80,6 +80,8 @@ settings can be defined here.</p>
 
   </div>
 </div>
+
+
 <div class="tags">
   
   <div class="examples">
@@ -137,6 +139,7 @@ settings can be defined here.</p>
     </li>
   
 </ul>
+
 
 
   <p class="tag_title">See Also:</p>
@@ -199,7 +202,7 @@ define postfix::main (
   Enum[&#39;present&#39;, &#39;absent&#39;] $ensure  = &#39;present&#39;,
 ) {
 
-  if ! defined(Class[&#39;::postfix&#39;]) {
+  if ! defined(Class[&#39;postfix&#39;]) {
     fail(&#39;You must include the postfix base class before using any postfix defined resources&#39;)
   }
 
@@ -207,8 +210,8 @@ define postfix::main (
     ensure  =&gt; $ensure,
     value   =&gt; $value,
     target  =&gt; &quot;${::postfix::conf_dir}/main.cf&quot;,
-    require =&gt; Class[&#39;::postfix::config&#39;],
-    notify  =&gt; Class[&#39;::postfix::service&#39;],
+    require =&gt; Class[&#39;postfix::config&#39;],
+    notify  =&gt; Class[&#39;postfix::service&#39;],
   }
 }</pre>
       </td>

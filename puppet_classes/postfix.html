@@ -6,15 +6,15 @@
 <title>
   Puppet Class: postfix
   
-    &mdash; Documentation by YARD 0.9.14
+    &mdash; Documentation by YARD 0.9.25
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "puppet_classes::postfix";
   relpath = '../';
 </script>
@@ -64,7 +64,7 @@
   
   <dl>
     <dt>Inherits:</dt>
-    <dd>::postfix::params</dd>
+    <dd><span class='object_link'>postfix::params</span></dd>
   </dl>
   
   
@@ -84,6 +84,8 @@
 
   </div>
 </div>
+
+
 <div class="tags">
   
   <div class="examples">
@@ -9433,6 +9435,7 @@ naming conventions.</p>
 </ul>
 
 
+
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
@@ -10920,14 +10923,14 @@ class postfix (
   Optional[String]                    $virtual_minimum_uid                                    = undef,
   Optional[String]                    $virtual_transport                                      = undef,
   Optional[Array[String, 1]]          $virtual_uid_maps                                       = undef,
-) inherits ::postfix::params {
+) inherits postfix::params {
 
-  contain ::postfix::install
-  contain ::postfix::config
-  contain ::postfix::service
+  contain postfix::install
+  contain postfix::config
+  contain postfix::service
 
-  Class[&#39;::postfix::install&#39;] -&gt; Class[&#39;::postfix::config&#39;]
-    ~&gt; Class[&#39;::postfix::service&#39;]
+  Class[&#39;postfix::install&#39;] -&gt; Class[&#39;postfix::config&#39;]
+    ~&gt; Class[&#39;postfix::service&#39;]
 }</pre>
       </td>
     </tr>

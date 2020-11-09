@@ -6,15 +6,15 @@
 <title>
   Defined Type: postfix::lookup::database
   
-    &mdash; Documentation by YARD 0.9.14
+    &mdash; Documentation by YARD 0.9.25
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "puppet_defined_types::postfix::lookup::database";
   relpath = '../';
 </script>
@@ -77,6 +77,8 @@
 
   </div>
 </div>
+
+
 <div class="tags">
   
   <div class="examples">
@@ -175,6 +177,7 @@ Mailalias &lt;||&gt; -&gt; ::Postfix::Lookup::Database[&#39;/etc/aliases&#39;]</
     </li>
   
 </ul>
+
 
 
   <p class="tag_title">See Also:</p>
@@ -303,7 +306,7 @@ define postfix::lookup::database (
   Optional[String]                $source  = undef,
 ) {
 
-  if ! defined(Class[&#39;::postfix&#39;]) {
+  if ! defined(Class[&#39;postfix&#39;]) {
     fail(&#39;You must include the postfix base class before using any postfix defined resources&#39;)
   }
 
@@ -328,7 +331,7 @@ define postfix::lookup::database (
   # Changes to files that aren&#39;t hashed generally don&#39;t get picked up without
   # a reload so trigger one
   if $type =~ Postfix::Type::Lookup::Database::Flat {
-    File[$path] ~&gt; Class[&#39;::postfix::service&#39;] # lint:ignore:trailing_comma FIXME
+    File[$path] ~&gt; Class[&#39;postfix::service&#39;]
   }
 
   if $ensure != &#39;absent&#39; and has_key($::postfix::lookup_packages, $type) {
@@ -341,7 +344,7 @@ define postfix::lookup::database (
 
     case $type {
       &#39;btree&#39;, &#39;hash&#39;: {
-        $files = [&quot;${path}.db&quot;] # lint:ignore:trailing_comma FIXME
+        $files = [&quot;${path}.db&quot;]
       }
       &#39;cdb&#39;: {
         $files = [&quot;${path}.cdb&quot;]
@@ -359,7 +362,7 @@ define postfix::lookup::database (
 
     file { $files:
       ensure =&gt; $_ensure,
-      before =&gt; Class[&#39;::postfix::service&#39;],
+      before =&gt; Class[&#39;postfix::service&#39;],
     }
 
     if $ensure != &#39;absent&#39; {

@@ -6,15 +6,15 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.14
+    &mdash; Documentation by YARD 0.9.25
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "";
   relpath = '';
 </script>
@@ -60,14 +60,16 @@
       <div id="content"><div id='filecontents'>
 <h1 id="label-postfix">postfix</h1>
 
-<p>Tested with Travis CI</p>
-
 <p><a href="https://travis-ci.org/bodgit/puppet-postfix"><img
 src="https://travis-ci.org/bodgit/puppet-postfix.svg?branch=master"></a> <a
-href="https://coveralls.io/github/bodgit/puppet-postfix?branch=master"><img
-src="https://coveralls.io/repos/bodgit/puppet-postfix/badge.svg?branch=master&service=github"></a>
-<a href="https://forge.puppetlabs.com/bodgit/postfix"><img
-src="http://img.shields.io/puppetforge/v/bodgit/postfix.svg"></a></p>
+href="https://codecov.io/gh/bodgit/puppet-postfix"><img
+src="https://img.shields.io/codecov/c/github/bodgit/puppet-postfix"></a> <a
+href="https://forge.puppetlabs.com/bodgit/postfix"><img
+src="http://img.shields.io/puppetforge/v/bodgit/postfix"></a> <a
+href="https://forge.puppetlabs.com/bodgit/postfix"><img
+src="https://img.shields.io/puppetforge/dt/bodgit/postfix"></a> <a
+href="https://forge.puppetlabs.com/bodgit/postfix"><img
+src="https://img.shields.io/puppetforge/pdk-version/bodgit/postfix"></a></p>
 
 <h4 id="label-Table+of+Contents">Table of Contents</h4>
 <ol><li>
@@ -95,7 +97,7 @@ module</a></p>
 <p>This module manages Postfix.</p>
 
 <p>CentOS, RHEL, Scientific and Oracle Enterprise Linux is supported using
-Puppet 4.6.0 or later.</p>
+Puppet 5 or later.</p>
 
 <h2 id="label-Setup">Setup</h2>
 
@@ -202,7 +204,9 @@ Postfix::Lookup::Ldap {
 <p>The reference documentation is generated with <a
 href="https://github.com/puppetlabs/puppet-strings">puppet-strings</a> and
 the latest version of the documentation is hosted at <a
-href="https://bodgit.github.io/puppet-postfix/">bodgit.github.io/puppet-postfix/</a>.</p>
+href="https://bodgit.github.io/puppet-postfix/">bodgit.github.io/puppet-postfix/</a>
+and available also in the <a
+href="https://github.com/bodgit/puppet-postfix/blob/master/REFERENCE.md">REFERENCE.md</a>.</p>
 
 <h2 id="label-Limitations">Limitations</h2>
 
@@ -241,8 +245,7 @@ of settings, which should result in more control.</p>
 <p><code>${transport}_recipient_refill_limit</code></p>
 </li></ul>
 
-<p>For these, use the <a href="#label-Defined+type+postfixmain">postfix::main</a>
-defined type.</p>
+<p>For these, use the <code>postfix::main</code> defined type.</p>
 
 <p>Because Postfix allows you to recursively define parameters in terms of
 other parameters it makes validating values impossible unless that
@@ -259,7 +262,7 @@ appropriately using either <code>&lt;/code&gt; or
 &lt;code&gt;&#39;&#39;</code> to prevent Puppet expanding the variable
 itself.</p>
 
-<p>This module has been built on and tested against Puppet 4.6.0 and higher.</p>
+<p>This module has been built on and tested against Puppet 5 and higher.</p>
 
 <p>The module has been tested on:</p>
 <ul><li>
@@ -268,11 +271,13 @@ itself.</p>
 
 <h2 id="label-Development">Development</h2>
 
-<p>The module has both <a href="http://rspec-puppet.com">rspec-puppet</a> and
-<a href="https://github.com/puppetlabs/beaker-rspec">beaker-rspec</a>
-tests. Run them with:</p>
+<p>The module relies on <a
+href="https://puppet.com/docs/pdk/1.x/pdk.html">PDK</a> and has both <a
+href="http://rspec-puppet.com">rspec-puppet</a> and <a
+href="https://github.com/puppetlabs/beaker-rspec">beaker-rspec</a> tests.
+Run them with:</p>
 
-<pre class="code ruby"><code class="ruby">$ bundle exec rake test
+<pre class="code ruby"><code class="ruby">$ bundle exec rake spec
 $ PUPPET_INSTALL_TYPE=agent PUPPET_INSTALL_VERSION=x.y.z bundle exec rake beaker:&lt;nodeset&gt;</code></pre>
 
 <p>Please log issues or pull requests at <a
