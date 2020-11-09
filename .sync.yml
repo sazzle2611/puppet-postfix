@@ -12,7 +12,9 @@ appveyor.yml:
     - 'sudo apt-get install augeas-tools augeas-lenses libaugeas0 libaugeas-dev libxml2-dev'
   notifications:
     email: true
+  secure: 'PO+wr9xLKAe2w3p1GWmpPd9NDPnomGioX8yzchbKrr636SBPLiJ2K4irXb2Ox7ocer787egQxphiY4MjIQkRNv68oKiXIJXZAyRdfd0ySMtA9oh4K8/oXGLSmhN94DABDQgSZjkHO1fNcgpeAFN+KID8PNrXqatlnZJbVaYECqRscP1GyE9hqDHad0rY+FXSb9I5BvGAqw5tdO+4xiAFVBXE+0MgleJ3vNDDMh+VhrZ55seSYHDt1r463mmTiAppUMa0NZWzblMnfQ9gJMmOfE2zMu2Cm5W9zOKa7NwxoQ/CIBuc5b09lW532moXCcLBEpmd2jagPtS+JmfscpUEZW1q3SuOnYnr0sEVqEUvChBPx52SDjIPjZN+nGwAK8o66N7CbgCkQKcsg9PaR674ftcGIscdv63WObofDYDxEs5BU3ufPSwnL7XBNlnhsPxyKrhNIPRi1PkOqrwfVqhDbJNhV7vH0WbPLhQW2sFXY1PZ7uLXbuL/z5FOE1ocgEhTeVTQqN7zpJg3FQMyYPimOdRa9P3JmTkpN9eU7yKkg1xMYPq3Uu+VkPXeFfLX01jkkaPbowjqDEfSLi809zFUvAfiTKKg+Lp6dPwb4tuLS2OtfywdnwrNAnwhYQIq2aZOa5XVyYZ37yr+S7LU30Y0Lgqwn7W5jkhhAFgx2OApyeU='
   simplecov: true
+  user: 'bodgit'
 .vscode/extensions.json:
   delete: true
 Gemfile:
