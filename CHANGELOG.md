@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v3.0.1](https://github.com/bodgit/puppet-postfix/tree/v3.0.1) (2020-11-09)
+
+[Full Changelog](https://github.com/bodgit/puppet-postfix/compare/v3.0.0...v3.0.1)
+
+### Fixed
+
+- Allow more characters in services [\#15](https://github.com/bodgit/puppet-postfix/pull/15) ([bodgit](https://github.com/bodgit))
+
 ## [v3.0.0](https://github.com/bodgit/puppet-postfix/tree/v3.0.0) (2020-11-07)
 
 [Full Changelog](https://github.com/bodgit/puppet-postfix/compare/v2.0.0...v3.0.0)
