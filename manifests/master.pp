@@ -24,7 +24,7 @@
 # @since 1.0.0
 define postfix::master (
   String                                                $command,
-  Pattern[/(?x) ^ [a-z]+ \/ (?:inet|unix|fifo|pass) $/] $service      = $title,
+  Pattern[/(?x) ^ [^\/]+ \/ (?:inet|unix|fifo|pass) $/] $service      = $title,
   Enum['present', 'absent']                             $ensure       = 'present',
   Optional[Enum['-', 'n', 'y']]                         $private      = undef,
   Optional[Enum['-', 'n', 'y']]                         $unprivileged = undef,
