@@ -6784,7 +6784,7 @@ Data type: `String`
 
 ##### `service`
 
-Data type: `Pattern[/(?x) ^ [a-z]+ \/ (?:inet|unix|fifo|pass) $/]`
+Data type: `Pattern[/(?x) ^ [^\/]+ \/ (?:inet|unix|fifo|pass) $/]`
 
 
 
