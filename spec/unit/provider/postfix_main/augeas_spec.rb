@@ -20,7 +20,7 @@ describe provider_class do
                value:    'localhost',
                target:   target,
                provider: 'augeas',
-      ))
+             ))
 
       aug_open(target, 'Postfix_Main.lns') do |aug|
         expect(aug.get('inet_interfaces')).to eq('localhost')
@@ -55,11 +55,11 @@ describe provider_class do
         end
 
         apply!(Puppet::Type.type(:postfix_main).new(
-                 name: 'inet_interfaces',
-                 ensure: 'absent',
-                 target: target,
+                 name:     'inet_interfaces',
+                 ensure:   'absent',
+                 target:   target,
                  provider: 'augeas',
-        ))
+               ))
 
         aug_open(target, 'Postfix_Main.lns') do |aug|
           expect(aug.match(expr)).to eq([])

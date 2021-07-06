@@ -155,13 +155,11 @@ autorequired.'
     autos = []
     if self[:command]
       settings, values = command_scan(self[:command]).transpose
-      if values
-        values.each do |value|
-          value_split(value).each do |v|
-            value_scan(v) do |x|
-              # Add the setting unless it's been redefined in this same command
-              autos << x unless settings.include?(x)
-            end
+      values&.each do |value|
+        value_split(value).each do |v|
+          value_scan(v) do |x|
+            # Add the setting unless it's been redefined in this same command
+            autos << x unless settings.include?(x)
           end
         end
       end
@@ -173,7 +171,7 @@ autorequired.'
     autos = []
     if self[:command]
       command_scan(self[:command]).each do |setting, value|
-        if setting =~ %r{_service_name$}
+        if %r{_service_name$}.match?(setting)
           autos << "#{value}/unix"
         end
       end

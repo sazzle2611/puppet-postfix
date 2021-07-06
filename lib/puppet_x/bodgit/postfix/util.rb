@@ -60,7 +60,7 @@ module PuppetX # rubocop:disable ClassAndModuleChildren
           (?!
             \$
           )
-        }x
+        }x.freeze
 
         # Expand variables where possible
         def expand(value)
@@ -68,7 +68,7 @@ module PuppetX # rubocop:disable ClassAndModuleChildren
           loop do
             old = v.clone
             v.gsub!(PARAMETER_REGEXP) do |_s|
-              replacement = $&
+              replacement = Regexp.last_match(0)
               # We want all non-nil $1..n captures
               match = $LAST_MATCH_INFO.to_a[1..-1].compact.reverse.map { |x| x.reverse }
               types = catalog.resources.select do |r|

@@ -7,13 +7,13 @@ describe Puppet::Type.type(:postfix_master) do
 
   describe 'when validating attributes' do
     [:name, :service, :type, :target].each do |param|
-      it "should have a #{param} parameter" do
+      it "has a #{param} parameter" do
         expect(described_class.attrtype(param)).to eq(:param)
       end
     end
 
     [:ensure, :private, :unprivileged, :chroot, :wakeup, :limit, :command].each do |property|
-      it "should have a #{property} property" do
+      it "has a #{property} property" do
         expect(described_class.attrtype(property)).to eq(:property)
       end
     end

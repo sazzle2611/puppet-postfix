@@ -26,7 +26,7 @@ describe provider_class do
                command:      'smtpd',
                target:       target,
                provider:     'augeas',
-      ))
+             ))
 
       aug_open(target, 'Postfix_Master.lns') do |aug|
         expect(aug.get("submission[type = 'inet']/command")).to eq('smtpd')
@@ -71,7 +71,7 @@ describe provider_class do
                  ensure:   'absent',
                  target:   target,
                  provider: 'augeas',
-        ))
+               ))
 
         aug_open(target, 'Postfix_Master.lns') do |aug|
           expect(aug.match(expr)).to eq([])
