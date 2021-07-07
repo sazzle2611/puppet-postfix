@@ -1,0 +1,6 @@
+---
+vagrant:
+  provisioner: vagrant
+  images:
+    - 'generic/centos6'
+    - 'generic/centos7'
