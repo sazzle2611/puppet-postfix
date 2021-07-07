@@ -1,9 +1,9 @@
 # @!visibility private
-module PuppetX # rubocop:disable ClassAndModuleChildren
+module PuppetX # rubocop:disable Style/ClassAndModuleChildren
   # @!visibility private
-  module Bodgit # rubocop:disable ClassAndModuleChildren
+  module Bodgit # rubocop:disable Style/ClassAndModuleChildren
     # @!visibility private
-    module Postfix # rubocop:disable ClassAndModuleChildren
+    module Postfix # rubocop:disable Style/ClassAndModuleChildren
       # Postfix type utility methods
       module Util
         # Match the following provided it's not preceeded by a $:
