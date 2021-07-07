@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v3.1.0](https://github.com/bodgit/puppet-postfix/tree/v3.1.0) (2021-07-07)
+
+[Full Changelog](https://github.com/bodgit/puppet-postfix/compare/v3.0.1...v3.1.0)
+
+### Added
+
+- Update dependencies [\#23](https://github.com/bodgit/puppet-postfix/pull/23) ([bodgit](https://github.com/bodgit))
+- Support Puppet 7.x [\#22](https://github.com/bodgit/puppet-postfix/pull/22) ([bodgit](https://github.com/bodgit))
+- Convert to Hiera [\#21](https://github.com/bodgit/puppet-postfix/pull/21) ([bodgit](https://github.com/bodgit))
+- Add support for EL8 [\#20](https://github.com/bodgit/puppet-postfix/pull/20) ([bodgit](https://github.com/bodgit))
+- Convert to Litmus [\#19](https://github.com/bodgit/puppet-postfix/pull/19) ([bodgit](https://github.com/bodgit))
+
 ## [v3.0.1](https://github.com/bodgit/puppet-postfix/tree/v3.0.1) (2020-11-09)
 
 [Full Changelog](https://github.com/bodgit/puppet-postfix/compare/v3.0.0...v3.0.1)
