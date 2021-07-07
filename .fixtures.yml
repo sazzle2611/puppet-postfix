@@ -5,16 +5,16 @@ fixtures:
     augeas:
       repo: "camptocamp/augeas"
       ref: "1.9.0"
-    augeasproviders_core:
-      repo: "herculesteam/augeasproviders_core"
-      ref: "2.6.0"
     bodgitlib:
       repo: "bodgit/bodgitlib"
-      ref: "3.0.0"
+      ref: "3.0.2"
     stdlib:
       repo: "puppetlabs/stdlib"
-      ref: "6.5.0"
+      ref: "7.1.0"
   repositories:
+    augeasproviders_core:
+      repo: "https://github.com/hercules-team/augeasproviders_core.git"
+      ref: "2.7.0"
     facts: "https://github.com/puppetlabs/puppetlabs-facts.git"
     provision: "https://github.com/puppetlabs/provision.git"
     puppet_agent: "https://github.com/puppetlabs/puppetlabs-puppet_agent.git"
