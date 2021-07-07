@@ -6,7 +6,7 @@
 <title>
   Resource Type: postfix_master
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -85,9 +85,7 @@
     
 <p>Manages Postfix services.</p>
 
-<p>The resource name can be used as a shortcut for specifying the service and
-type parameters by using the form <code>&lt;service&gt;/&lt;type&gt;</code>
-otherwise it can be left as a normal string.</p>
+<p>The resource name can be used as a shortcut for specifying the service and type parameters by using the form <code>&lt;service&gt;/&lt;type&gt;</code> otherwise it can be left as a normal string.</p>
 
   </div>
 </div>
@@ -150,15 +148,9 @@ otherwise it can be left as a normal string.</p>
           
 <p>The command name and arguments.</p>
 
-<p>The command to run. If the command includes any <code>-o</code> options
-then these follow the same autorequire rules as for <a
-href="#native-type-postfix_main">postfix_main</a> resources with the
-exception that it doesn&#39;t autorequire a setting that is redefined with
-<code>-o</code> in the same command.</p>
+<p>The command to run. If the command includes any <code>-o</code> options then these follow the same autorequire rules as for <a href="#native-type-postfix_main">postfix_main</a> resources with the exception that it doesn&#39;t autorequire a setting that is redefined with <code>-o</code> in the same command.</p>
 
-<p>If the command uses <code>pipe(8)</code> then the value from the
-<code>user=</code> attribute is parsed and any existing user or group
-resource will be autorequired.</p>
+<p>If the command uses <code>pipe(8)</code> then the value from the <code>user=</code> attribute is parsed and any existing user or group resource will be autorequired.</p>
 
         </div>
       </div>
@@ -361,8 +353,7 @@ resource will be autorequired.</p>
       <div class="docstring">
         <div class="discussion">
           
-<p>The name of the service and type separated by <code>/</code>, or a unique
-string.</p>
+<p>The name of the service and type separated by <code>/</code>, or a unique string.</p>
 
         </div>
       </div>
@@ -377,9 +368,7 @@ string.</p>
       <div class="docstring">
         <div class="discussion">
           
-<p>The specific backend to use for this <code>postfix_master</code> resource.
-You will seldom need to specify this — Puppet will usually discover the
-appropriate provider for your platform.</p>
+<p>The specific backend to use for this <code>postfix_master</code> resource. You will seldom need to specify this — Puppet will usually discover the appropriate provider for your platform.</p>
 
         </div>
       </div>
@@ -409,11 +398,9 @@ appropriate provider for your platform.</p>
       <div class="docstring">
         <div class="discussion">
           
-<p>The file in which to store the services, defaults to
-<code>/etc/postfix/master.cf</code>.</p>
+<p>The file in which to store the services, defaults to <code>/etc/postfix/master.cf</code>.</p>
 
-<p>If a file resource exists in the catalogue for this value it will be
-autorequired.</p>
+<p>If a file resource exists in the catalogue for this value it will be autorequired.</p>
 
         </div>
       </div>
@@ -446,6 +433,11 @@ autorequired.</p>
           <li>
             
             unix
+          </li>
+          
+          <li>
+            
+            unix-dgram
           </li>
           
           <li>

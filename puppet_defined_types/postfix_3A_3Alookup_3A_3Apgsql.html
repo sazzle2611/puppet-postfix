@@ -6,7 +6,7 @@
 <title>
   Defined Type: postfix::lookup::pgsql
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -210,7 +210,7 @@
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><span class='object_link'><a href="../puppet_classes/postfix.html" title="puppet_classes::postfix (puppet_class)">::postfix</a></span></li>
+      <li><span class='object_link'><a href="../puppet_classes/postfix.html" title="puppet_classes::postfix (puppet_class)">postfix</a></span></li>
     
   </ul>
 <p class="tag_title">Since:</p>
@@ -272,9 +272,7 @@
 49
 50
 51
-52
-53
-54</pre>
+52</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/lookup/pgsql.pp', line 17</span>
@@ -292,9 +290,7 @@ define postfix::lookup::pgsql (
   Optional[Integer[0]]                         $expansion_limit = undef,
 ) {
 
-  if ! defined(Class[&#39;postfix&#39;]) {
-    fail(&#39;You must include the postfix base class before using any postfix defined resources&#39;)
-  }
+  include postfix
 
   $_hosts = postfix::flatten_hosts($hosts)
 
@@ -311,8 +307,8 @@ define postfix::lookup::pgsql (
     content =&gt; template(&quot;${module_name}/pgsql.cf.erb&quot;),
   }
 
-  if $ensure != &#39;absent&#39; and has_key($::postfix::lookup_packages, &#39;pgsql&#39;) {
-    $pgsql_package = $::postfix::lookup_packages[&#39;pgsql&#39;]
+  if $ensure != &#39;absent&#39; and has_key($postfix::lookup_packages, &#39;pgsql&#39;) {
+    $pgsql_package = $postfix::lookup_packages[&#39;pgsql&#39;]
     ensure_packages([$pgsql_package])
     Package[$pgsql_package] -&gt; File[$path]
   }

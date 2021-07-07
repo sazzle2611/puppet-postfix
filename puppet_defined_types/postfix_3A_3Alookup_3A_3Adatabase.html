@@ -6,7 +6,7 @@
 <title>
   Defined Type: postfix::lookup::database
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -89,7 +89,7 @@
 <p>Define a <code>transport(5)</code> table</p>
 </div></p>
       
-      <pre class="example code"><code>::postfix::lookup::database { &#39;/etc/postfix/transport&#39;:
+      <pre class="example code"><code>postfix::lookup::database { &#39;/etc/postfix/transport&#39;:
   content =&gt; @(EOS/L),
     example.com :
     | EOS
@@ -98,14 +98,13 @@
     
       
         <p class="example_title"><div class='inline'>
-<p>Manage the <code>aliases(5)</code> table with <code>mailalias</code>
-resources</p>
+<p>Manage the <code>aliases(5)</code> table with <code>mailalias</code> resources</p>
 </div></p>
       
-      <pre class="example code"><code>::postfix::lookup::database { &#39;/etc/aliases&#39;:
+      <pre class="example code"><code>postfix::lookup::database { &#39;/etc/aliases&#39;:
   type =&gt; &#39;hash&#39;,
 }
-Mailalias &lt;||&gt; -&gt; ::Postfix::Lookup::Database[&#39;/etc/aliases&#39;]</code></pre>
+Mailalias &lt;||&gt; -&gt; Postfix::Lookup::Database[&#39;/etc/aliases&#39;]</code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -145,7 +144,7 @@ Mailalias &lt;||&gt; -&gt; ::Postfix::Lookup::Database[&#39;/etc/aliases&#39;]</
         <span class='type'>(<tt>Postfix::Type::Lookup::Database</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::default_database_type</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::default_database_type</tt>)</em>
       
       
     </li>
@@ -183,7 +182,7 @@ Mailalias &lt;||&gt; -&gt; ::Postfix::Lookup::Database[&#39;/etc/aliases&#39;]</
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><span class='object_link'><a href="../puppet_classes/postfix.html" title="puppet_classes::postfix (puppet_class)">::postfix</a></span></li>
+      <li><span class='object_link'><a href="../puppet_classes/postfix.html" title="puppet_classes::postfix (puppet_class)">postfix</a></span></li>
     
   </ul>
 <p class="tag_title">Since:</p>
@@ -291,9 +290,7 @@ Mailalias &lt;||&gt; -&gt; ::Postfix::Lookup::Database[&#39;/etc/aliases&#39;]</
 104
 105
 106
-107
-108
-109</pre>
+107</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/lookup/database.pp', line 26</span>
@@ -301,14 +298,12 @@ Mailalias &lt;||&gt; -&gt; ::Postfix::Lookup::Database[&#39;/etc/aliases&#39;]</
 define postfix::lookup::database (
   Enum[&#39;present&#39;, &#39;absent&#39;]       $ensure  = &#39;present&#39;,
   Stdlib::Absolutepath            $path    = $title,
-  Postfix::Type::Lookup::Database $type    = $::postfix::default_database_type,
+  Postfix::Type::Lookup::Database $type    = $postfix::default_database_type,
   Optional[String]                $content = undef,
   Optional[String]                $source  = undef,
 ) {
 
-  if ! defined(Class[&#39;postfix&#39;]) {
-    fail(&#39;You must include the postfix base class before using any postfix defined resources&#39;)
-  }
+  include postfix
 
   if $content and $source {
     fail(&#39;Only one of $content or $source should be specified.&#39;)
@@ -334,8 +329,8 @@ define postfix::lookup::database (
     File[$path] ~&gt; Class[&#39;postfix::service&#39;]
   }
 
-  if $ensure != &#39;absent&#39; and has_key($::postfix::lookup_packages, $type) {
-    $lookup_package = $::postfix::lookup_packages[$type]
+  if $ensure != &#39;absent&#39; and has_key($postfix::lookup_packages, $type) {
+    $lookup_package = $postfix::lookup_packages[$type]
     ensure_packages([$lookup_package])
     Package[$lookup_package] -&gt; File[$path]
   }

@@ -6,7 +6,7 @@
 <title>
   Resource Type: postfix_main
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -85,8 +85,7 @@
     
 <p>Manages Postfix settings.</p>
 
-<p>The resource name can be used as a shortcut for specifying the setting
-parameter.</p>
+<p>The resource name can be used as a shortcut for specifying the setting parameter.</p>
 
   </div>
 </div>
@@ -144,16 +143,7 @@ parameter.</p>
           
 <p>Value to change the setting to.</p>
 
-<p>If this value is refers to other settings and those settings are also
-managed by Puppet, they will be autorequired. If the value can be fully
-expanded and matches a file resource that exists in the catalogue then it
-will be autorequired. Lookup tables of the form
-<code>type:/path/to/file</code> will use the filename that is produced by
-the <code>postmap(1)</code> command. For example, a value of
-<code>hash:/etc/aliases</code> will attempt to autorequire
-<code>/etc/aliases.db</code>. Any setting that references a service defined
-in <code>master.cf</code> will attempt to autorequire it. This includes the
-various <code>${transport}_delivery_slot_cost</code>, etc. settings.</p>
+<p>If this value is refers to other settings and those settings are also managed by Puppet, they will be autorequired. If the value can be fully expanded and matches a file resource that exists in the catalogue then it will be autorequired. Lookup tables of the form <code>type:/path/to/file</code> will use the filename that is produced by the <code>postmap(1)</code> command. For example, a value of <code>hash:/etc/aliases</code> will attempt to autorequire <code>/etc/aliases.db</code>. Any setting that references a service defined in <code>master.cf</code> will attempt to autorequire it. This includes the various <code>${transport}_delivery_slot_cost</code>, etc. settings.</p>
 
         </div>
       </div>
@@ -191,9 +181,7 @@ various <code>${transport}_delivery_slot_cost</code>, etc. settings.</p>
       <div class="docstring">
         <div class="discussion">
           
-<p>The specific backend to use for this <code>postfix_main</code> resource.
-You will seldom need to specify this — Puppet will usually discover the
-appropriate provider for your platform.</p>
+<p>The specific backend to use for this <code>postfix_main</code> resource. You will seldom need to specify this — Puppet will usually discover the appropriate provider for your platform.</p>
 
         </div>
       </div>
@@ -223,11 +211,9 @@ appropriate provider for your platform.</p>
       <div class="docstring">
         <div class="discussion">
           
-<p>The file in which to store the settings, defaults to
-<code>/etc/postfix/main.cf</code>.</p>
+<p>The file in which to store the settings, defaults to <code>/etc/postfix/main.cf</code>.</p>
 
-<p>If a file resource exists in the catalogue for this value it will be
-autorequired.</p>
+<p>If a file resource exists in the catalogue for this value it will be autorequired.</p>
 
         </div>
       </div>

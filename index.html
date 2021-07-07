@@ -6,7 +6,7 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -60,77 +60,63 @@
       <div id="content"><div id='filecontents'>
 <h1 id="label-postfix">postfix</h1>
 
-<p><a href="https://travis-ci.org/bodgit/puppet-postfix"><img
-src="https://travis-ci.org/bodgit/puppet-postfix.svg?branch=master"></a> <a
-href="https://codecov.io/gh/bodgit/puppet-postfix"><img
-src="https://img.shields.io/codecov/c/github/bodgit/puppet-postfix"></a> <a
-href="https://forge.puppetlabs.com/bodgit/postfix"><img
-src="http://img.shields.io/puppetforge/v/bodgit/postfix"></a> <a
-href="https://forge.puppetlabs.com/bodgit/postfix"><img
-src="https://img.shields.io/puppetforge/dt/bodgit/postfix"></a> <a
-href="https://forge.puppetlabs.com/bodgit/postfix"><img
-src="https://img.shields.io/puppetforge/pdk-version/bodgit/postfix"></a></p>
+<p><a href="https://github.com/bodgit/puppet-postfix/actions?query=workflow%3ATest"><img src="https://img.shields.io/github/workflow/status/bodgit/puppet-postfix/Test"></a> <a href="https://codecov.io/gh/bodgit/puppet-postfix"><img src="https://img.shields.io/codecov/c/github/bodgit/puppet-postfix"></a> <a href="https://forge.puppetlabs.com/bodgit/postfix"><img src="http://img.shields.io/puppetforge/v/bodgit/postfix"></a> <a href="https://forge.puppetlabs.com/bodgit/postfix"><img src="https://img.shields.io/puppetforge/dt/bodgit/postfix"></a> <a href="https://forge.puppetlabs.com/bodgit/postfix"><img src="https://img.shields.io/puppetforge/pdk-version/bodgit/postfix"></a></p>
 
 <h4 id="label-Table+of+Contents">Table of Contents</h4>
 <ol><li>
-<p><a href="#label-Description">Description</a></p>
+<p><a href="#description">Description</a></p>
 </li><li>
-<p><a href="#label-Setup">Setup - The basics of getting started with postfix</a></p>
+<p><a href="#setup">Setup - The basics of getting started with postfix</a></p>
 <ul><li>
-<p><a href="#label-Beginning+with+postfix">Beginning with postfix</a></p>
+<p><a href="#beginning-with-postfix">Beginning with postfix</a></p>
 </li></ul>
 </li><li>
-<p><a href="#label-Usage">Usage - Configuration options and additional
-functionality</a></p>
+<p><a href="#usage">Usage - Configuration options and additional functionality</a></p>
 </li><li>
-<p><a href="#label-Reference">Reference - An under-the-hood peek at what the module
-is doing and how</a></p>
+<p><a href="#reference">Reference - An under-the-hood peek at what the module is doing and how</a></p>
 </li><li>
-<p><a href="#label-Limitations">Limitations - OS compatibility, etc.</a></p>
+<p><a href="#limitations">Limitations - OS compatibility, etc.</a></p>
 </li><li>
-<p><a href="#label-Development">Development - Guide for contributing to the
-module</a></p>
+<p><a href="#development">Development - Guide for contributing to the module</a></p>
 </li></ol>
 
 <h2 id="label-Description">Description</h2>
 
 <p>This module manages Postfix.</p>
 
-<p>CentOS, RHEL, Scientific and Oracle Enterprise Linux is supported using
-Puppet 5 or later.</p>
+<p>CentOS, RHEL, Scientific and Oracle Enterprise Linux is supported using Puppet 5 or later.</p>
 
 <h2 id="label-Setup">Setup</h2>
 
 <h3 id="label-Beginning+with+postfix">Beginning with postfix</h3>
 
-<p>Configure Postfix with the defaults as shipped by the OS and managing any
-aliases using the standard Puppet <code>mailalias</code> resource type:</p>
+<p>Configure Postfix with the defaults as shipped by the OS and managing any aliases using the standard Puppet <code>mailalias</code> resource type:</p>
 
-<pre class="code ruby"><code class="ruby">include ::postfix
+<pre class="code ruby"><code class="ruby">include postfix
 
-::postfix::lookup::database { &#39;/etc/aliases&#39;:
+postfix::lookup::database { &#39;/etc/aliases&#39;:
   type =&gt; &#39;hash&#39;,
 }
 
-Mailalias &lt;||&gt; -&gt; ::Postfix::Lookup::Database[&#39;/etc/aliases&#39;]</code></pre>
+Mailalias &lt;||&gt; -&gt; Postfix::Lookup::Database[&#39;/etc/aliases&#39;]
+</code></pre>
 
 <h2 id="label-Usage">Usage</h2>
 
-<p>Configure Postfix with an additional submission service running on TCP port
-587:</p>
+<p>Configure Postfix with an additional submission service running on TCP port 587:</p>
 
-<pre class="code ruby"><code class="ruby">include ::postfix
+<pre class="code ruby"><code class="ruby">include postfix
 
-::postfix::master { &#39;submission/inet&#39;:
+postfix::master { &#39;submission/inet&#39;:
   private =&gt; &#39;n&#39;,
   chroot  =&gt; &#39;n&#39;,
   command =&gt; &#39;smtpd -o smtpd_tls_security_level=encrypt -o smtpd_recipient_restrictions=permit_sasl_authenticated,reject&#39;,
-}</code></pre>
+}
+</code></pre>
 
-<p>Configure Postfix for virtual mailbox hosting using LDAP to provide the
-various lookup tables:</p>
+<p>Configure Postfix for virtual mailbox hosting using LDAP to provide the various lookup tables:</p>
 
-<pre class="code ruby"><code class="ruby">class { &#39;::postfix&#39;:
+<pre class="code ruby"><code class="ruby">class { &#39;postfix&#39;:
   virtual_mailbox_base    =&gt; &#39;/var/mail/vhosts&#39;,
   virtual_mailbox_domains =&gt; [&#39;ldap:/etc/postfix/virtualdomains.cf&#39;],
   virtual_mailbox_maps    =&gt; [&#39;ldap:/etc/postfix/virtualrecipients.cf&#39;],
@@ -148,36 +134,36 @@ Postfix::Lookup::Ldap {
   version     =&gt; 3,
 }
 
-::postfix::lookup::ldap { &#39;/etc/postfix/virtualdomains.cf&#39;:
+postfix::lookup::ldap { &#39;/etc/postfix/virtualdomains.cf&#39;:
   query_filter     =&gt; &#39;(associatedDomain=%s)&#39;,
   result_attribute =&gt; [&#39;associatedDomain&#39;],
 }
 
-::postfix::lookup::ldap { &#39;/etc/postfix/virtualrecipients.cf&#39;:
+postfix::lookup::ldap { &#39;/etc/postfix/virtualrecipients.cf&#39;:
   query_filter     =&gt; &#39;(mail=%s)&#39;,
   result_attribute =&gt; [&#39;mail&#39;],
-}</code></pre>
+}
+</code></pre>
 
-<p>Extend the above example to use <code>dovecot-lda(1)</code> instead of
-<code>virtual(8)</code>:</p>
+<p>Extend the above example to use <code>dovecot-lda(1)</code> instead of <code>virtual(8)</code>:</p>
 
-<pre class="code ruby"><code class="ruby">include ::dovecot
+<pre class="code ruby"><code class="ruby">include dovecot
 
-class { &#39;::postfix&#39;:
+class { &#39;postfix&#39;:
   virtual_transport       =&gt; &#39;dovecot&#39;
   virtual_mailbox_domains =&gt; [&#39;ldap:/etc/postfix/virtualdomains.cf&#39;],
   virtual_mailbox_maps    =&gt; [&#39;ldap:/etc/postfix/virtualrecipients.cf&#39;],
 }
 
-::postfix::main { &#39;dovecot_destination_recipient_limit&#39;:
+postfix::main { &#39;dovecot_destination_recipient_limit&#39;:
   value =&gt; 1,
 }
 
-::postfix::master { &#39;dovecot/unix&#39;:
+postfix::master { &#39;dovecot/unix&#39;:
   chroot       =&gt; &#39;n&#39;,
   command      =&gt; &#39;pipe flags=DRhu user=vmail:vmail argv=/path/to/dovecot-lda -f ${sender} -d ${recipient}&#39;,
   unprivileged =&gt; &#39;n&#39;,
-  require      =&gt; Class[&#39;::dovecot&#39;],
+  require      =&gt; Class[&#39;dovecot&#39;],
 }
 
 # Specify connection defaults to enable sharing as per LDAP_README
@@ -189,30 +175,24 @@ Postfix::Lookup::Ldap {
   version     =&gt; 3,
 }
 
-::postfix::lookup::ldap { &#39;/etc/postfix/virtualdomains.cf&#39;:
+postfix::lookup::ldap { &#39;/etc/postfix/virtualdomains.cf&#39;:
   query_filter     =&gt; &#39;(associatedDomain=%s)&#39;,
   result_attribute =&gt; [&#39;associatedDomain&#39;],
 }
 
-::postfix::lookup::ldap { &#39;/etc/postfix/virtualrecipients.cf&#39;:
+postfix::lookup::ldap { &#39;/etc/postfix/virtualrecipients.cf&#39;:
   query_filter     =&gt; &#39;(mail=%s)&#39;,
   result_attribute =&gt; [&#39;mail&#39;],
-}</code></pre>
+}
+</code></pre>
 
 <h2 id="label-Reference">Reference</h2>
 
-<p>The reference documentation is generated with <a
-href="https://github.com/puppetlabs/puppet-strings">puppet-strings</a> and
-the latest version of the documentation is hosted at <a
-href="https://bodgit.github.io/puppet-postfix/">bodgit.github.io/puppet-postfix/</a>
-and available also in the <a
-href="https://github.com/bodgit/puppet-postfix/blob/master/REFERENCE.md">REFERENCE.md</a>.</p>
+<p>The reference documentation is generated with <a href="https://github.com/puppetlabs/puppet-strings">puppet-strings</a> and the latest version of the documentation is hosted at <a href="https://bodgit.github.io/puppet-postfix/">bodgit.github.io/puppet-postfix/</a> and available also in the <a href="https://github.com/bodgit/puppet-postfix/blob/main/REFERENCE.md">REFERENCE.md</a>.</p>
 
 <h2 id="label-Limitations">Limitations</h2>
 
-<p>This module takes the (somewhat laborious) approach of creating parameters
-for each <code>main.cf</code> setting rather than just pass in a large hash
-of settings, which should result in more control.</p>
+<p>This module takes the (somewhat laborious) approach of creating parameters for each <code>main.cf</code> setting rather than just pass in a large hash of settings, which should result in more control.</p>
 
 <p>The only settings deliberately excluded are the following:</p>
 <ul><li>
@@ -247,41 +227,28 @@ of settings, which should result in more control.</p>
 
 <p>For these, use the <code>postfix::main</code> defined type.</p>
 
-<p>Because Postfix allows you to recursively define parameters in terms of
-other parameters it makes validating values impossible unless that
-convention is forbidden. Currently this module allows recursive parameter
-expansion and so only validates that values are either strings or arrays
-(of strings).</p>
+<p>Because Postfix allows you to recursively define parameters in terms of other parameters it makes validating values impossible unless that convention is forbidden. Currently this module allows recursive parameter expansion and so only validates that values are either strings or arrays (of strings).</p>
 
-<p>Any setting that accepts a boolean <code>yes</code>/<code>no</code> value
-also accepts native Puppet boolean values. Any multi-valued setting accepts
-an array of values.</p>
+<p>Any setting that accepts a boolean <code>yes</code>/<code>no</code> value also accepts native Puppet boolean values. Any multi-valued setting accepts an array of values.</p>
 
-<p>For referring to other settings, ensure that the <code>$</code> is escaped
-appropriately using either <code>&lt;/code&gt; or
-&lt;code&gt;&#39;&#39;</code> to prevent Puppet expanding the variable
-itself.</p>
+<p>For referring to other settings, ensure that the <code>$</code> is escaped appropriately using either <code>&lt;/code&gt; or &lt;code&gt;&#39;&#39;</code> to prevent Puppet expanding the variable itself.</p>
 
 <p>This module has been built on and tested against Puppet 5 and higher.</p>
 
 <p>The module has been tested on:</p>
 <ul><li>
-<p>Red Hat/CentOS Enterprise Linux 6/7</p>
+<p>Red Hat/CentOS Enterprise Linux 6/7/8</p>
 </li></ul>
 
 <h2 id="label-Development">Development</h2>
 
-<p>The module relies on <a
-href="https://puppet.com/docs/pdk/1.x/pdk.html">PDK</a> and has both <a
-href="http://rspec-puppet.com">rspec-puppet</a> and <a
-href="https://github.com/puppetlabs/beaker-rspec">beaker-rspec</a> tests.
-Run them with:</p>
+<p>The module relies on <a href="https://puppet.com/docs/pdk/1.x/pdk.html">PDK</a> and has both <a href="http://rspec-puppet.com">rspec-puppet</a> and <a href="https://github.com/puppetlabs/puppet_litmus">Litmus</a> tests. Run them with:</p>
 
 <pre class="code ruby"><code class="ruby">$ bundle exec rake spec
-$ PUPPET_INSTALL_TYPE=agent PUPPET_INSTALL_VERSION=x.y.z bundle exec rake beaker:&lt;nodeset&gt;</code></pre>
+$ bundle exec rake litmus:*
+</code></pre>
 
-<p>Please log issues or pull requests at <a
-href="https://github.com/bodgit/puppet-postfix">github</a>.</p>
+<p>Please log issues or pull requests at <a href="https://github.com/bodgit/puppet-postfix">github</a>.</p>
 </div></div>
 
       <div id="footer">

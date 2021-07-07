@@ -6,7 +6,7 @@
 <title>
   Puppet Function: postfix::flatten_hosts (Puppet Language)
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -92,9 +92,109 @@
     </div>
   </div>
   
+
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_postfix'>postfix</span><span class='op'>::</span><span class='id identifier rubyid_flatten_hosts'>flatten_hosts</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>2001:db8::1</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>192.0.2.1</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='int'>389</span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hosts</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Variant[Postfix::Type::Lookup::LDAP::Host, Postfix::Type::Lookup::MySQL::Host, Postfix::Type::Lookup::PgSQL::Host], 1]]</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The array of hosts to flatten, <code>undef</code> is passed through.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Optional[Array[String, 1]]</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The array of flattened strings.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Since:</p>
+<ul class="since">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>2.0.0</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><div class="method_details_list">
+  <table class="source_code">
+    <tr>
+      <td>
+        <pre class="lines">
+
+
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre>
+      </td>
+      <td>
+        <pre class="code"><span class="info file"># File 'functions/flatten_hosts.pp', line 11</span>
+
+function postfix::flatten_hosts(Optional[Array[Variant[Postfix::Type::Lookup::LDAP::Host, Postfix::Type::Lookup::MySQL::Host, Postfix::Type::Lookup::PgSQL::Host], 1]] $hosts) {
+
+  $hosts ? {
+    undef   =&gt; undef,
+    default =&gt; $hosts.map |$host| {
+      postfix::flatten_host($host)
+    },
+  }
+}</pre>
+      </td>
+    </tr>
+  </table>
 </div>
 
-
+</div>
 </div>
 
       <div id="footer">

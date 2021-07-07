@@ -6,7 +6,7 @@
 <title>
   Defined Type: postfix::lookup::ldap
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -86,11 +86,10 @@
     
       
         <p class="example_title"><div class='inline'>
-<p>Configure Postfix for virtual mailbox hosting using LDAP to provide the
-various lookup tables</p>
+<p>Configure Postfix for virtual mailbox hosting using LDAP to provide the various lookup tables</p>
 </div></p>
       
-      <pre class="example code"><code>class { &#39;::postfix&#39;:
+      <pre class="example code"><code>class { &#39;postfix&#39;:
   virtual_mailbox_base    =&gt; &#39;/var/mail/vhosts&#39;,
   virtual_mailbox_domains =&gt; [&#39;ldap:/etc/postfix/virtualdomains.cf&#39;],
   virtual_mailbox_maps    =&gt; [&#39;ldap:/etc/postfix/virtualrecipients.cf&#39;],
@@ -108,12 +107,12 @@ Postfix::Lookup::Ldap {
   version     =&gt; 3,
 }
 
-::postfix::lookup::ldap { &#39;/etc/postfix/virtualdomains.cf&#39;:
+postfix::lookup::ldap { &#39;/etc/postfix/virtualdomains.cf&#39;:
   query_filter     =&gt; &#39;(associatedDomain=%s)&#39;,
   result_attribute =&gt; [&#39;associatedDomain&#39;],
 }
 
-::postfix::lookup::ldap { &#39;/etc/postfix/virtualrecipients.cf&#39;:
+postfix::lookup::ldap { &#39;/etc/postfix/virtualrecipients.cf&#39;:
   query_filter     =&gt; &#39;(mail=%s)&#39;,
   result_attribute =&gt; [&#39;mail&#39;],
 }</code></pre>
@@ -595,7 +594,7 @@ Postfix::Lookup::Ldap {
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><span class='object_link'><a href="../puppet_classes/postfix.html" title="puppet_classes::postfix (puppet_class)">::postfix</a></span></li>
+      <li><span class='object_link'><a href="../puppet_classes/postfix.html" title="puppet_classes::postfix (puppet_class)">postfix</a></span></li>
     
   </ul>
 <p class="tag_title">Since:</p>
@@ -683,9 +682,7 @@ Postfix::Lookup::Ldap {
 130
 131
 132
-133
-134
-135</pre>
+133</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/lookup/ldap.pp', line 72</span>
@@ -729,9 +726,7 @@ define postfix::lookup::ldap (
   Optional[String]                                           $tls_cipher_suite          = undef,
 ) {
 
-  if ! defined(Class[&#39;postfix&#39;]) {
-    fail(&#39;You must include the postfix base class before using any postfix defined resources&#39;)
-  }
+  include postfix
 
   $_server_host = postfix::flatten_hosts($server_host)
 
@@ -748,8 +743,8 @@ define postfix::lookup::ldap (
     content =&gt; template(&quot;${module_name}/ldap.cf.erb&quot;),
   }
 
-  if $ensure != &#39;absent&#39; and has_key($::postfix::lookup_packages, &#39;ldap&#39;) {
-    $ldap_package = $::postfix::lookup_packages[&#39;ldap&#39;]
+  if $ensure != &#39;absent&#39; and has_key($postfix::lookup_packages, &#39;ldap&#39;) {
+    $ldap_package = $postfix::lookup_packages[&#39;ldap&#39;]
     ensure_packages([$ldap_package])
     Package[$ldap_package] -&gt; File[$path]
   }

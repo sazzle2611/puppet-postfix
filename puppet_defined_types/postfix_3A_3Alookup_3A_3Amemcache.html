@@ -6,7 +6,7 @@
 <title>
   Defined Type: postfix::lookup::memcache
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -89,19 +89,19 @@
 <p>Postscreen temporary whitelist</p>
 </div></p>
       
-      <pre class="example code"><code>include ::memcached
+      <pre class="example code"><code>include memcached
 
-class { &#39;::postfix&#39;:
+class { &#39;postfix&#39;:
   postscreen_cache_map =&gt; &#39;memcache:/etc/postfix/postscreen_cache&#39;,
   proxy_write_maps     =&gt; [&#39;btree:$data_directory/postscreen_cache&#39;],
   ...
 }
 
-::postfix::lookup::memcache { &#39;/etc/postfix/postscreen_cache&#39;:
+postfix::lookup::memcache { &#39;/etc/postfix/postscreen_cache&#39;:
   memcache   =&gt; [&#39;inet&#39;, &#39;127.0.0.1&#39;, 11211],
   backup     =&gt; &#39;btree:$data_directory/postscreen_cache&#39;,
   key_format =&gt; &#39;postscreen:%s&#39;,
-  require    =&gt; Class[&#39;::memcached&#39;],
+  require    =&gt; Class[&#39;memcached&#39;],
 }</code></pre>
     
   </div>
@@ -284,7 +284,7 @@ class { &#39;::postfix&#39;:
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><span class='object_link'><a href="../puppet_classes/postfix.html" title="puppet_classes::postfix (puppet_class)">::postfix</a></span></li>
+      <li><span class='object_link'><a href="../puppet_classes/postfix.html" title="puppet_classes::postfix (puppet_class)">postfix</a></span></li>
     
   </ul>
 <p class="tag_title">Since:</p>
@@ -349,9 +349,7 @@ class { &#39;::postfix&#39;:
 71
 72
 73
-74
-75
-76</pre>
+74</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/lookup/memcache.pp', line 36</span>
@@ -372,9 +370,7 @@ define postfix::lookup::memcache (
   Optional[Integer[0]]                            $timeout         = undef,
 ) {
 
-  if ! defined(Class[&#39;postfix&#39;]) {
-    fail(&#39;You must include the postfix base class before using any postfix defined resources&#39;)
-  }
+  include postfix
 
   $_memcache = postfix::flatten_host($memcache)
 
@@ -391,8 +387,8 @@ define postfix::lookup::memcache (
     content =&gt; template(&quot;${module_name}/memcache.cf.erb&quot;),
   }
 
-  if $ensure != &#39;absent&#39; and has_key($::postfix::lookup_packages, &#39;memcache&#39;) {
-    $memcache_package = $::postfix::lookup_packages[&#39;memcache&#39;]
+  if $ensure != &#39;absent&#39; and has_key($postfix::lookup_packages, &#39;memcache&#39;) {
+    $memcache_package = $postfix::lookup_packages[&#39;memcache&#39;]
     ensure_packages([$memcache_package])
     Package[$memcache_package] -&gt; File[$path]
   }

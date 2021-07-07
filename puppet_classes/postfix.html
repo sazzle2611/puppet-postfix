@@ -6,7 +6,7 @@
 <title>
   Puppet Class: postfix
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -93,27 +93,25 @@
     
       
         <p class="example_title"><div class='inline'>
-<p>Configure Postfix with the defaults as shipped by the OS and managing any
-aliases using the standard Puppet <code>mailalias</code> resource type</p>
+<p>Configure Postfix with the defaults as shipped by the OS and managing any aliases using the standard Puppet <code>mailalias</code> resource type</p>
 </div></p>
       
-      <pre class="example code"><code>include ::postfix
+      <pre class="example code"><code>include postfix
 
-::postfix::lookup::database { &#39;/etc/aliases&#39;:
+postfix::lookup::database { &#39;/etc/aliases&#39;:
   type =&gt; &#39;hash&#39;,
 }
 
-Mailalias &lt;||&gt; -&gt; ::Postfix::Lookup::Database[&#39;/etc/aliases&#39;]</code></pre>
+Mailalias &lt;||&gt; -&gt; Postfix::Lookup::Database[&#39;/etc/aliases&#39;]</code></pre>
     
       
         <p class="example_title"><div class='inline'>
-<p>Configure Postfix with an additional submission service running on TCP port
-587</p>
+<p>Configure Postfix with an additional submission service running on TCP port 587</p>
 </div></p>
       
-      <pre class="example code"><code>include ::postfix
+      <pre class="example code"><code>include postfix
 
-::postfix::master { &#39;submission/inet&#39;:
+postfix::master { &#39;submission/inet&#39;:
   private =&gt; &#39;n&#39;,
   chroot  =&gt; &#39;n&#39;,
   command =&gt; &#39;smtpd -o smtpd_tls_security_level=encrypt -o smtpd_recipient_restrictions=permit_sasl_authenticated,reject&#39;,
@@ -121,11 +119,10 @@ Mailalias &lt;||&gt; -&gt; ::Postfix::Lookup::Database[&#39;/etc/aliases&#39;]</
     
       
         <p class="example_title"><div class='inline'>
-<p>Configure Postfix for virtual mailbox hosting using LDAP to provide the
-various lookup tables</p>
+<p>Configure Postfix for virtual mailbox hosting using LDAP to provide the various lookup tables</p>
 </div></p>
       
-      <pre class="example code"><code>class { &#39;::postfix&#39;:
+      <pre class="example code"><code>class { &#39;postfix&#39;:
   virtual_mailbox_base    =&gt; &#39;/var/mail/vhosts&#39;,
   virtual_mailbox_domains =&gt; [&#39;ldap:/etc/postfix/virtualdomains.cf&#39;],
   virtual_mailbox_maps    =&gt; [&#39;ldap:/etc/postfix/virtualrecipients.cf&#39;],
@@ -143,12 +140,12 @@ Postfix::Lookup::Ldap {
   version     =&gt; 3,
 }
 
-::postfix::lookup::ldap { &#39;/etc/postfix/virtualdomains.cf&#39;:
+postfix::lookup::ldap { &#39;/etc/postfix/virtualdomains.cf&#39;:
   query_filter     =&gt; &#39;(associatedDomain=%s)&#39;,
   result_attribute =&gt; [&#39;associatedDomain&#39;],
 }
 
-::postfix::lookup::ldap { &#39;/etc/postfix/virtualrecipients.cf&#39;:
+postfix::lookup::ldap { &#39;/etc/postfix/virtualrecipients.cf&#39;:
   query_filter     =&gt; &#39;(mail=%s)&#39;,
   result_attribute =&gt; [&#39;mail&#39;],
 }</code></pre>
@@ -165,7 +162,7 @@ Postfix::Lookup::Ldap {
         <span class='type'>(<tt>Stdlib::Absolutepath</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::conf_dir</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::conf_dir</tt>)</em>
       
       
     </li>
@@ -178,7 +175,7 @@ Postfix::Lookup::Ldap {
         <span class='type'>(<tt>Hash[String, Hash[String, Any]]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::services</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::services</tt>)</em>
       
       
     </li>
@@ -191,7 +188,7 @@ Postfix::Lookup::Ldap {
         <span class='type'>(<tt>Hash[Postfix::Type::Lookup, String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::lookup_packages</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::lookup_packages</tt>)</em>
       
       
     </li>
@@ -204,7 +201,7 @@ Postfix::Lookup::Ldap {
         <span class='type'>(<tt>String</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::package_name</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::package_name</tt>)</em>
       
       
     </li>
@@ -217,7 +214,7 @@ Postfix::Lookup::Ldap {
         <span class='type'>(<tt>String</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::service_name</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::service_name</tt>)</em>
       
       
     </li>
@@ -235,8 +232,7 @@ Postfix::Lookup::Ldap {
       
         &mdash;
         <div class='inline'>
-<p><code>2bounce_notice_recipient</code> is a violation of Puppet variable
-naming conventions.</p>
+<p><code>2bounce_notice_recipient</code> is a violation of Puppet variable naming conventions.</p>
 </div>
       
     </li>
@@ -535,7 +531,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[Array[String, 1]]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::alias_database</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::alias_database</tt>)</em>
       
       
     </li>
@@ -548,7 +544,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[Array[String, 1]]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::alias_maps</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::alias_maps</tt>)</em>
       
       
     </li>
@@ -977,7 +973,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::command_directory</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::command_directory</tt>)</em>
       
       
     </li>
@@ -1017,6 +1013,19 @@ naming conventions.</p>
       
       
         <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>compatibility_level</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$postfix::params::compatibility_level</tt>)</em>
       
       
     </li>
@@ -1120,7 +1129,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::daemon_directory</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::daemon_directory</tt>)</em>
       
       
     </li>
@@ -1159,7 +1168,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::data_directory</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::data_directory</tt>)</em>
       
       
     </li>
@@ -1172,7 +1181,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::debug_peer_level</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::debug_peer_level</tt>)</em>
       
       
     </li>
@@ -1198,7 +1207,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::debugger_command</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::debugger_command</tt>)</em>
       
       
     </li>
@@ -1211,7 +1220,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Postfix::Type::Lookup::Database</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::default_database_type</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::default_database_type</tt>)</em>
       
       
     </li>
@@ -2134,7 +2143,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[Variant[Boolean, String]]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::html_directory</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::html_directory</tt>)</em>
       
       
     </li>
@@ -2186,7 +2195,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[Array[String, 1]]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::inet_interfaces</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::inet_interfaces</tt>)</em>
       
       
     </li>
@@ -2199,7 +2208,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[Array[String, 1]]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::inet_protocols</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::inet_protocols</tt>)</em>
       
       
     </li>
@@ -3538,7 +3547,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::mail_owner</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::mail_owner</tt>)</em>
       
       
     </li>
@@ -3668,7 +3677,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::mailq_path</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::mailq_path</tt>)</em>
       
       
     </li>
@@ -3681,7 +3690,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::manpage_directory</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::manpage_directory</tt>)</em>
       
       
     </li>
@@ -3851,6 +3860,19 @@ naming conventions.</p>
       
       
         <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>meta_directory</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$postfix::params::meta_directory</tt>)</em>
       
       
     </li>
@@ -4201,7 +4223,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[Array[String, 1]]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::mydestination</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::mydestination</tt>)</em>
       
       
     </li>
@@ -4292,7 +4314,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::newaliases_path</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::newaliases_path</tt>)</em>
       
       
     </li>
@@ -5254,7 +5276,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::queue_directory</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::queue_directory</tt>)</em>
       
       
     </li>
@@ -5332,7 +5354,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[Variant[Boolean, String]]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::readme_directory</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::readme_directory</tt>)</em>
       
       
     </li>
@@ -5618,7 +5640,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::sample_directory</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::sample_directory</tt>)</em>
       
       
     </li>
@@ -5722,7 +5744,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::sendmail_path</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::sendmail_path</tt>)</em>
       
       
     </li>
@@ -5748,7 +5770,20 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::setgid_group</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::setgid_group</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>shlib_directory</span>
+      
+      
+        <span class='type'>(<tt>Optional[Variant[Boolean, String]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$postfix::params::shlib_directory</tt>)</em>
       
       
     </li>
@@ -6567,7 +6602,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>undef</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::smtp_tls_cafile</tt>)</em>
       
       
     </li>
@@ -6580,7 +6615,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>undef</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::smtp_tls_capath</tt>)</em>
       
       
     </li>
@@ -6879,7 +6914,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>undef</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::smtp_tls_security_level</tt>)</em>
       
       
     </li>
@@ -7867,7 +7902,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>undef</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::smtpd_tls_cert_file</tt>)</em>
       
       
     </li>
@@ -8010,7 +8045,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>undef</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::smtpd_tls_key_file</tt>)</em>
       
       
     </li>
@@ -8114,7 +8149,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>undef</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::smtpd_tls_security_level</tt>)</em>
       
       
     </li>
@@ -9102,7 +9137,7 @@ naming conventions.</p>
         <span class='type'>(<tt>Optional[String]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::postfix::params::unknown_local_recipient_reject_code</tt>)</em>
+        <em class="default">(defaults to: <tt>$postfix::params::unknown_local_recipient_reject_code</tt>)</em>
       
       
     </li>
@@ -9439,21 +9474,21 @@ naming conventions.</p>
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Amain.html" title="puppet_defined_types::postfix::main (puppet_defined_type)">::postfix::main</a></span></li>
+      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Amain.html" title="puppet_defined_types::postfix::main (puppet_defined_type)">postfix::main</a></span></li>
     
-      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Amaster.html" title="puppet_defined_types::postfix::master (puppet_defined_type)">::postfix::master</a></span></li>
+      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Amaster.html" title="puppet_defined_types::postfix::master (puppet_defined_type)">postfix::master</a></span></li>
     
-      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Alookup_3A_3Adatabase.html" title="puppet_defined_types::postfix::lookup::database (puppet_defined_type)">::postfix::lookup::database</a></span></li>
+      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Alookup_3A_3Adatabase.html" title="puppet_defined_types::postfix::lookup::database (puppet_defined_type)">postfix::lookup::database</a></span></li>
     
-      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Alookup_3A_3Aldap.html" title="puppet_defined_types::postfix::lookup::ldap (puppet_defined_type)">::postfix::lookup::ldap</a></span></li>
+      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Alookup_3A_3Aldap.html" title="puppet_defined_types::postfix::lookup::ldap (puppet_defined_type)">postfix::lookup::ldap</a></span></li>
     
-      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Alookup_3A_3Amemcache.html" title="puppet_defined_types::postfix::lookup::memcache (puppet_defined_type)">::postfix::lookup::memcache</a></span></li>
+      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Alookup_3A_3Amemcache.html" title="puppet_defined_types::postfix::lookup::memcache (puppet_defined_type)">postfix::lookup::memcache</a></span></li>
     
-      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Alookup_3A_3Amysql.html" title="puppet_defined_types::postfix::lookup::mysql (puppet_defined_type)">::postfix::lookup::mysql</a></span></li>
+      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Alookup_3A_3Amysql.html" title="puppet_defined_types::postfix::lookup::mysql (puppet_defined_type)">postfix::lookup::mysql</a></span></li>
     
-      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Alookup_3A_3Apgsql.html" title="puppet_defined_types::postfix::lookup::pgsql (puppet_defined_type)">::postfix::lookup::pgsql</a></span></li>
+      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Alookup_3A_3Apgsql.html" title="puppet_defined_types::postfix::lookup::pgsql (puppet_defined_type)">postfix::lookup::pgsql</a></span></li>
     
-      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Alookup_3A_3Asqlite.html" title="puppet_defined_types::postfix::lookup::sqlite (puppet_defined_type)">::postfix::lookup::sqlite</a></span></li>
+      <li><span class='object_link'><a href="../puppet_defined_types/postfix_3A_3Alookup_3A_3Asqlite.html" title="puppet_defined_types::postfix::lookup::sqlite (puppet_defined_type)">postfix::lookup::sqlite</a></span></li>
     
   </ul>
 <p class="tag_title">Since:</p>
@@ -9480,9 +9515,6 @@ naming conventions.</p>
         <pre class="lines">
 
 
-775
-776
-777
 778
 779
 780
@@ -10203,17 +10235,23 @@ naming conventions.</p>
 1495
 1496
 1497
-1498</pre>
+1498
+1499
+1500
+1501
+1502
+1503
+1504</pre>
       </td>
       <td>
-        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 775</span>
+        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 778</span>
 
 class postfix (
-  Stdlib::Absolutepath                $conf_dir                                               = $::postfix::params::conf_dir,
-  Hash[String, Hash[String, Any]]     $services                                               = $::postfix::params::services,
-  Hash[Postfix::Type::Lookup, String] $lookup_packages                                        = $::postfix::params::lookup_packages,
-  String                              $package_name                                           = $::postfix::params::package_name,
-  String                              $service_name                                           = $::postfix::params::service_name,
+  Stdlib::Absolutepath                $conf_dir                                               = $postfix::params::conf_dir,
+  Hash[String, Hash[String, Any]]     $services                                               = $postfix::params::services,
+  Hash[Postfix::Type::Lookup, String] $lookup_packages                                        = $postfix::params::lookup_packages,
+  String                              $package_name                                           = $postfix::params::package_name,
+  String                              $service_name                                           = $postfix::params::service_name,
   # main.cf parameters below
   Optional[String]                    $twobounce_notice_recipient                             = undef,
   Optional[String]                    $access_map_defer_code                                  = undef,
@@ -10238,8 +10276,8 @@ class postfix (
   Optional[String]                    $address_verify_service_name                            = undef,
   Optional[Array[String, 1]]          $address_verify_transport_maps                          = undef,
   Optional[String]                    $address_verify_virtual_transport                       = undef,
-  Optional[Array[String, 1]]          $alias_database                                         = $::postfix::params::alias_database,
-  Optional[Array[String, 1]]          $alias_maps                                             = $::postfix::params::alias_maps,
+  Optional[Array[String, 1]]          $alias_database                                         = $postfix::params::alias_database,
+  Optional[Array[String, 1]]          $alias_maps                                             = $postfix::params::alias_maps,
   Optional[Array[String, 1]]          $allow_mail_to_commands                                 = undef,
   Optional[Array[String, 1]]          $allow_mail_to_files                                    = undef,
   Optional[Variant[Boolean, String]]  $allow_min_user                                         = undef,
@@ -10272,10 +10310,11 @@ class postfix (
   Optional[Array[String, 1]]          $canonical_classes                                      = undef,
   Optional[Array[String, 1]]          $canonical_maps                                         = undef,
   Optional[String]                    $cleanup_service_name                                   = undef,
-  Optional[String]                    $command_directory                                      = $::postfix::params::command_directory,
+  Optional[String]                    $command_directory                                      = $postfix::params::command_directory,
   Optional[String]                    $command_execution_directory                            = undef,
   Optional[String]                    $command_expansion_filter                               = undef,
   Optional[String]                    $command_time_limit                                     = undef,
+  Optional[String]                    $compatibility_level                                    = $postfix::params::compatibility_level,
   Optional[String]                    $config_directory                                       = undef,
   Optional[String]                    $connection_cache_protocol_timeout                      = undef,
   Optional[String]                    $connection_cache_service_name                          = undef,
@@ -10283,14 +10322,14 @@ class postfix (
   Optional[String]                    $connection_cache_ttl_limit                             = undef,
   Optional[String]                    $content_filter                                         = undef,
   Optional[Array[String, 1]]          $cyrus_sasl_config_path                                 = undef,
-  Optional[String]                    $daemon_directory                                       = $::postfix::params::daemon_directory,
+  Optional[String]                    $daemon_directory                                       = $postfix::params::daemon_directory,
   Optional[Variant[Boolean, String]]  $daemon_table_open_error_is_fatal                       = undef,
   Optional[String]                    $daemon_timeout                                         = undef,
-  Optional[String]                    $data_directory                                         = $::postfix::params::data_directory,
-  Optional[String]                    $debug_peer_level                                       = $::postfix::params::debug_peer_level,
+  Optional[String]                    $data_directory                                         = $postfix::params::data_directory,
+  Optional[String]                    $debug_peer_level                                       = $postfix::params::debug_peer_level,
   Optional[Array[String, 1]]          $debug_peer_list                                        = undef,
-  Optional[String]                    $debugger_command                                       = $::postfix::params::debugger_command,
-  Postfix::Type::Lookup::Database     $default_database_type                                  = $::postfix::params::default_database_type,
+  Optional[String]                    $debugger_command                                       = $postfix::params::debugger_command,
+  Postfix::Type::Lookup::Database     $default_database_type                                  = $postfix::params::default_database_type,
   Optional[String]                    $default_delivery_slot_cost                             = undef,
   Optional[String]                    $default_delivery_slot_discount                         = undef,
   Optional[String]                    $default_delivery_slot_loan                             = undef,
@@ -10361,12 +10400,12 @@ class postfix (
   Optional[Variant[Boolean, String]]  $helpful_warnings                                       = undef,
   Optional[String]                    $home_mailbox                                           = undef,
   Optional[String]                    $hopcount_limit                                         = undef,
-  Optional[Variant[Boolean, String]]  $html_directory                                         = $::postfix::params::html_directory,
+  Optional[Variant[Boolean, String]]  $html_directory                                         = $postfix::params::html_directory,
   Optional[Variant[Boolean, String]]  $ignore_mx_lookup_error                                 = undef,
   Optional[Array[String, 1]]          $import_environment                                     = undef,
   Optional[String]                    $in_flow_delay                                          = undef,
-  Optional[Array[String, 1]]          $inet_interfaces                                        = $::postfix::params::inet_interfaces,
-  Optional[Array[String, 1]]          $inet_protocols                                         = $::postfix::params::inet_protocols,
+  Optional[Array[String, 1]]          $inet_interfaces                                        = $postfix::params::inet_interfaces,
+  Optional[Array[String, 1]]          $inet_protocols                                         = $postfix::params::inet_protocols,
   Optional[String]                    $initial_destination_concurrency                        = undef,
   Optional[Array[String, 1]]          $internal_mail_filter_classes                           = undef,
   Optional[String]                    $invalid_hostname_reject_code                           = undef,
@@ -10469,7 +10508,7 @@ class postfix (
   Optional[String]                    $local_transport                                        = undef,
   Optional[String]                    $luser_relay                                            = undef,
   Optional[String]                    $mail_name                                              = undef,
-  Optional[String]                    $mail_owner                                             = $::postfix::params::mail_owner,
+  Optional[String]                    $mail_owner                                             = $postfix::params::mail_owner,
   Optional[String]                    $mail_release_date                                      = undef,
   Optional[String]                    $mail_spool_directory                                   = undef,
   Optional[String]                    $mail_version                                           = undef,
@@ -10479,8 +10518,8 @@ class postfix (
   Optional[String]                    $mailbox_size_limit                                     = undef,
   Optional[String]                    $mailbox_transport                                      = undef,
   Optional[Array[String, 1]]          $mailbox_transport_maps                                 = undef,
-  Optional[String]                    $mailq_path                                             = $::postfix::params::mailq_path,
-  Optional[String]                    $manpage_directory                                      = $::postfix::params::manpage_directory,
+  Optional[String]                    $mailq_path                                             = $postfix::params::mailq_path,
+  Optional[String]                    $manpage_directory                                      = $postfix::params::manpage_directory,
   Optional[Array[String, 1]]          $maps_rbl_domains                                       = undef,
   Optional[String]                    $maps_rbl_reject_code                                   = undef,
   Optional[Array[String, 1]]          $masquerade_classes                                     = undef,
@@ -10494,6 +10533,7 @@ class postfix (
   Optional[String]                    $message_reject_characters                              = undef,
   Optional[String]                    $message_size_limit                                     = undef,
   Optional[String]                    $message_strip_characters                               = undef,
+  Optional[String]                    $meta_directory                                         = $postfix::params::meta_directory,
   Optional[String]                    $milter_command_timeout                                 = undef,
   Optional[String]                    $milter_connect_macros                                  = undef,
   Optional[String]                    $milter_connect_timeout                                 = undef,
@@ -10520,14 +10560,14 @@ class postfix (
   Optional[String]                    $multi_instance_name                                    = undef,
   Optional[String]                    $multi_instance_wrapper                                 = undef,
   Optional[String]                    $multi_recipient_bounce_reject_code                     = undef,
-  Optional[Array[String, 1]]          $mydestination                                          = $::postfix::params::mydestination,
+  Optional[Array[String, 1]]          $mydestination                                          = $postfix::params::mydestination,
   Optional[String]                    $mydomain                                               = undef,
   Optional[String]                    $myhostname                                             = undef,
   Optional[Array[String, 1]]          $mynetworks                                             = undef,
   Optional[String]                    $mynetworks_style                                       = undef,
   Optional[String]                    $myorigin                                               = undef,
   Optional[Array[String, 1]]          $nested_header_checks                                   = undef,
-  Optional[String]                    $newaliases_path                                        = $::postfix::params::newaliases_path,
+  Optional[String]                    $newaliases_path                                        = $postfix::params::newaliases_path,
   Optional[String]                    $non_fqdn_reject_code                                   = undef,
   Optional[Array[String, 1]]          $non_smtpd_milters                                      = undef,
   Optional[Array[String, 1]]          $notify_classes                                         = undef,
@@ -10601,13 +10641,13 @@ class postfix (
   Optional[Variant[Boolean, String]]  $qmqpd_client_port_logging                              = undef,
   Optional[String]                    $qmqpd_error_delay                                      = undef,
   Optional[String]                    $qmqpd_timeout                                          = undef,
-  Optional[String]                    $queue_directory                                        = $::postfix::params::queue_directory,
+  Optional[String]                    $queue_directory                                        = $postfix::params::queue_directory,
   Optional[String]                    $queue_file_attribute_count_limit                       = undef,
   Optional[String]                    $queue_minfree                                          = undef,
   Optional[String]                    $queue_run_delay                                        = undef,
   Optional[String]                    $queue_service_name                                     = undef,
   Optional[Array[String, 1]]          $rbl_reply_maps                                         = undef,
-  Optional[Variant[Boolean, String]]  $readme_directory                                       = $::postfix::params::readme_directory,
+  Optional[Variant[Boolean, String]]  $readme_directory                                       = $postfix::params::readme_directory,
   Optional[Array[String, 1]]          $receive_override_options                               = undef,
   Optional[Array[String, 1]]          $recipient_bcc_maps                                     = undef,
   Optional[Array[String, 1]]          $recipient_canonical_classes                            = undef,
@@ -10629,7 +10669,7 @@ class postfix (
   Optional[Variant[Boolean, String]]  $resolve_null_domain                                    = undef,
   Optional[Variant[Boolean, String]]  $resolve_numeric_domain                                 = undef,
   Optional[String]                    $rewrite_service_name                                   = undef,
-  Optional[String]                    $sample_directory                                       = $::postfix::params::sample_directory,
+  Optional[String]                    $sample_directory                                       = $postfix::params::sample_directory,
   Optional[Variant[Boolean, String]]  $send_cyrus_sasl_authzid                                = undef,
   Optional[Array[String, 1]]          $sender_bcc_maps                                        = undef,
   Optional[Array[String, 1]]          $sender_canonical_classes                               = undef,
@@ -10637,9 +10677,10 @@ class postfix (
   Optional[Array[String, 1]]          $sender_dependent_default_transport_maps                = undef,
   Optional[Array[String, 1]]          $sender_dependent_relayhost_maps                        = undef,
   Optional[String]                    $sendmail_fix_line_endings                              = undef,
-  Optional[String]                    $sendmail_path                                          = $::postfix::params::sendmail_path,
+  Optional[String]                    $sendmail_path                                          = $postfix::params::sendmail_path,
   Optional[String]                    $service_throttle_time                                  = undef,
-  Optional[String]                    $setgid_group                                           = $::postfix::params::setgid_group,
+  Optional[String]                    $setgid_group                                           = $postfix::params::setgid_group,
+  Optional[Variant[Boolean, String]]  $shlib_directory                                        = $postfix::params::shlib_directory,
   Optional[Variant[Boolean, String]]  $show_user_unknown_table_name                           = undef,
   Optional[String]                    $showq_service_name                                     = undef,
   Optional[String]                    $smtp_address_preference                                = undef,
@@ -10702,8 +10743,8 @@ class postfix (
   Optional[Variant[Boolean, String]]  $smtp_skip_5xx_greeting                                 = undef,
   Optional[Variant[Boolean, String]]  $smtp_skip_quit_response                                = undef,
   Optional[String]                    $smtp_starttls_timeout                                  = undef,
-  Optional[String]                    $smtp_tls_cafile                                        = undef,
-  Optional[String]                    $smtp_tls_capath                                        = undef,
+  Optional[String]                    $smtp_tls_cafile                                        = $postfix::params::smtp_tls_cafile,
+  Optional[String]                    $smtp_tls_capath                                        = $postfix::params::smtp_tls_capath,
   Optional[Variant[Boolean, String]]  $smtp_tls_block_early_mail_reply                        = undef,
   Optional[String]                    $smtp_tls_cert_file                                     = undef,
   Optional[String]                    $smtp_tls_ciphers                                       = undef,
@@ -10726,7 +10767,7 @@ class postfix (
   Optional[Array[String, 1]]          $smtp_tls_protocols                                     = undef,
   Optional[String]                    $smtp_tls_scert_verifydepth                             = undef,
   Optional[Array[String, 1]]          $smtp_tls_secure_cert_match                             = undef,
-  Optional[String]                    $smtp_tls_security_level                                = undef,
+  Optional[String]                    $smtp_tls_security_level                                = $postfix::params::smtp_tls_security_level,
   Optional[String]                    $smtp_tls_session_cache_database                        = undef,
   Optional[String]                    $smtp_tls_session_cache_timeout                         = undef,
   Optional[Array[String, 1]]          $smtp_tls_verify_cert_match                             = undef,
@@ -10802,7 +10843,7 @@ class postfix (
   Optional[Variant[Boolean, String]]  $smtpd_tls_ask_ccert                                    = undef,
   Optional[Variant[Boolean, String]]  $smtpd_tls_auth_only                                    = undef,
   Optional[String]                    $smtpd_tls_ccert_verifydepth                            = undef,
-  Optional[String]                    $smtpd_tls_cert_file                                    = undef,
+  Optional[String]                    $smtpd_tls_cert_file                                    = $postfix::params::smtpd_tls_cert_file,
   Optional[String]                    $smtpd_tls_ciphers                                      = undef,
   Optional[String]                    $smtpd_tls_dcert_file                                   = undef,
   Optional[String]                    $smtpd_tls_dh1024_param_file                            = undef,
@@ -10813,7 +10854,7 @@ class postfix (
   Optional[String]                    $smtpd_tls_eecdh_grade                                  = undef,
   Optional[Array[String, 1]]          $smtpd_tls_exclude_ciphers                              = undef,
   Optional[String]                    $smtpd_tls_fingerprint_digest                           = undef,
-  Optional[String]                    $smtpd_tls_key_file                                     = undef,
+  Optional[String]                    $smtpd_tls_key_file                                     = $postfix::params::smtpd_tls_key_file,
   Optional[String]                    $smtpd_tls_loglevel                                     = undef,
   Optional[String]                    $smtpd_tls_mandatory_ciphers                            = undef,
   Optional[Array[String, 1]]          $smtpd_tls_mandatory_exclude_ciphers                    = undef,
@@ -10821,7 +10862,7 @@ class postfix (
   Optional[Array[String, 1]]          $smtpd_tls_protocols                                    = undef,
   Optional[Variant[Boolean, String]]  $smtpd_tls_received_header                              = undef,
   Optional[Variant[Boolean, String]]  $smtpd_tls_req_ccert                                    = undef,
-  Optional[String]                    $smtpd_tls_security_level                               = undef,
+  Optional[String]                    $smtpd_tls_security_level                               = $postfix::params::smtpd_tls_security_level,
   Optional[String]                    $smtpd_tls_session_cache_database                       = undef,
   Optional[String]                    $smtpd_tls_session_cache_timeout                        = undef,
   Optional[Variant[Boolean, String]]  $smtpd_tls_wrappermode                                  = undef,
@@ -10897,7 +10938,7 @@ class postfix (
   Optional[String]                    $unknown_client_reject_code                             = undef,
   Optional[String]                    $unknown_helo_hostname_tempfail_action                  = undef,
   Optional[String]                    $unknown_hostname_reject_code                           = undef,
-  Optional[String]                    $unknown_local_recipient_reject_code                    = $::postfix::params::unknown_local_recipient_reject_code,
+  Optional[String]                    $unknown_local_recipient_reject_code                    = $postfix::params::unknown_local_recipient_reject_code,
   Optional[String]                    $unknown_relay_recipient_reject_code                    = undef,
   Optional[String]                    $unknown_virtual_alias_reject_code                      = undef,
   Optional[String]                    $unknown_virtual_mailbox_reject_code                    = undef,

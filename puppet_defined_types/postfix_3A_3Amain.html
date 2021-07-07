@@ -6,7 +6,7 @@
 <title>
   Defined Type: postfix::main
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -75,8 +75,7 @@
     
 <p>Define additional Postfix settings.</p>
 
-<p>Any settings not (yet) implemented in the main class or per-transport
-settings can be defined here.</p>
+<p>Any settings not (yet) implemented in the main class or per-transport settings can be defined here.</p>
 
   </div>
 </div>
@@ -92,8 +91,8 @@ settings can be defined here.</p>
 <p>An example setting</p>
 </div></p>
       
-      <pre class="example code"><code>include ::postfix
-::postfix::main { &#39;dovecot_destination_recipient_limit&#39;:
+      <pre class="example code"><code>include postfix
+postfix::main { &#39;dovecot_destination_recipient_limit&#39;:
   value =&gt; 1,
 }</code></pre>
     
@@ -145,9 +144,9 @@ settings can be defined here.</p>
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><span class='object_link'><a href="../puppet_classes/postfix.html" title="puppet_classes::postfix (puppet_class)">::postfix</a></span></li>
+      <li><span class='object_link'><a href="../puppet_classes/postfix.html" title="puppet_classes::postfix (puppet_class)">postfix</a></span></li>
     
-      <li><span class='object_link'><a href="postfix_3A_3Amaster.html" title="puppet_defined_types::postfix::master (puppet_defined_type)">::postfix::master</a></span></li>
+      <li><span class='object_link'><a href="postfix_3A_3Amaster.html" title="puppet_defined_types::postfix::master (puppet_defined_type)">postfix::master</a></span></li>
     
   </ul>
 <p class="tag_title">Since:</p>
@@ -189,9 +188,7 @@ settings can be defined here.</p>
 32
 33
 34
-35
-36
-37</pre>
+35</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/main.pp', line 20</span>
@@ -202,14 +199,12 @@ define postfix::main (
   Enum[&#39;present&#39;, &#39;absent&#39;] $ensure  = &#39;present&#39;,
 ) {
 
-  if ! defined(Class[&#39;postfix&#39;]) {
-    fail(&#39;You must include the postfix base class before using any postfix defined resources&#39;)
-  }
+  include postfix
 
   postfix_main { $setting:
     ensure  =&gt; $ensure,
     value   =&gt; $value,
-    target  =&gt; &quot;${::postfix::conf_dir}/main.cf&quot;,
+    target  =&gt; &quot;${postfix::conf_dir}/main.cf&quot;,
     require =&gt; Class[&#39;postfix::config&#39;],
     notify  =&gt; Class[&#39;postfix::service&#39;],
   }

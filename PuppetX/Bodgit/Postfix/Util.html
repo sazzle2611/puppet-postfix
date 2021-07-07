@@ -6,7 +6,7 @@
 <title>
   Module: PuppetX::Bodgit::Postfix::Util
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -121,10 +121,7 @@
 <p><code>${foo_bar_baz:value}</code></p>
 </li></ul>
 
-<p>However, due to Ruby 1.8.7 we have to do this backwards as there&#39;s no
-look-behind operator without pulling in Oniguruma. So anywhere this Regexp
-is used the target string needs to be reversed and then any captures need
-to be un-reversed again.</p>
+<p>However, due to Ruby 1.8.7 we have to do this backwards as there&#39;s no look-behind operator without pulling in Oniguruma. So anywhere this Regexp is used the target string needs to be reversed and then any captures need to be un-reversed again.</p>
 
 
   </div>
@@ -177,7 +174,7 @@ to be un-reversed again.</p>
   (?!
     \$
   )
-</span><span class='regexp_end'>}x</span></span></pre></dd>
+</span><span class='regexp_end'>}x</span></span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
       
     </dl>
   
@@ -335,7 +332,7 @@ to be un-reversed again.</p>
   <span class='id identifier rubyid_loop'>loop</span> <span class='kw'>do</span>
     <span class='id identifier rubyid_old'>old</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_clone'>clone</span>
     <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#PARAMETER_REGEXP-constant" title="PuppetX::Bodgit::Postfix::Util::PARAMETER_REGEXP (constant)">PARAMETER_REGEXP</a></span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid__s'>_s</span><span class='op'>|</span>
-      <span class='id identifier rubyid_replacement'>replacement</span> <span class='op'>=</span> <span class='backref'>$&amp;</span>
+      <span class='id identifier rubyid_replacement'>replacement</span> <span class='op'>=</span> <span class='const'>Regexp</span><span class='period'>.</span><span class='id identifier rubyid_last_match'>last_match</span><span class='lparen'>(</span><span class='int'>0</span><span class='rparen'>)</span>
       <span class='comment'># We want all non-nil $1..n captures
 </span>      <span class='id identifier rubyid_match'>match</span> <span class='op'>=</span> <span class='gvar'>$LAST_MATCH_INFO</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span><span class='lbracket'>[</span><span class='int'>1</span><span class='op'>..</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_reverse'>reverse</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span> <span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_reverse'>reverse</span> <span class='rbrace'>}</span>
       <span class='id identifier rubyid_types'>types</span> <span class='op'>=</span> <span class='id identifier rubyid_catalog'>catalog</span><span class='period'>.</span><span class='id identifier rubyid_resources'>resources</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='op'>|</span>

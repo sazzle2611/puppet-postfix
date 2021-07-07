@@ -6,7 +6,7 @@
 <title>
   Defined Type: postfix::lookup::sqlite
   
-    &mdash; Documentation by YARD 0.9.25
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
@@ -177,7 +177,7 @@
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><span class='object_link'><a href="../puppet_classes/postfix.html" title="puppet_classes::postfix (puppet_class)">::postfix</a></span></li>
+      <li><span class='object_link'><a href="../puppet_classes/postfix.html" title="puppet_classes::postfix (puppet_class)">postfix</a></span></li>
     
   </ul>
 <p class="tag_title">Since:</p>
@@ -234,9 +234,7 @@
 41
 42
 43
-44
-45
-46</pre>
+44</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/lookup/sqlite.pp', line 14</span>
@@ -251,9 +249,7 @@ define postfix::lookup::sqlite (
   Optional[Integer[0]]       $expansion_limit = undef,
 ) {
 
-  if ! defined(Class[&#39;postfix&#39;]) {
-    fail(&#39;You must include the postfix base class before using any postfix defined resources&#39;)
-  }
+  include postfix
 
   $_ensure = $ensure ? {
     &#39;absent&#39; =&gt; &#39;absent&#39;,
@@ -268,8 +264,8 @@ define postfix::lookup::sqlite (
     content =&gt; template(&quot;${module_name}/sqlite.cf.erb&quot;),
   }
 
-  if $ensure != &#39;absent&#39; and has_key($::postfix::lookup_packages, &#39;sqlite&#39;) {
-    $sqlite_package = $::postfix::lookup_packages[&#39;sqlite&#39;]
+  if $ensure != &#39;absent&#39; and has_key($postfix::lookup_packages, &#39;sqlite&#39;) {
+    $sqlite_package = $postfix::lookup_packages[&#39;sqlite&#39;]
     ensure_packages([$sqlite_package])
     Package[$sqlite_package] -&gt; File[$path]
   }
