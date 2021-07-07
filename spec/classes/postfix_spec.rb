@@ -1,18 +1,6 @@
 require 'spec_helper'
 
 describe 'postfix' do
-  context 'on unsupported distributions' do
-    let(:facts) do
-      {
-        os: {
-          family: 'Unsupported',
-        },
-      }
-    end
-
-    it { is_expected.to compile.and_raise_error(%r{not supported on an Unsupported}) }
-  end
-
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
@@ -24,7 +12,6 @@ describe 'postfix' do
       it { is_expected.to contain_class('postfix') }
       it { is_expected.to contain_class('postfix::config') }
       it { is_expected.to contain_class('postfix::install') }
-      it { is_expected.to contain_class('postfix::params') }
       it { is_expected.to contain_class('postfix::service') }
       it { is_expected.to contain_file('/etc/postfix/main.cf') }
       it { is_expected.to contain_file('/etc/postfix/master.cf') }
