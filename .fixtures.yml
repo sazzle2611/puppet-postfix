@@ -2,6 +2,9 @@ fixtures:
   symlinks:
     postfix: "#{source_dir}"
   forge_modules:
+    augeas:
+      repo: "camptocamp/augeas"
+      ref: "1.9.0"
     augeasproviders_core:
       repo: "herculesteam/augeasproviders_core"
       ref: "2.6.0"

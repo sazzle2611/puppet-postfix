@@ -139,7 +139,7 @@ class postfix::params {
 
       case $facts['os']['release']['major'] {
         '6': {
-          $services         = merge($_services, {
+          $services                 = merge($_services, {
             'pickup/fifo' => {
               'chroot'  => 'n',
               'command' => 'pickup',
@@ -159,11 +159,20 @@ class postfix::params {
               'command' => 'smtp -o smtp_fallback_relay=',
             },
           })
-          $readme_directory = '/usr/share/doc/postfix-2.6.6/README_FILES'
-          $sample_directory = '/usr/share/doc/postfix-2.6.6/samples'
+          $compatibility_level      = undef
+          $meta_directory           = undef
+          $shlib_directory          = undef
+          $readme_directory         = '/usr/share/doc/postfix-2.6.6/README_FILES'
+          $sample_directory         = '/usr/share/doc/postfix-2.6.6/samples'
+          $smtpd_tls_cert_file      = undef
+          $smtpd_tls_key_file       = undef
+          $smtpd_tls_security_level = undef
+          $smtp_tls_capath          = undef
+          $smtp_tls_cafile          = undef
+          $smtp_tls_security_level  = undef
         }
-        default: {
-          $services         = merge($_services, {
+        '7': {
+          $services            = merge($_services, {
             'pickup/unix' => {
               'chroot'  => 'n',
               'command' => 'pickup',
@@ -179,8 +188,56 @@ class postfix::params {
               'wakeup'  => '300',
             },
           })
-          $readme_directory = '/usr/share/doc/postfix-2.10.1/README_FILES'
-          $sample_directory = '/usr/share/doc/postfix-2.10.1/samples'
+          $compatibility_level      = undef
+          $meta_directory           = undef
+          $shlib_directory          = undef
+          $readme_directory         = '/usr/share/doc/postfix-2.10.1/README_FILES'
+          $sample_directory         = '/usr/share/doc/postfix-2.10.1/samples'
+          $smtpd_tls_cert_file      = undef
+          $smtpd_tls_key_file       = undef
+          $smtpd_tls_security_level = undef
+          $smtp_tls_capath          = undef
+          $smtp_tls_cafile          = undef
+          $smtp_tls_security_level  = undef
+        }
+        default: {
+          $services                 = merge($_services, {
+            'pickup/unix' => {
+              'chroot'  => 'n',
+              'command' => 'pickup',
+              'limit'   => '1',
+              'private' => 'n',
+              'wakeup'  => '60',
+            },
+            'qmgr/unix'   => {
+              'chroot'  => 'n',
+              'command' => 'qmgr',
+              'limit'   => '1',
+              'private' => 'n',
+              'wakeup'  => '300',
+            },
+            'postlog/unix-dgram' => {
+              'chroot'  => 'n',
+              'command' => 'postlogd',
+              'limit'   => '1',
+              'private' => 'n',
+            },
+            'relay/unix'  => {
+              'chroot'  => 'n',
+              'command' => 'smtp -o syslog_name=postfix/$service_name',
+            },
+          })
+          $compatibility_level      = '2'
+          $meta_directory           = '/etc/postfix'
+          $shlib_directory          = '/usr/lib64/postfix'
+          $readme_directory         = '/usr/share/doc/postfix/README_FILES'
+          $sample_directory         = '/usr/share/doc/postfix/samples'
+          $smtpd_tls_cert_file      = '/etc/pki/tls/certs/postfix.pem'
+          $smtpd_tls_key_file       = '/etc/pki/tls/private/postfix.key'
+          $smtpd_tls_security_level = 'may'
+          $smtp_tls_capath          = '/etc/pki/tls/certs'
+          $smtp_tls_cafile          = '/etc/pki/tls/certs/ca-bundle.crt'
+          $smtp_tls_security_level  = 'may'
         }
       }
     }

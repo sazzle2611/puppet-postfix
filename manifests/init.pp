@@ -114,6 +114,7 @@
 # @param command_execution_directory
 # @param command_expansion_filter
 # @param command_time_limit
+# @param compatibility_level
 # @param config_directory
 # @param connection_cache_protocol_timeout
 # @param connection_cache_service_name
@@ -332,6 +333,7 @@
 # @param message_reject_characters
 # @param message_size_limit
 # @param message_strip_characters
+# @param meta_directory
 # @param milter_command_timeout
 # @param milter_connect_macros
 # @param milter_connect_timeout
@@ -478,6 +480,7 @@
 # @param sendmail_path
 # @param service_throttle_time
 # @param setgid_group
+# @param shlib_directory
 # @param show_user_unknown_table_name
 # @param showq_service_name
 # @param smtp_address_preference
@@ -840,6 +843,7 @@ class postfix (
   Optional[String]                    $command_execution_directory                            = undef,
   Optional[String]                    $command_expansion_filter                               = undef,
   Optional[String]                    $command_time_limit                                     = undef,
+  Optional[String]                    $compatibility_level                                    = $postfix::params::compatibility_level,
   Optional[String]                    $config_directory                                       = undef,
   Optional[String]                    $connection_cache_protocol_timeout                      = undef,
   Optional[String]                    $connection_cache_service_name                          = undef,
@@ -1058,6 +1062,7 @@ class postfix (
   Optional[String]                    $message_reject_characters                              = undef,
   Optional[String]                    $message_size_limit                                     = undef,
   Optional[String]                    $message_strip_characters                               = undef,
+  Optional[String]                    $meta_directory                                         = $postfix::params::meta_directory,
   Optional[String]                    $milter_command_timeout                                 = undef,
   Optional[String]                    $milter_connect_macros                                  = undef,
   Optional[String]                    $milter_connect_timeout                                 = undef,
@@ -1204,6 +1209,7 @@ class postfix (
   Optional[String]                    $sendmail_path                                          = $postfix::params::sendmail_path,
   Optional[String]                    $service_throttle_time                                  = undef,
   Optional[String]                    $setgid_group                                           = $postfix::params::setgid_group,
+  Optional[Variant[Boolean, String]]  $shlib_directory                                        = $postfix::params::shlib_directory,
   Optional[Variant[Boolean, String]]  $show_user_unknown_table_name                           = undef,
   Optional[String]                    $showq_service_name                                     = undef,
   Optional[String]                    $smtp_address_preference                                = undef,
@@ -1266,8 +1272,8 @@ class postfix (
   Optional[Variant[Boolean, String]]  $smtp_skip_5xx_greeting                                 = undef,
   Optional[Variant[Boolean, String]]  $smtp_skip_quit_response                                = undef,
   Optional[String]                    $smtp_starttls_timeout                                  = undef,
-  Optional[String]                    $smtp_tls_cafile                                        = undef,
-  Optional[String]                    $smtp_tls_capath                                        = undef,
+  Optional[String]                    $smtp_tls_cafile                                        = $postfix::params::smtp_tls_cafile,
+  Optional[String]                    $smtp_tls_capath                                        = $postfix::params::smtp_tls_capath,
   Optional[Variant[Boolean, String]]  $smtp_tls_block_early_mail_reply                        = undef,
   Optional[String]                    $smtp_tls_cert_file                                     = undef,
   Optional[String]                    $smtp_tls_ciphers                                       = undef,
@@ -1290,7 +1296,7 @@ class postfix (
   Optional[Array[String, 1]]          $smtp_tls_protocols                                     = undef,
   Optional[String]                    $smtp_tls_scert_verifydepth                             = undef,
   Optional[Array[String, 1]]          $smtp_tls_secure_cert_match                             = undef,
-  Optional[String]                    $smtp_tls_security_level                                = undef,
+  Optional[String]                    $smtp_tls_security_level                                = $postfix::params::smtp_tls_security_level,
   Optional[String]                    $smtp_tls_session_cache_database                        = undef,
   Optional[String]                    $smtp_tls_session_cache_timeout                         = undef,
   Optional[Array[String, 1]]          $smtp_tls_verify_cert_match                             = undef,
@@ -1366,7 +1372,7 @@ class postfix (
   Optional[Variant[Boolean, String]]  $smtpd_tls_ask_ccert                                    = undef,
   Optional[Variant[Boolean, String]]  $smtpd_tls_auth_only                                    = undef,
   Optional[String]                    $smtpd_tls_ccert_verifydepth                            = undef,
-  Optional[String]                    $smtpd_tls_cert_file                                    = undef,
+  Optional[String]                    $smtpd_tls_cert_file                                    = $postfix::params::smtpd_tls_cert_file,
   Optional[String]                    $smtpd_tls_ciphers                                      = undef,
   Optional[String]                    $smtpd_tls_dcert_file                                   = undef,
   Optional[String]                    $smtpd_tls_dh1024_param_file                            = undef,
@@ -1377,7 +1383,7 @@ class postfix (
   Optional[String]                    $smtpd_tls_eecdh_grade                                  = undef,
   Optional[Array[String, 1]]          $smtpd_tls_exclude_ciphers                              = undef,
   Optional[String]                    $smtpd_tls_fingerprint_digest                           = undef,
-  Optional[String]                    $smtpd_tls_key_file                                     = undef,
+  Optional[String]                    $smtpd_tls_key_file                                     = $postfix::params::smtpd_tls_key_file,
   Optional[String]                    $smtpd_tls_loglevel                                     = undef,
   Optional[String]                    $smtpd_tls_mandatory_ciphers                            = undef,
   Optional[Array[String, 1]]          $smtpd_tls_mandatory_exclude_ciphers                    = undef,
@@ -1385,7 +1391,7 @@ class postfix (
   Optional[Array[String, 1]]          $smtpd_tls_protocols                                    = undef,
   Optional[Variant[Boolean, String]]  $smtpd_tls_received_header                              = undef,
   Optional[Variant[Boolean, String]]  $smtpd_tls_req_ccert                                    = undef,
-  Optional[String]                    $smtpd_tls_security_level                               = undef,
+  Optional[String]                    $smtpd_tls_security_level                               = $postfix::params::smtpd_tls_security_level,
   Optional[String]                    $smtpd_tls_session_cache_database                       = undef,
   Optional[String]                    $smtpd_tls_session_cache_timeout                        = undef,
   Optional[Variant[Boolean, String]]  $smtpd_tls_wrappermode                                  = undef,

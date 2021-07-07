@@ -20,6 +20,7 @@ describe 'postfix' do
       end
 
       it { is_expected.to compile.with_all_deps }
+      it { is_expected.to contain_augeas__lens('postfix_master') }
       it { is_expected.to contain_class('postfix') }
       it { is_expected.to contain_class('postfix::config') }
       it { is_expected.to contain_class('postfix::install') }
@@ -78,15 +79,27 @@ describe 'postfix' do
       it { is_expected.to contain_resources('postfix_master') }
       it { is_expected.to contain_service('postfix') }
 
-      case facts[:osfamily]
+      case facts[:os]['family']
       when 'RedHat'
-        case facts[:operatingsystemmajrelease]
-        when '6'
+        if facts[:os]['release']['major'].eql?('6')
           it { is_expected.to contain_postfix_master('pickup/fifo') }
           it { is_expected.to contain_postfix_master('qmgr/fifo') }
         else
           it { is_expected.to contain_postfix_master('pickup/unix') }
           it { is_expected.to contain_postfix_master('qmgr/unix') }
+        end
+
+        if facts[:os]['release']['major'].eql?('8')
+          it { is_expected.to contain_postfix_main('compatibility_level') }
+          it { is_expected.to contain_postfix_main('meta_directory') }
+          it { is_expected.to contain_postfix_main('shlib_directory') }
+          it { is_expected.to contain_postfix_main('smtp_tls_CAfile') }
+          it { is_expected.to contain_postfix_main('smtp_tls_CApath') }
+          it { is_expected.to contain_postfix_main('smtp_tls_security_level') }
+          it { is_expected.to contain_postfix_main('smtpd_tls_cert_file') }
+          it { is_expected.to contain_postfix_main('smtpd_tls_key_file') }
+          it { is_expected.to contain_postfix_main('smtpd_tls_security_level') }
+          it { is_expected.to contain_postfix_master('postlog/unix-dgram') }
         end
       end
     end
