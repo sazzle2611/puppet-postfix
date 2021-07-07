@@ -8,7 +8,7 @@
 # @param domain
 # @param expansion_limit
 #
-# @see puppet_classes::postfix ::postfix
+# @see puppet_classes::postfix postfix
 #
 # @since 1.0.0
 define postfix::lookup::sqlite (
@@ -21,9 +21,7 @@ define postfix::lookup::sqlite (
   Optional[Integer[0]]       $expansion_limit = undef,
 ) {
 
-  if ! defined(Class['postfix']) {
-    fail('You must include the postfix base class before using any postfix defined resources')
-  }
+  include postfix
 
   $_ensure = $ensure ? {
     'absent' => 'absent',
@@ -38,8 +36,8 @@ define postfix::lookup::sqlite (
     content => template("${module_name}/sqlite.cf.erb"),
   }
 
-  if $ensure != 'absent' and has_key($::postfix::lookup_packages, 'sqlite') {
-    $sqlite_package = $::postfix::lookup_packages['sqlite']
+  if $ensure != 'absent' and has_key($postfix::lookup_packages, 'sqlite') {
+    $sqlite_package = $postfix::lookup_packages['sqlite']
     ensure_packages([$sqlite_package])
     Package[$sqlite_package] -> File[$path]
   }

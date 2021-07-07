@@ -1,12 +1,12 @@
 # Define additional Postfix services.
 #
 # @example Define the Dovecot LDA service
-#   include ::postfix
-#   ::postfix::master { 'dovecot/unix':
+#   include postfix
+#   postfix::master { 'dovecot/unix':
 #     chroot       => 'n',
 #     command      => 'pipe flags=DRhu user=vmail:vmail argv=/path/to/dovecot-lda -f ${sender} -d ${recipient}',
 #     unprivileged => 'n',
-#     require      => Class['::dovecot'],
+#     require      => Class['dovecot'],
 #   }
 #
 # @param command
@@ -18,8 +18,8 @@
 # @param wakeup
 # @param limit
 #
-# @see puppet_classes::postfix ::postfix
-# @see puppet_defined_types::postfix::main ::postfix::main
+# @see puppet_classes::postfix postfix
+# @see puppet_defined_types::postfix::main postfix::main
 #
 # @since 1.0.0
 define postfix::master (
@@ -33,9 +33,7 @@ define postfix::master (
   Optional[Pattern[/(?x) ^ (?: - | \d+ ) $/]]           $limit        = undef,
 ) {
 
-  if ! defined(Class['postfix']) {
-    fail('You must include the postfix base class before using any postfix defined resources')
-  }
+  include postfix
 
   postfix_master { $service:
     ensure       => $ensure,
@@ -45,7 +43,7 @@ define postfix::master (
     chroot       => $chroot,
     wakeup       => $wakeup,
     limit        => $limit,
-    target       => "${::postfix::conf_dir}/master.cf",
+    target       => "${postfix::conf_dir}/master.cf",
     require      => Class['postfix::config'],
     notify       => Class['postfix::service'],
   }

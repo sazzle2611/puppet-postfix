@@ -18,7 +18,7 @@
 # @param tls_ca_cert_dir
 # @param tls_verify_cert
 #
-# @see puppet_classes::postfix ::postfix
+# @see puppet_classes::postfix postfix
 #
 # @since 1.0.0
 define postfix::lookup::mysql (
@@ -41,9 +41,7 @@ define postfix::lookup::mysql (
   Optional[Boolean]                            $tls_verify_cert  = undef,
 ) {
 
-  if ! defined(Class['postfix']) {
-    fail('You must include the postfix base class before using any postfix defined resources')
-  }
+  include postfix
 
   $_hosts = postfix::flatten_hosts($hosts)
 
@@ -60,8 +58,8 @@ define postfix::lookup::mysql (
     content => template("${module_name}/mysql.cf.erb"),
   }
 
-  if $ensure != 'absent' and has_key($::postfix::lookup_packages, 'mysql') {
-    $mysql_package = $::postfix::lookup_packages['mysql']
+  if $ensure != 'absent' and has_key($postfix::lookup_packages, 'mysql') {
+    $mysql_package = $postfix::lookup_packages['mysql']
     ensure_packages([$mysql_package])
     Package[$mysql_package] -> File[$path]
   }

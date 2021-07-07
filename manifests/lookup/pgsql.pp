@@ -11,7 +11,7 @@
 # @param domain
 # @param expansion_limit
 #
-# @see puppet_classes::postfix ::postfix
+# @see puppet_classes::postfix postfix
 #
 # @since 1.0.0
 define postfix::lookup::pgsql (
@@ -27,9 +27,7 @@ define postfix::lookup::pgsql (
   Optional[Integer[0]]                         $expansion_limit = undef,
 ) {
 
-  if ! defined(Class['postfix']) {
-    fail('You must include the postfix base class before using any postfix defined resources')
-  }
+  include postfix
 
   $_hosts = postfix::flatten_hosts($hosts)
 
@@ -46,8 +44,8 @@ define postfix::lookup::pgsql (
     content => template("${module_name}/pgsql.cf.erb"),
   }
 
-  if $ensure != 'absent' and has_key($::postfix::lookup_packages, 'pgsql') {
-    $pgsql_package = $::postfix::lookup_packages['pgsql']
+  if $ensure != 'absent' and has_key($postfix::lookup_packages, 'pgsql') {
+    $pgsql_package = $postfix::lookup_packages['pgsql']
     ensure_packages([$pgsql_package])
     Package[$pgsql_package] -> File[$path]
   }

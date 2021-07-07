@@ -1,19 +1,19 @@
 # Define a Memcache lookup table.
 #
 # @example Postscreen temporary whitelist
-#   include ::memcached
+#   include memcached
 #
-#   class { '::postfix':
+#   class { 'postfix':
 #     postscreen_cache_map => 'memcache:/etc/postfix/postscreen_cache',
 #     proxy_write_maps     => ['btree:$data_directory/postscreen_cache'],
 #     ...
 #   }
 #
-#   ::postfix::lookup::memcache { '/etc/postfix/postscreen_cache':
+#   postfix::lookup::memcache { '/etc/postfix/postscreen_cache':
 #     memcache   => ['inet', '127.0.0.1', 11211],
 #     backup     => 'btree:$data_directory/postscreen_cache',
 #     key_format => 'postscreen:%s',
-#     require    => Class['::memcached'],
+#     require    => Class['memcached'],
 #   }
 #
 # @param ensure
@@ -30,7 +30,7 @@
 # @param retry_pause
 # @param timeout
 #
-# @see puppet_classes::postfix ::postfix
+# @see puppet_classes::postfix postfix
 #
 # @since 2.0.0
 define postfix::lookup::memcache (
@@ -49,9 +49,7 @@ define postfix::lookup::memcache (
   Optional[Integer[0]]                            $timeout         = undef,
 ) {
 
-  if ! defined(Class['postfix']) {
-    fail('You must include the postfix base class before using any postfix defined resources')
-  }
+  include postfix
 
   $_memcache = postfix::flatten_host($memcache)
 
@@ -68,8 +66,8 @@ define postfix::lookup::memcache (
     content => template("${module_name}/memcache.cf.erb"),
   }
 
-  if $ensure != 'absent' and has_key($::postfix::lookup_packages, 'memcache') {
-    $memcache_package = $::postfix::lookup_packages['memcache']
+  if $ensure != 'absent' and has_key($postfix::lookup_packages, 'memcache') {
+    $memcache_package = $postfix::lookup_packages['memcache']
     ensure_packages([$memcache_package])
     Package[$memcache_package] -> File[$path]
   }

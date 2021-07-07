@@ -1,25 +1,25 @@
 # Manage Postfix.
 #
 # @example Configure Postfix with the defaults as shipped by the OS and managing any aliases using the standard Puppet `mailalias` resource type
-#   include ::postfix
+#   include postfix
 #
-#   ::postfix::lookup::database { '/etc/aliases':
+#   postfix::lookup::database { '/etc/aliases':
 #     type => 'hash',
 #   }
 #
-#   Mailalias <||> -> ::Postfix::Lookup::Database['/etc/aliases']
+#   Mailalias <||> -> Postfix::Lookup::Database['/etc/aliases']
 #
 # @example Configure Postfix with an additional submission service running on TCP port 587
-#   include ::postfix
+#   include postfix
 #
-#   ::postfix::master { 'submission/inet':
+#   postfix::master { 'submission/inet':
 #     private => 'n',
 #     chroot  => 'n',
 #     command => 'smtpd -o smtpd_tls_security_level=encrypt -o smtpd_recipient_restrictions=permit_sasl_authenticated,reject',
 #   }
 #
 # @example Configure Postfix for virtual mailbox hosting using LDAP to provide the various lookup tables
-#   class { '::postfix':
+#   class { 'postfix':
 #     virtual_mailbox_base    => '/var/mail/vhosts',
 #     virtual_mailbox_domains => ['ldap:/etc/postfix/virtualdomains.cf'],
 #     virtual_mailbox_maps    => ['ldap:/etc/postfix/virtualrecipients.cf'],
@@ -37,12 +37,12 @@
 #     version     => 3,
 #   }
 #
-#   ::postfix::lookup::ldap { '/etc/postfix/virtualdomains.cf':
+#   postfix::lookup::ldap { '/etc/postfix/virtualdomains.cf':
 #     query_filter     => '(associatedDomain=%s)',
 #     result_attribute => ['associatedDomain'],
 #   }
 #
-#   ::postfix::lookup::ldap { '/etc/postfix/virtualrecipients.cf':
+#   postfix::lookup::ldap { '/etc/postfix/virtualrecipients.cf':
 #     query_filter     => '(mail=%s)',
 #     result_attribute => ['mail'],
 #   }
@@ -762,22 +762,22 @@
 # @param virtual_transport
 # @param virtual_uid_maps
 #
-# @see puppet_defined_types::postfix::main ::postfix::main
-# @see puppet_defined_types::postfix::master ::postfix::master
-# @see puppet_defined_types::postfix::lookup::database ::postfix::lookup::database
-# @see puppet_defined_types::postfix::lookup::ldap ::postfix::lookup::ldap
-# @see puppet_defined_types::postfix::lookup::memcache ::postfix::lookup::memcache
-# @see puppet_defined_types::postfix::lookup::mysql ::postfix::lookup::mysql
-# @see puppet_defined_types::postfix::lookup::pgsql ::postfix::lookup::pgsql
-# @see puppet_defined_types::postfix::lookup::sqlite ::postfix::lookup::sqlite
+# @see puppet_defined_types::postfix::main postfix::main
+# @see puppet_defined_types::postfix::master postfix::master
+# @see puppet_defined_types::postfix::lookup::database postfix::lookup::database
+# @see puppet_defined_types::postfix::lookup::ldap postfix::lookup::ldap
+# @see puppet_defined_types::postfix::lookup::memcache postfix::lookup::memcache
+# @see puppet_defined_types::postfix::lookup::mysql postfix::lookup::mysql
+# @see puppet_defined_types::postfix::lookup::pgsql postfix::lookup::pgsql
+# @see puppet_defined_types::postfix::lookup::sqlite postfix::lookup::sqlite
 #
 # @since 1.0.0
 class postfix (
-  Stdlib::Absolutepath                $conf_dir                                               = $::postfix::params::conf_dir,
-  Hash[String, Hash[String, Any]]     $services                                               = $::postfix::params::services,
-  Hash[Postfix::Type::Lookup, String] $lookup_packages                                        = $::postfix::params::lookup_packages,
-  String                              $package_name                                           = $::postfix::params::package_name,
-  String                              $service_name                                           = $::postfix::params::service_name,
+  Stdlib::Absolutepath                $conf_dir                                               = $postfix::params::conf_dir,
+  Hash[String, Hash[String, Any]]     $services                                               = $postfix::params::services,
+  Hash[Postfix::Type::Lookup, String] $lookup_packages                                        = $postfix::params::lookup_packages,
+  String                              $package_name                                           = $postfix::params::package_name,
+  String                              $service_name                                           = $postfix::params::service_name,
   # main.cf parameters below
   Optional[String]                    $twobounce_notice_recipient                             = undef,
   Optional[String]                    $access_map_defer_code                                  = undef,
@@ -802,8 +802,8 @@ class postfix (
   Optional[String]                    $address_verify_service_name                            = undef,
   Optional[Array[String, 1]]          $address_verify_transport_maps                          = undef,
   Optional[String]                    $address_verify_virtual_transport                       = undef,
-  Optional[Array[String, 1]]          $alias_database                                         = $::postfix::params::alias_database,
-  Optional[Array[String, 1]]          $alias_maps                                             = $::postfix::params::alias_maps,
+  Optional[Array[String, 1]]          $alias_database                                         = $postfix::params::alias_database,
+  Optional[Array[String, 1]]          $alias_maps                                             = $postfix::params::alias_maps,
   Optional[Array[String, 1]]          $allow_mail_to_commands                                 = undef,
   Optional[Array[String, 1]]          $allow_mail_to_files                                    = undef,
   Optional[Variant[Boolean, String]]  $allow_min_user                                         = undef,
@@ -836,7 +836,7 @@ class postfix (
   Optional[Array[String, 1]]          $canonical_classes                                      = undef,
   Optional[Array[String, 1]]          $canonical_maps                                         = undef,
   Optional[String]                    $cleanup_service_name                                   = undef,
-  Optional[String]                    $command_directory                                      = $::postfix::params::command_directory,
+  Optional[String]                    $command_directory                                      = $postfix::params::command_directory,
   Optional[String]                    $command_execution_directory                            = undef,
   Optional[String]                    $command_expansion_filter                               = undef,
   Optional[String]                    $command_time_limit                                     = undef,
@@ -847,14 +847,14 @@ class postfix (
   Optional[String]                    $connection_cache_ttl_limit                             = undef,
   Optional[String]                    $content_filter                                         = undef,
   Optional[Array[String, 1]]          $cyrus_sasl_config_path                                 = undef,
-  Optional[String]                    $daemon_directory                                       = $::postfix::params::daemon_directory,
+  Optional[String]                    $daemon_directory                                       = $postfix::params::daemon_directory,
   Optional[Variant[Boolean, String]]  $daemon_table_open_error_is_fatal                       = undef,
   Optional[String]                    $daemon_timeout                                         = undef,
-  Optional[String]                    $data_directory                                         = $::postfix::params::data_directory,
-  Optional[String]                    $debug_peer_level                                       = $::postfix::params::debug_peer_level,
+  Optional[String]                    $data_directory                                         = $postfix::params::data_directory,
+  Optional[String]                    $debug_peer_level                                       = $postfix::params::debug_peer_level,
   Optional[Array[String, 1]]          $debug_peer_list                                        = undef,
-  Optional[String]                    $debugger_command                                       = $::postfix::params::debugger_command,
-  Postfix::Type::Lookup::Database     $default_database_type                                  = $::postfix::params::default_database_type,
+  Optional[String]                    $debugger_command                                       = $postfix::params::debugger_command,
+  Postfix::Type::Lookup::Database     $default_database_type                                  = $postfix::params::default_database_type,
   Optional[String]                    $default_delivery_slot_cost                             = undef,
   Optional[String]                    $default_delivery_slot_discount                         = undef,
   Optional[String]                    $default_delivery_slot_loan                             = undef,
@@ -925,12 +925,12 @@ class postfix (
   Optional[Variant[Boolean, String]]  $helpful_warnings                                       = undef,
   Optional[String]                    $home_mailbox                                           = undef,
   Optional[String]                    $hopcount_limit                                         = undef,
-  Optional[Variant[Boolean, String]]  $html_directory                                         = $::postfix::params::html_directory,
+  Optional[Variant[Boolean, String]]  $html_directory                                         = $postfix::params::html_directory,
   Optional[Variant[Boolean, String]]  $ignore_mx_lookup_error                                 = undef,
   Optional[Array[String, 1]]          $import_environment                                     = undef,
   Optional[String]                    $in_flow_delay                                          = undef,
-  Optional[Array[String, 1]]          $inet_interfaces                                        = $::postfix::params::inet_interfaces,
-  Optional[Array[String, 1]]          $inet_protocols                                         = $::postfix::params::inet_protocols,
+  Optional[Array[String, 1]]          $inet_interfaces                                        = $postfix::params::inet_interfaces,
+  Optional[Array[String, 1]]          $inet_protocols                                         = $postfix::params::inet_protocols,
   Optional[String]                    $initial_destination_concurrency                        = undef,
   Optional[Array[String, 1]]          $internal_mail_filter_classes                           = undef,
   Optional[String]                    $invalid_hostname_reject_code                           = undef,
@@ -1033,7 +1033,7 @@ class postfix (
   Optional[String]                    $local_transport                                        = undef,
   Optional[String]                    $luser_relay                                            = undef,
   Optional[String]                    $mail_name                                              = undef,
-  Optional[String]                    $mail_owner                                             = $::postfix::params::mail_owner,
+  Optional[String]                    $mail_owner                                             = $postfix::params::mail_owner,
   Optional[String]                    $mail_release_date                                      = undef,
   Optional[String]                    $mail_spool_directory                                   = undef,
   Optional[String]                    $mail_version                                           = undef,
@@ -1043,8 +1043,8 @@ class postfix (
   Optional[String]                    $mailbox_size_limit                                     = undef,
   Optional[String]                    $mailbox_transport                                      = undef,
   Optional[Array[String, 1]]          $mailbox_transport_maps                                 = undef,
-  Optional[String]                    $mailq_path                                             = $::postfix::params::mailq_path,
-  Optional[String]                    $manpage_directory                                      = $::postfix::params::manpage_directory,
+  Optional[String]                    $mailq_path                                             = $postfix::params::mailq_path,
+  Optional[String]                    $manpage_directory                                      = $postfix::params::manpage_directory,
   Optional[Array[String, 1]]          $maps_rbl_domains                                       = undef,
   Optional[String]                    $maps_rbl_reject_code                                   = undef,
   Optional[Array[String, 1]]          $masquerade_classes                                     = undef,
@@ -1084,14 +1084,14 @@ class postfix (
   Optional[String]                    $multi_instance_name                                    = undef,
   Optional[String]                    $multi_instance_wrapper                                 = undef,
   Optional[String]                    $multi_recipient_bounce_reject_code                     = undef,
-  Optional[Array[String, 1]]          $mydestination                                          = $::postfix::params::mydestination,
+  Optional[Array[String, 1]]          $mydestination                                          = $postfix::params::mydestination,
   Optional[String]                    $mydomain                                               = undef,
   Optional[String]                    $myhostname                                             = undef,
   Optional[Array[String, 1]]          $mynetworks                                             = undef,
   Optional[String]                    $mynetworks_style                                       = undef,
   Optional[String]                    $myorigin                                               = undef,
   Optional[Array[String, 1]]          $nested_header_checks                                   = undef,
-  Optional[String]                    $newaliases_path                                        = $::postfix::params::newaliases_path,
+  Optional[String]                    $newaliases_path                                        = $postfix::params::newaliases_path,
   Optional[String]                    $non_fqdn_reject_code                                   = undef,
   Optional[Array[String, 1]]          $non_smtpd_milters                                      = undef,
   Optional[Array[String, 1]]          $notify_classes                                         = undef,
@@ -1165,13 +1165,13 @@ class postfix (
   Optional[Variant[Boolean, String]]  $qmqpd_client_port_logging                              = undef,
   Optional[String]                    $qmqpd_error_delay                                      = undef,
   Optional[String]                    $qmqpd_timeout                                          = undef,
-  Optional[String]                    $queue_directory                                        = $::postfix::params::queue_directory,
+  Optional[String]                    $queue_directory                                        = $postfix::params::queue_directory,
   Optional[String]                    $queue_file_attribute_count_limit                       = undef,
   Optional[String]                    $queue_minfree                                          = undef,
   Optional[String]                    $queue_run_delay                                        = undef,
   Optional[String]                    $queue_service_name                                     = undef,
   Optional[Array[String, 1]]          $rbl_reply_maps                                         = undef,
-  Optional[Variant[Boolean, String]]  $readme_directory                                       = $::postfix::params::readme_directory,
+  Optional[Variant[Boolean, String]]  $readme_directory                                       = $postfix::params::readme_directory,
   Optional[Array[String, 1]]          $receive_override_options                               = undef,
   Optional[Array[String, 1]]          $recipient_bcc_maps                                     = undef,
   Optional[Array[String, 1]]          $recipient_canonical_classes                            = undef,
@@ -1193,7 +1193,7 @@ class postfix (
   Optional[Variant[Boolean, String]]  $resolve_null_domain                                    = undef,
   Optional[Variant[Boolean, String]]  $resolve_numeric_domain                                 = undef,
   Optional[String]                    $rewrite_service_name                                   = undef,
-  Optional[String]                    $sample_directory                                       = $::postfix::params::sample_directory,
+  Optional[String]                    $sample_directory                                       = $postfix::params::sample_directory,
   Optional[Variant[Boolean, String]]  $send_cyrus_sasl_authzid                                = undef,
   Optional[Array[String, 1]]          $sender_bcc_maps                                        = undef,
   Optional[Array[String, 1]]          $sender_canonical_classes                               = undef,
@@ -1201,9 +1201,9 @@ class postfix (
   Optional[Array[String, 1]]          $sender_dependent_default_transport_maps                = undef,
   Optional[Array[String, 1]]          $sender_dependent_relayhost_maps                        = undef,
   Optional[String]                    $sendmail_fix_line_endings                              = undef,
-  Optional[String]                    $sendmail_path                                          = $::postfix::params::sendmail_path,
+  Optional[String]                    $sendmail_path                                          = $postfix::params::sendmail_path,
   Optional[String]                    $service_throttle_time                                  = undef,
-  Optional[String]                    $setgid_group                                           = $::postfix::params::setgid_group,
+  Optional[String]                    $setgid_group                                           = $postfix::params::setgid_group,
   Optional[Variant[Boolean, String]]  $show_user_unknown_table_name                           = undef,
   Optional[String]                    $showq_service_name                                     = undef,
   Optional[String]                    $smtp_address_preference                                = undef,
@@ -1461,7 +1461,7 @@ class postfix (
   Optional[String]                    $unknown_client_reject_code                             = undef,
   Optional[String]                    $unknown_helo_hostname_tempfail_action                  = undef,
   Optional[String]                    $unknown_hostname_reject_code                           = undef,
-  Optional[String]                    $unknown_local_recipient_reject_code                    = $::postfix::params::unknown_local_recipient_reject_code,
+  Optional[String]                    $unknown_local_recipient_reject_code                    = $postfix::params::unknown_local_recipient_reject_code,
   Optional[String]                    $unknown_relay_recipient_reject_code                    = undef,
   Optional[String]                    $unknown_virtual_alias_reject_code                      = undef,
   Optional[String]                    $unknown_virtual_mailbox_reject_code                    = undef,

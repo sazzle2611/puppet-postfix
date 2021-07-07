@@ -1,7 +1,7 @@
 # Define lookup tables using static database files.
 #
 # @example Define a `transport(5)` table
-#   ::postfix::lookup::database { '/etc/postfix/transport':
+#   postfix::lookup::database { '/etc/postfix/transport':
 #     content => @(EOS/L),
 #       example.com :
 #       | EOS
@@ -9,10 +9,10 @@
 #   }
 #
 # @example Manage the `aliases(5)` table with `mailalias` resources
-#   ::postfix::lookup::database { '/etc/aliases':
+#   postfix::lookup::database { '/etc/aliases':
 #     type => 'hash',
 #   }
-#   Mailalias <||> -> ::Postfix::Lookup::Database['/etc/aliases']
+#   Mailalias <||> -> Postfix::Lookup::Database['/etc/aliases']
 #
 # @param ensure
 # @param path
@@ -20,20 +20,18 @@
 # @param content
 # @param source
 #
-# @see puppet_classes::postfix ::postfix
+# @see puppet_classes::postfix postfix
 #
 # @since 1.0.0
 define postfix::lookup::database (
   Enum['present', 'absent']       $ensure  = 'present',
   Stdlib::Absolutepath            $path    = $title,
-  Postfix::Type::Lookup::Database $type    = $::postfix::default_database_type,
+  Postfix::Type::Lookup::Database $type    = $postfix::default_database_type,
   Optional[String]                $content = undef,
   Optional[String]                $source  = undef,
 ) {
 
-  if ! defined(Class['postfix']) {
-    fail('You must include the postfix base class before using any postfix defined resources')
-  }
+  include postfix
 
   if $content and $source {
     fail('Only one of $content or $source should be specified.')
@@ -59,8 +57,8 @@ define postfix::lookup::database (
     File[$path] ~> Class['postfix::service']
   }
 
-  if $ensure != 'absent' and has_key($::postfix::lookup_packages, $type) {
-    $lookup_package = $::postfix::lookup_packages[$type]
+  if $ensure != 'absent' and has_key($postfix::lookup_packages, $type) {
+    $lookup_package = $postfix::lookup_packages[$type]
     ensure_packages([$lookup_package])
     Package[$lookup_package] -> File[$path]
   }

@@ -1,7 +1,7 @@
 # Define an LDAP lookup table.
 #
 # @example Configure Postfix for virtual mailbox hosting using LDAP to provide the various lookup tables
-#   class { '::postfix':
+#   class { 'postfix':
 #     virtual_mailbox_base    => '/var/mail/vhosts',
 #     virtual_mailbox_domains => ['ldap:/etc/postfix/virtualdomains.cf'],
 #     virtual_mailbox_maps    => ['ldap:/etc/postfix/virtualrecipients.cf'],
@@ -19,12 +19,12 @@
 #     version     => 3,
 #   }
 #
-#   ::postfix::lookup::ldap { '/etc/postfix/virtualdomains.cf':
+#   postfix::lookup::ldap { '/etc/postfix/virtualdomains.cf':
 #     query_filter     => '(associatedDomain=%s)',
 #     result_attribute => ['associatedDomain'],
 #   }
 #
-#   ::postfix::lookup::ldap { '/etc/postfix/virtualrecipients.cf':
+#   postfix::lookup::ldap { '/etc/postfix/virtualrecipients.cf':
 #     query_filter     => '(mail=%s)',
 #     result_attribute => ['mail'],
 #   }
@@ -66,7 +66,7 @@
 # @param tls_random_file
 # @param tls_cipher_suite
 #
-# @see puppet_classes::postfix ::postfix
+# @see puppet_classes::postfix postfix
 #
 # @since 1.0.0
 define postfix::lookup::ldap (
@@ -108,9 +108,7 @@ define postfix::lookup::ldap (
   Optional[String]                                           $tls_cipher_suite          = undef,
 ) {
 
-  if ! defined(Class['postfix']) {
-    fail('You must include the postfix base class before using any postfix defined resources')
-  }
+  include postfix
 
   $_server_host = postfix::flatten_hosts($server_host)
 
@@ -127,8 +125,8 @@ define postfix::lookup::ldap (
     content => template("${module_name}/ldap.cf.erb"),
   }
 
-  if $ensure != 'absent' and has_key($::postfix::lookup_packages, 'ldap') {
-    $ldap_package = $::postfix::lookup_packages['ldap']
+  if $ensure != 'absent' and has_key($postfix::lookup_packages, 'ldap') {
+    $ldap_package = $postfix::lookup_packages['ldap']
     ensure_packages([$ldap_package])
     Package[$ldap_package] -> File[$path]
   }
