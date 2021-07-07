@@ -1,24 +1,27 @@
 require 'spec_helper_acceptance'
 
 describe 'postfix' do
-  it 'works with no errors' do
-    pp = <<-EOS
-      include ::postfix
+  let(:pp) do
+    <<-MANIFEST
+      class { 'postfix':
+        inet_protocols => ['ipv4'],
+      }
 
-      ::postfix::lookup::database { '/etc/aliases':
+      postfix::lookup::database { '/etc/aliases':
         type => 'hash',
       }
 
-      Mailalias <||> -> ::Postfix::Lookup::Database['/etc/aliases']
+      Mailalias <||> -> Postfix::Lookup::Database['/etc/aliases']
 
       mailalias { 'foo':
         recipient => ['bar'],
         target    => '/etc/aliases',
       }
-    EOS
+    MANIFEST
+  end
 
-    apply_manifest(pp, catch_failures: true)
-    apply_manifest(pp, catch_changes:  true)
+  it 'applies idempotently' do
+    idempotent_apply(pp)
   end
 
   describe package('postfix') do
