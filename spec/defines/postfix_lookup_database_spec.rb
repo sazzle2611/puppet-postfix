@@ -36,7 +36,6 @@ describe 'postfix::lookup::database' do
         end
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to have_exec_resource_count(0) }
         it { is_expected.to contain_file('/etc/postfix/test').that_notifies('Class[postfix::service]') }
         it { is_expected.to contain_postfix__lookup__database('/etc/postfix/test') }
       end

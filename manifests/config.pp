@@ -20,12 +20,19 @@ class postfix::config {
     mode   => '0644',
   }
 
+  # Augeas 1.12.0 has a lens that doesn't recognise unix-dgram in master.cf
+  augeas::lens { 'postfix_master':
+    lens_content => file("${module_name}/postfix_master.aug"),
+    stock_since  => '1.12.1',
+  }
+
   Postfix_main {
     target => $main_cf,
   }
 
   Postfix_master {
-    target => $master_cf,
+    target  => $master_cf,
+    require => Augeas::Lens['postfix_master'],
   }
 
   resources { 'postfix_main':
@@ -33,7 +40,8 @@ class postfix::config {
   }
 
   resources { 'postfix_master':
-    purge => true,
+    purge   => true,
+    require => Augeas::Lens['postfix_master'],
   }
 
   $config = delete_undef_values({
@@ -190,6 +198,7 @@ class postfix::config {
     'command_execution_directory'                            => $postfix::command_execution_directory,
     'command_expansion_filter'                               => $postfix::command_expansion_filter,
     'command_time_limit'                                     => $postfix::command_time_limit,
+    'compatibility_level'                                    => $postfix::compatibility_level,
     'config_directory'                                       => $postfix::config_directory,
     'connection_cache_protocol_timeout'                      => $postfix::connection_cache_protocol_timeout,
     'connection_cache_service_name'                          => $postfix::connection_cache_service_name,
@@ -722,6 +731,7 @@ class postfix::config {
     'message_reject_characters'                              => $postfix::message_reject_characters,
     'message_size_limit'                                     => $postfix::message_size_limit,
     'message_strip_characters'                               => $postfix::message_strip_characters,
+    'meta_directory'                                         => $postfix::meta_directory,
     'milter_command_timeout'                                 => $postfix::milter_command_timeout,
     'milter_connect_macros'                                  => $postfix::milter_connect_macros,
     'milter_connect_timeout'                                 => $postfix::milter_connect_timeout,
@@ -1070,6 +1080,12 @@ class postfix::config {
     'sendmail_path'                                          => $postfix::sendmail_path,
     'service_throttle_time'                                  => $postfix::service_throttle_time,
     'setgid_group'                                           => $postfix::setgid_group,
+    'shlib_directory'                                        => $postfix::shlib_directory ? {
+      undef   => undef,
+      false   => 'no',
+      true    => 'yes',
+      default => $postfix::shlib_directory,
+    },
     'show_user_unknown_table_name'                           => $postfix::show_user_unknown_table_name ? {
       undef   => undef,
       false   => 'no',
