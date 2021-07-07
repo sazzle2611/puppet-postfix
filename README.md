@@ -1,6 +1,6 @@
 # postfix
 
-[![Build Status](https://travis-ci.org/bodgit/puppet-postfix.svg?branch=master)](https://travis-ci.org/bodgit/puppet-postfix)
+[![Build Status](https://img.shields.io/github/workflow/status/bodgit/puppet-postfix/Test)](https://github.com/bodgit/puppet-postfix/actions?query=workflow%3ATest)
 [![Codecov](https://img.shields.io/codecov/c/github/bodgit/puppet-postfix)](https://codecov.io/gh/bodgit/puppet-postfix)
 [![Puppet Forge version](http://img.shields.io/puppetforge/v/bodgit/postfix)](https://forge.puppetlabs.com/bodgit/postfix)
 [![Puppet Forge downloads](https://img.shields.io/puppetforge/dt/bodgit/postfix)](https://forge.puppetlabs.com/bodgit/postfix)
@@ -31,13 +31,13 @@ Configure Postfix with the defaults as shipped by the OS and managing any
 aliases using the standard Puppet `mailalias` resource type:
 
 ```puppet
-include ::postfix
+include postfix
 
-::postfix::lookup::database { '/etc/aliases':
+postfix::lookup::database { '/etc/aliases':
   type => 'hash',
 }
 
-Mailalias <||> -> ::Postfix::Lookup::Database['/etc/aliases']
+Mailalias <||> -> Postfix::Lookup::Database['/etc/aliases']
 ```
 
 ## Usage
@@ -46,9 +46,9 @@ Configure Postfix with an additional submission service running on TCP port
 587:
 
 ```puppet
-include ::postfix
+include postfix
 
-::postfix::master { 'submission/inet':
+postfix::master { 'submission/inet':
   private => 'n',
   chroot  => 'n',
   command => 'smtpd -o smtpd_tls_security_level=encrypt -o smtpd_recipient_restrictions=permit_sasl_authenticated,reject',
@@ -59,7 +59,7 @@ Configure Postfix for virtual mailbox hosting using LDAP to provide the
 various lookup tables:
 
 ```puppet
-class { '::postfix':
+class { 'postfix':
   virtual_mailbox_base    => '/var/mail/vhosts',
   virtual_mailbox_domains => ['ldap:/etc/postfix/virtualdomains.cf'],
   virtual_mailbox_maps    => ['ldap:/etc/postfix/virtualrecipients.cf'],
@@ -77,12 +77,12 @@ Postfix::Lookup::Ldap {
   version     => 3,
 }
 
-::postfix::lookup::ldap { '/etc/postfix/virtualdomains.cf':
+postfix::lookup::ldap { '/etc/postfix/virtualdomains.cf':
   query_filter     => '(associatedDomain=%s)',
   result_attribute => ['associatedDomain'],
 }
 
-::postfix::lookup::ldap { '/etc/postfix/virtualrecipients.cf':
+postfix::lookup::ldap { '/etc/postfix/virtualrecipients.cf':
   query_filter     => '(mail=%s)',
   result_attribute => ['mail'],
 }
@@ -91,23 +91,23 @@ Postfix::Lookup::Ldap {
 Extend the above example to use `dovecot-lda(1)` instead of `virtual(8)`:
 
 ```puppet
-include ::dovecot
+include dovecot
 
-class { '::postfix':
+class { 'postfix':
   virtual_transport       => 'dovecot'
   virtual_mailbox_domains => ['ldap:/etc/postfix/virtualdomains.cf'],
   virtual_mailbox_maps    => ['ldap:/etc/postfix/virtualrecipients.cf'],
 }
 
-::postfix::main { 'dovecot_destination_recipient_limit':
+postfix::main { 'dovecot_destination_recipient_limit':
   value => 1,
 }
 
-::postfix::master { 'dovecot/unix':
+postfix::master { 'dovecot/unix':
   chroot       => 'n',
   command      => 'pipe flags=DRhu user=vmail:vmail argv=/path/to/dovecot-lda -f ${sender} -d ${recipient}',
   unprivileged => 'n',
-  require      => Class['::dovecot'],
+  require      => Class['dovecot'],
 }
 
 # Specify connection defaults to enable sharing as per LDAP_README
@@ -119,12 +119,12 @@ Postfix::Lookup::Ldap {
   version     => 3,
 }
 
-::postfix::lookup::ldap { '/etc/postfix/virtualdomains.cf':
+postfix::lookup::ldap { '/etc/postfix/virtualdomains.cf':
   query_filter     => '(associatedDomain=%s)',
   result_attribute => ['associatedDomain'],
 }
 
-::postfix::lookup::ldap { '/etc/postfix/virtualrecipients.cf':
+postfix::lookup::ldap { '/etc/postfix/virtualrecipients.cf':
   query_filter     => '(mail=%s)',
   result_attribute => ['mail'],
 }
@@ -136,7 +136,7 @@ The reference documentation is generated with
 [puppet-strings](https://github.com/puppetlabs/puppet-strings) and the latest
 version of the documentation is hosted at
 [https://bodgit.github.io/puppet-postfix/](https://bodgit.github.io/puppet-postfix/)
-and available also in the [REFERENCE.md](https://github.com/bodgit/puppet-postfix/blob/master/REFERENCE.md).
+and available also in the [REFERENCE.md](https://github.com/bodgit/puppet-postfix/blob/main/REFERENCE.md).
 
 ## Limitations
 
@@ -178,18 +178,18 @@ This module has been built on and tested against Puppet 5 and higher.
 
 The module has been tested on:
 
-* Red Hat/CentOS Enterprise Linux 6/7
+* Red Hat/CentOS Enterprise Linux 6/7/8
 
 ## Development
 
 The module relies on [PDK](https://puppet.com/docs/pdk/1.x/pdk.html) and has
 both [rspec-puppet](http://rspec-puppet.com) and
-[beaker-rspec](https://github.com/puppetlabs/beaker-rspec) tests. Run them
+[Litmus](https://github.com/puppetlabs/puppet_litmus) tests. Run them
 with:
 
 ```
 $ bundle exec rake spec
-$ PUPPET_INSTALL_TYPE=agent PUPPET_INSTALL_VERSION=x.y.z bundle exec rake beaker:<nodeset>
+$ bundle exec rake litmus:*
 ```
 
 Please log issues or pull requests at
