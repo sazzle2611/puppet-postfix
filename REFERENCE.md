@@ -9,7 +9,6 @@
 * [`postfix`](#postfix): Manage Postfix.
 * [`postfix::config`](#postfixconfig)
 * [`postfix::install`](#postfixinstall)
-* [`postfix::params`](#postfixparams)
 * [`postfix::service`](#postfixservice)
 
 ### Defined types
@@ -855,15 +854,11 @@ Data type: `Stdlib::Absolutepath`
 
 
 
-Default value: `$postfix::params::conf_dir`
-
 ##### <a name="services"></a>`services`
 
 Data type: `Hash[String, Hash[String, Any]]`
 
 
-
-Default value: `$postfix::params::services`
 
 ##### <a name="lookup_packages"></a>`lookup_packages`
 
@@ -871,23 +866,17 @@ Data type: `Hash[Postfix::Type::Lookup, String]`
 
 
 
-Default value: `$postfix::params::lookup_packages`
-
 ##### <a name="package_name"></a>`package_name`
 
 Data type: `String`
 
 
 
-Default value: `$postfix::params::package_name`
-
 ##### <a name="service_name"></a>`service_name`
 
 Data type: `String`
 
 
-
-Default value: `$postfix::params::service_name`
 
 ##### <a name="twobounce_notice_recipient"></a>`twobounce_notice_recipient`
 
@@ -896,15 +885,11 @@ Data type: `Optional[String]`
 `2bounce_notice_recipient` is a violation
 of Puppet variable naming conventions.
 
-Default value: ``undef``
-
 ##### <a name="access_map_defer_code"></a>`access_map_defer_code`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="access_map_reject_code"></a>`access_map_reject_code`
 
@@ -912,15 +897,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="address_verify_cache_cleanup_interval"></a>`address_verify_cache_cleanup_interval`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="address_verify_default_transport"></a>`address_verify_default_transport`
 
@@ -928,15 +909,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="address_verify_local_transport"></a>`address_verify_local_transport`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="address_verify_map"></a>`address_verify_map`
 
@@ -944,15 +921,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="address_verify_negative_cache"></a>`address_verify_negative_cache`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="address_verify_negative_expire_time"></a>`address_verify_negative_expire_time`
 
@@ -960,15 +933,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="address_verify_negative_refresh_time"></a>`address_verify_negative_refresh_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="address_verify_poll_count"></a>`address_verify_poll_count`
 
@@ -976,15 +945,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="address_verify_poll_delay"></a>`address_verify_poll_delay`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="address_verify_positive_expire_time"></a>`address_verify_positive_expire_time`
 
@@ -992,15 +957,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="address_verify_positive_refresh_time"></a>`address_verify_positive_refresh_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="address_verify_relay_transport"></a>`address_verify_relay_transport`
 
@@ -1008,15 +969,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="address_verify_relayhost"></a>`address_verify_relayhost`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="address_verify_sender"></a>`address_verify_sender`
 
@@ -1024,15 +981,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="address_verify_sender_dependent_default_transport_maps"></a>`address_verify_sender_dependent_default_transport_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="address_verify_sender_dependent_relayhost_maps"></a>`address_verify_sender_dependent_relayhost_maps`
 
@@ -1040,15 +993,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="address_verify_sender_ttl"></a>`address_verify_sender_ttl`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="address_verify_service_name"></a>`address_verify_service_name`
 
@@ -1056,15 +1005,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="address_verify_transport_maps"></a>`address_verify_transport_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="address_verify_virtual_transport"></a>`address_verify_virtual_transport`
 
@@ -1072,15 +1017,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="alias_database"></a>`alias_database`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: `$postfix::params::alias_database`
 
 ##### <a name="alias_maps"></a>`alias_maps`
 
@@ -1088,15 +1029,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: `$postfix::params::alias_maps`
-
 ##### <a name="allow_mail_to_commands"></a>`allow_mail_to_commands`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="allow_mail_to_files"></a>`allow_mail_to_files`
 
@@ -1104,15 +1041,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="allow_min_user"></a>`allow_min_user`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="allow_percent_hack"></a>`allow_percent_hack`
 
@@ -1120,15 +1053,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="allow_untrusted_routing"></a>`allow_untrusted_routing`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="alternate_config_directories"></a>`alternate_config_directories`
 
@@ -1136,15 +1065,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="always_add_missing_headers"></a>`always_add_missing_headers`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="always_bcc"></a>`always_bcc`
 
@@ -1152,15 +1077,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="anvil_rate_time_unit"></a>`anvil_rate_time_unit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="anvil_status_update_time"></a>`anvil_status_update_time`
 
@@ -1168,15 +1089,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="append_at_myorigin"></a>`append_at_myorigin`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="append_dot_mydomain"></a>`append_dot_mydomain`
 
@@ -1184,15 +1101,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="application_event_drain_time"></a>`application_event_drain_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="authorized_flush_users"></a>`authorized_flush_users`
 
@@ -1200,15 +1113,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="authorized_mailq_users"></a>`authorized_mailq_users`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="authorized_submit_users"></a>`authorized_submit_users`
 
@@ -1216,15 +1125,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="backwards_bounce_logfile_compatibility"></a>`backwards_bounce_logfile_compatibility`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="berkeley_db_create_buffer_size"></a>`berkeley_db_create_buffer_size`
 
@@ -1232,15 +1137,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="berkeley_db_read_buffer_size"></a>`berkeley_db_read_buffer_size`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="best_mx_transport"></a>`best_mx_transport`
 
@@ -1248,15 +1149,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="biff"></a>`biff`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="body_checks"></a>`body_checks`
 
@@ -1264,15 +1161,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="body_checks_size_limit"></a>`body_checks_size_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="bounce_notice_recipient"></a>`bounce_notice_recipient`
 
@@ -1280,15 +1173,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="bounce_queue_lifetime"></a>`bounce_queue_lifetime`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="bounce_service_name"></a>`bounce_service_name`
 
@@ -1296,15 +1185,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="bounce_size_limit"></a>`bounce_size_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="bounce_template_file"></a>`bounce_template_file`
 
@@ -1312,15 +1197,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="broken_sasl_auth_clients"></a>`broken_sasl_auth_clients`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="canonical_classes"></a>`canonical_classes`
 
@@ -1328,15 +1209,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="canonical_maps"></a>`canonical_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="cleanup_service_name"></a>`cleanup_service_name`
 
@@ -1344,15 +1221,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="command_directory"></a>`command_directory`
 
 Data type: `Optional[String]`
 
 
-
-Default value: `$postfix::params::command_directory`
 
 ##### <a name="command_execution_directory"></a>`command_execution_directory`
 
@@ -1360,15 +1233,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="command_expansion_filter"></a>`command_expansion_filter`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="command_time_limit"></a>`command_time_limit`
 
@@ -1376,15 +1245,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="compatibility_level"></a>`compatibility_level`
 
 Data type: `Optional[String]`
 
 
-
-Default value: `$postfix::params::compatibility_level`
 
 ##### <a name="config_directory"></a>`config_directory`
 
@@ -1392,15 +1257,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="connection_cache_protocol_timeout"></a>`connection_cache_protocol_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="connection_cache_service_name"></a>`connection_cache_service_name`
 
@@ -1408,15 +1269,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="connection_cache_status_update_time"></a>`connection_cache_status_update_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="connection_cache_ttl_limit"></a>`connection_cache_ttl_limit`
 
@@ -1424,15 +1281,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="content_filter"></a>`content_filter`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="cyrus_sasl_config_path"></a>`cyrus_sasl_config_path`
 
@@ -1440,15 +1293,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="daemon_directory"></a>`daemon_directory`
 
 Data type: `Optional[String]`
 
 
-
-Default value: `$postfix::params::daemon_directory`
 
 ##### <a name="daemon_table_open_error_is_fatal"></a>`daemon_table_open_error_is_fatal`
 
@@ -1456,15 +1305,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="daemon_timeout"></a>`daemon_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="data_directory"></a>`data_directory`
 
@@ -1472,15 +1317,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: `$postfix::params::data_directory`
-
 ##### <a name="debug_peer_level"></a>`debug_peer_level`
 
 Data type: `Optional[String]`
 
 
-
-Default value: `$postfix::params::debug_peer_level`
 
 ##### <a name="debug_peer_list"></a>`debug_peer_list`
 
@@ -1488,15 +1329,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="debugger_command"></a>`debugger_command`
 
 Data type: `Optional[String]`
 
 
-
-Default value: `$postfix::params::debugger_command`
 
 ##### <a name="default_database_type"></a>`default_database_type`
 
@@ -1504,15 +1341,11 @@ Data type: `Postfix::Type::Lookup::Database`
 
 
 
-Default value: `$postfix::params::default_database_type`
-
 ##### <a name="default_delivery_slot_cost"></a>`default_delivery_slot_cost`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="default_delivery_slot_discount"></a>`default_delivery_slot_discount`
 
@@ -1520,15 +1353,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="default_delivery_slot_loan"></a>`default_delivery_slot_loan`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="default_destination_concurrency_failed_cohort_limit"></a>`default_destination_concurrency_failed_cohort_limit`
 
@@ -1536,15 +1365,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="default_destination_concurrency_limit"></a>`default_destination_concurrency_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="default_destination_concurrency_negative_feedback"></a>`default_destination_concurrency_negative_feedback`
 
@@ -1552,15 +1377,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="default_destination_concurrency_positive_feedback"></a>`default_destination_concurrency_positive_feedback`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="default_destination_rate_delay"></a>`default_destination_rate_delay`
 
@@ -1568,15 +1389,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="default_destination_recipient_limit"></a>`default_destination_recipient_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="default_extra_recipient_limit"></a>`default_extra_recipient_limit`
 
@@ -1584,15 +1401,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="default_filter_nexthop"></a>`default_filter_nexthop`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="default_minimum_delivery_slots"></a>`default_minimum_delivery_slots`
 
@@ -1600,15 +1413,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="default_privs"></a>`default_privs`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="default_process_limit"></a>`default_process_limit`
 
@@ -1616,15 +1425,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="default_rbl_reply"></a>`default_rbl_reply`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="default_recipient_limit"></a>`default_recipient_limit`
 
@@ -1632,15 +1437,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="default_recipient_refill_delay"></a>`default_recipient_refill_delay`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="default_recipient_refill_limit"></a>`default_recipient_refill_limit`
 
@@ -1648,15 +1449,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="default_transport"></a>`default_transport`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="default_verp_delimiters"></a>`default_verp_delimiters`
 
@@ -1664,15 +1461,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="defer_code"></a>`defer_code`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="defer_service_name"></a>`defer_service_name`
 
@@ -1680,15 +1473,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="defer_transports"></a>`defer_transports`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="delay_logging_resolution_limit"></a>`delay_logging_resolution_limit`
 
@@ -1696,15 +1485,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="delay_notice_recipient"></a>`delay_notice_recipient`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="delay_warning_time"></a>`delay_warning_time`
 
@@ -1712,15 +1497,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="deliver_lock_attempts"></a>`deliver_lock_attempts`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="deliver_lock_delay"></a>`deliver_lock_delay`
 
@@ -1728,15 +1509,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="destination_concurrency_feedback_debug"></a>`destination_concurrency_feedback_debug`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="detect_8bit_encoding_header"></a>`detect_8bit_encoding_header`
 
@@ -1744,15 +1521,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="disable_dns_lookups"></a>`disable_dns_lookups`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="disable_mime_input_processing"></a>`disable_mime_input_processing`
 
@@ -1760,15 +1533,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="disable_mime_output_conversion"></a>`disable_mime_output_conversion`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="disable_verp_bounces"></a>`disable_verp_bounces`
 
@@ -1776,15 +1545,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="disable_vrfy_command"></a>`disable_vrfy_command`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="dnsblog_reply_delay"></a>`dnsblog_reply_delay`
 
@@ -1792,15 +1557,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="dnsblog_service_name"></a>`dnsblog_service_name`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="dont_remove"></a>`dont_remove`
 
@@ -1808,15 +1569,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="double_bounce_sender"></a>`double_bounce_sender`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="duplicate_filter_limit"></a>`duplicate_filter_limit`
 
@@ -1824,15 +1581,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="empty_address_default_transport_maps_lookup_key"></a>`empty_address_default_transport_maps_lookup_key`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="empty_address_recipient"></a>`empty_address_recipient`
 
@@ -1840,15 +1593,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="empty_address_relayhost_maps_lookup_key"></a>`empty_address_relayhost_maps_lookup_key`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="enable_long_queue_ids"></a>`enable_long_queue_ids`
 
@@ -1856,15 +1605,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="enable_original_recipient"></a>`enable_original_recipient`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="error_notice_recipient"></a>`error_notice_recipient`
 
@@ -1872,15 +1617,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="error_service_name"></a>`error_service_name`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="execution_directory_expansion_filter"></a>`execution_directory_expansion_filter`
 
@@ -1888,15 +1629,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="expand_owner_alias"></a>`expand_owner_alias`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="export_environment"></a>`export_environment`
 
@@ -1904,15 +1641,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="fallback_transport"></a>`fallback_transport`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="fallback_transport_maps"></a>`fallback_transport_maps`
 
@@ -1920,15 +1653,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="fast_flush_domains"></a>`fast_flush_domains`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="fast_flush_purge_time"></a>`fast_flush_purge_time`
 
@@ -1936,15 +1665,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="fast_flush_refresh_time"></a>`fast_flush_refresh_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="fault_injection_code"></a>`fault_injection_code`
 
@@ -1952,15 +1677,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="flush_service_name"></a>`flush_service_name`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="fork_attempts"></a>`fork_attempts`
 
@@ -1968,15 +1689,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="fork_delay"></a>`fork_delay`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="forward_expansion_filter"></a>`forward_expansion_filter`
 
@@ -1984,15 +1701,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="forward_path"></a>`forward_path`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="frozen_delivered_to"></a>`frozen_delivered_to`
 
@@ -2000,15 +1713,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="hash_queue_depth"></a>`hash_queue_depth`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="hash_queue_names"></a>`hash_queue_names`
 
@@ -2016,15 +1725,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="header_address_token_limit"></a>`header_address_token_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="header_checks"></a>`header_checks`
 
@@ -2032,15 +1737,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="header_size_limit"></a>`header_size_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="helpful_warnings"></a>`helpful_warnings`
 
@@ -2048,15 +1749,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="home_mailbox"></a>`home_mailbox`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="hopcount_limit"></a>`hopcount_limit`
 
@@ -2064,15 +1761,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="html_directory"></a>`html_directory`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: `$postfix::params::html_directory`
 
 ##### <a name="ignore_mx_lookup_error"></a>`ignore_mx_lookup_error`
 
@@ -2080,15 +1773,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="import_environment"></a>`import_environment`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="in_flow_delay"></a>`in_flow_delay`
 
@@ -2096,15 +1785,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="inet_interfaces"></a>`inet_interfaces`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: `$postfix::params::inet_interfaces`
 
 ##### <a name="inet_protocols"></a>`inet_protocols`
 
@@ -2112,15 +1797,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: `$postfix::params::inet_protocols`
-
 ##### <a name="initial_destination_concurrency"></a>`initial_destination_concurrency`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="internal_mail_filter_classes"></a>`internal_mail_filter_classes`
 
@@ -2128,15 +1809,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="invalid_hostname_reject_code"></a>`invalid_hostname_reject_code`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="ipc_idle"></a>`ipc_idle`
 
@@ -2144,15 +1821,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="ipc_timeout"></a>`ipc_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="ipc_ttl"></a>`ipc_ttl`
 
@@ -2160,15 +1833,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="line_length_limit"></a>`line_length_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_address_preference"></a>`lmtp_address_preference`
 
@@ -2176,15 +1845,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_assume_final"></a>`lmtp_assume_final`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_bind_address"></a>`lmtp_bind_address`
 
@@ -2192,15 +1857,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_bind_address6"></a>`lmtp_bind_address6`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_body_checks"></a>`lmtp_body_checks`
 
@@ -2208,15 +1869,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_cname_overrides_servername"></a>`lmtp_cname_overrides_servername`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_connect_timeout"></a>`lmtp_connect_timeout`
 
@@ -2224,15 +1881,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_connection_cache_destinations"></a>`lmtp_connection_cache_destinations`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_connection_cache_on_demand"></a>`lmtp_connection_cache_on_demand`
 
@@ -2240,15 +1893,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_connection_cache_time_limit"></a>`lmtp_connection_cache_time_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_connection_reuse_time_limit"></a>`lmtp_connection_reuse_time_limit`
 
@@ -2256,15 +1905,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_data_done_timeout"></a>`lmtp_data_done_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_data_init_timeout"></a>`lmtp_data_init_timeout`
 
@@ -2272,15 +1917,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_data_xfer_timeout"></a>`lmtp_data_xfer_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_defer_if_no_mx_address_found"></a>`lmtp_defer_if_no_mx_address_found`
 
@@ -2288,15 +1929,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_discard_lhlo_keyword_address_maps"></a>`lmtp_discard_lhlo_keyword_address_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_discard_lhlo_keywords"></a>`lmtp_discard_lhlo_keywords`
 
@@ -2304,15 +1941,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_dns_resolver_options"></a>`lmtp_dns_resolver_options`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_enforce_tls"></a>`lmtp_enforce_tls`
 
@@ -2320,15 +1953,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_generic_maps"></a>`lmtp_generic_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_header_checks"></a>`lmtp_header_checks`
 
@@ -2336,15 +1965,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_host_lookup"></a>`lmtp_host_lookup`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_lhlo_name"></a>`lmtp_lhlo_name`
 
@@ -2352,15 +1977,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_lhlo_timeout"></a>`lmtp_lhlo_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_line_length_limit"></a>`lmtp_line_length_limit`
 
@@ -2368,15 +1989,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_mail_timeout"></a>`lmtp_mail_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_mime_header_checks"></a>`lmtp_mime_header_checks`
 
@@ -2384,15 +2001,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_mx_address_limit"></a>`lmtp_mx_address_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_mx_session_limit"></a>`lmtp_mx_session_limit`
 
@@ -2400,15 +2013,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_nested_header_checks"></a>`lmtp_nested_header_checks`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_per_record_deadline"></a>`lmtp_per_record_deadline`
 
@@ -2416,15 +2025,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_pix_workaround_delay_time"></a>`lmtp_pix_workaround_delay_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_pix_workaround_maps"></a>`lmtp_pix_workaround_maps`
 
@@ -2432,15 +2037,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_pix_workaround_threshold_time"></a>`lmtp_pix_workaround_threshold_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_pix_workarounds"></a>`lmtp_pix_workarounds`
 
@@ -2448,15 +2049,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_quit_timeout"></a>`lmtp_quit_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_quote_rfc821_envelope"></a>`lmtp_quote_rfc821_envelope`
 
@@ -2464,15 +2061,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_randomize_addresses"></a>`lmtp_randomize_addresses`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_rcpt_timeout"></a>`lmtp_rcpt_timeout`
 
@@ -2480,15 +2073,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_reply_filter"></a>`lmtp_reply_filter`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_rset_timeout"></a>`lmtp_rset_timeout`
 
@@ -2496,15 +2085,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_sasl_auth_cache_name"></a>`lmtp_sasl_auth_cache_name`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_sasl_auth_cache_time"></a>`lmtp_sasl_auth_cache_time`
 
@@ -2512,15 +2097,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_sasl_auth_enable"></a>`lmtp_sasl_auth_enable`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_sasl_auth_soft_bounce"></a>`lmtp_sasl_auth_soft_bounce`
 
@@ -2528,15 +2109,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_sasl_mechanism_filter"></a>`lmtp_sasl_mechanism_filter`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_sasl_password_maps"></a>`lmtp_sasl_password_maps`
 
@@ -2544,15 +2121,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_sasl_path"></a>`lmtp_sasl_path`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_sasl_security_options"></a>`lmtp_sasl_security_options`
 
@@ -2560,15 +2133,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_sasl_tls_security_options"></a>`lmtp_sasl_tls_security_options`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_sasl_tls_verified_security_options"></a>`lmtp_sasl_tls_verified_security_options`
 
@@ -2576,15 +2145,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_sasl_type"></a>`lmtp_sasl_type`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_send_dummy_mail_auth"></a>`lmtp_send_dummy_mail_auth`
 
@@ -2592,15 +2157,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_send_xforward_command"></a>`lmtp_send_xforward_command`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_sender_dependent_authentication"></a>`lmtp_sender_dependent_authentication`
 
@@ -2608,15 +2169,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_skip_5xx_greeting"></a>`lmtp_skip_5xx_greeting`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_skip_quit_response"></a>`lmtp_skip_quit_response`
 
@@ -2624,15 +2181,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_starttls_timeout"></a>`lmtp_starttls_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tcp_port"></a>`lmtp_tcp_port`
 
@@ -2640,15 +2193,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_tls_cafile"></a>`lmtp_tls_cafile`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tls_capath"></a>`lmtp_tls_capath`
 
@@ -2656,15 +2205,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_tls_block_early_mail_reply"></a>`lmtp_tls_block_early_mail_reply`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tls_cert_file"></a>`lmtp_tls_cert_file`
 
@@ -2672,15 +2217,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_tls_ciphers"></a>`lmtp_tls_ciphers`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tls_dcert_file"></a>`lmtp_tls_dcert_file`
 
@@ -2688,15 +2229,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_tls_dkey_file"></a>`lmtp_tls_dkey_file`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tls_eccert_file"></a>`lmtp_tls_eccert_file`
 
@@ -2704,15 +2241,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_tls_eckey_file"></a>`lmtp_tls_eckey_file`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tls_enforce_peername"></a>`lmtp_tls_enforce_peername`
 
@@ -2720,15 +2253,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_tls_exclude_ciphers"></a>`lmtp_tls_exclude_ciphers`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tls_fingerprint_cert_match"></a>`lmtp_tls_fingerprint_cert_match`
 
@@ -2736,15 +2265,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_tls_fingerprint_digest"></a>`lmtp_tls_fingerprint_digest`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tls_key_file"></a>`lmtp_tls_key_file`
 
@@ -2752,15 +2277,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_tls_loglevel"></a>`lmtp_tls_loglevel`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tls_mandatory_ciphers"></a>`lmtp_tls_mandatory_ciphers`
 
@@ -2768,15 +2289,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_tls_mandatory_exclude_ciphers"></a>`lmtp_tls_mandatory_exclude_ciphers`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tls_mandatory_protocols"></a>`lmtp_tls_mandatory_protocols`
 
@@ -2784,15 +2301,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_tls_note_starttls_offer"></a>`lmtp_tls_note_starttls_offer`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tls_per_site"></a>`lmtp_tls_per_site`
 
@@ -2800,15 +2313,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_tls_policy_maps"></a>`lmtp_tls_policy_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tls_protocols"></a>`lmtp_tls_protocols`
 
@@ -2816,15 +2325,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_tls_scert_verifydepth"></a>`lmtp_tls_scert_verifydepth`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tls_secure_cert_match"></a>`lmtp_tls_secure_cert_match`
 
@@ -2832,15 +2337,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_tls_security_level"></a>`lmtp_tls_security_level`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tls_session_cache_database"></a>`lmtp_tls_session_cache_database`
 
@@ -2848,15 +2349,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_tls_session_cache_timeout"></a>`lmtp_tls_session_cache_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_tls_verify_cert_match"></a>`lmtp_tls_verify_cert_match`
 
@@ -2864,15 +2361,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="lmtp_use_tls"></a>`lmtp_use_tls`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="lmtp_xforward_timeout"></a>`lmtp_xforward_timeout`
 
@@ -2880,15 +2373,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="local_command_shell"></a>`local_command_shell`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="local_header_rewrite_clients"></a>`local_header_rewrite_clients`
 
@@ -2896,15 +2385,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="local_recipient_maps"></a>`local_recipient_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="local_transport"></a>`local_transport`
 
@@ -2912,15 +2397,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="luser_relay"></a>`luser_relay`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="mail_name"></a>`mail_name`
 
@@ -2928,15 +2409,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="mail_owner"></a>`mail_owner`
 
 Data type: `Optional[String]`
 
 
-
-Default value: `$postfix::params::mail_owner`
 
 ##### <a name="mail_release_date"></a>`mail_release_date`
 
@@ -2944,15 +2421,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="mail_spool_directory"></a>`mail_spool_directory`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="mail_version"></a>`mail_version`
 
@@ -2960,15 +2433,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="mailbox_command"></a>`mailbox_command`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="mailbox_command_maps"></a>`mailbox_command_maps`
 
@@ -2976,15 +2445,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="mailbox_delivery_lock"></a>`mailbox_delivery_lock`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="mailbox_size_limit"></a>`mailbox_size_limit`
 
@@ -2992,15 +2457,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="mailbox_transport"></a>`mailbox_transport`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="mailbox_transport_maps"></a>`mailbox_transport_maps`
 
@@ -3008,15 +2469,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="mailq_path"></a>`mailq_path`
 
 Data type: `Optional[String]`
 
 
-
-Default value: `$postfix::params::mailq_path`
 
 ##### <a name="manpage_directory"></a>`manpage_directory`
 
@@ -3024,15 +2481,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: `$postfix::params::manpage_directory`
-
 ##### <a name="maps_rbl_domains"></a>`maps_rbl_domains`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="maps_rbl_reject_code"></a>`maps_rbl_reject_code`
 
@@ -3040,15 +2493,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="masquerade_classes"></a>`masquerade_classes`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="masquerade_domains"></a>`masquerade_domains`
 
@@ -3056,15 +2505,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="masquerade_exceptions"></a>`masquerade_exceptions`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="master_service_disable"></a>`master_service_disable`
 
@@ -3072,15 +2517,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="max_idle"></a>`max_idle`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="max_use"></a>`max_use`
 
@@ -3088,15 +2529,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="maximal_backoff_time"></a>`maximal_backoff_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="maximal_queue_lifetime"></a>`maximal_queue_lifetime`
 
@@ -3104,15 +2541,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="message_reject_characters"></a>`message_reject_characters`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="message_size_limit"></a>`message_size_limit`
 
@@ -3120,15 +2553,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="message_strip_characters"></a>`message_strip_characters`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="meta_directory"></a>`meta_directory`
 
@@ -3136,15 +2565,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: `$postfix::params::meta_directory`
-
 ##### <a name="milter_command_timeout"></a>`milter_command_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="milter_connect_macros"></a>`milter_connect_macros`
 
@@ -3152,15 +2577,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="milter_connect_timeout"></a>`milter_connect_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="milter_content_timeout"></a>`milter_content_timeout`
 
@@ -3168,15 +2589,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="milter_data_macros"></a>`milter_data_macros`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="milter_default_action"></a>`milter_default_action`
 
@@ -3184,15 +2601,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="milter_end_of_data_macros"></a>`milter_end_of_data_macros`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="milter_end_of_header_macros"></a>`milter_end_of_header_macros`
 
@@ -3200,15 +2613,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="milter_header_checks"></a>`milter_header_checks`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="milter_helo_macros"></a>`milter_helo_macros`
 
@@ -3216,15 +2625,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="milter_macro_daemon_name"></a>`milter_macro_daemon_name`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="milter_macro_v"></a>`milter_macro_v`
 
@@ -3232,15 +2637,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="milter_mail_macros"></a>`milter_mail_macros`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="milter_protocol"></a>`milter_protocol`
 
@@ -3248,15 +2649,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="milter_rcpt_macros"></a>`milter_rcpt_macros`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="milter_unknown_command_macros"></a>`milter_unknown_command_macros`
 
@@ -3264,15 +2661,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="mime_boundary_length_limit"></a>`mime_boundary_length_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="mime_header_checks"></a>`mime_header_checks`
 
@@ -3280,15 +2673,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="mime_nesting_limit"></a>`mime_nesting_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="minimal_backoff_time"></a>`minimal_backoff_time`
 
@@ -3296,15 +2685,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="multi_instance_directories"></a>`multi_instance_directories`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="multi_instance_enable"></a>`multi_instance_enable`
 
@@ -3312,15 +2697,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="multi_instance_group"></a>`multi_instance_group`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="multi_instance_name"></a>`multi_instance_name`
 
@@ -3328,15 +2709,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="multi_instance_wrapper"></a>`multi_instance_wrapper`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="multi_recipient_bounce_reject_code"></a>`multi_recipient_bounce_reject_code`
 
@@ -3344,15 +2721,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="mydestination"></a>`mydestination`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: `$postfix::params::mydestination`
 
 ##### <a name="mydomain"></a>`mydomain`
 
@@ -3360,15 +2733,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="myhostname"></a>`myhostname`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="mynetworks"></a>`mynetworks`
 
@@ -3376,15 +2745,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="mynetworks_style"></a>`mynetworks_style`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="myorigin"></a>`myorigin`
 
@@ -3392,15 +2757,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="nested_header_checks"></a>`nested_header_checks`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="newaliases_path"></a>`newaliases_path`
 
@@ -3408,15 +2769,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: `$postfix::params::newaliases_path`
-
 ##### <a name="non_fqdn_reject_code"></a>`non_fqdn_reject_code`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="non_smtpd_milters"></a>`non_smtpd_milters`
 
@@ -3424,15 +2781,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="notify_classes"></a>`notify_classes`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="owner_request_special"></a>`owner_request_special`
 
@@ -3440,15 +2793,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="parent_domain_matches_subdomains"></a>`parent_domain_matches_subdomains`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="permit_mx_backup_networks"></a>`permit_mx_backup_networks`
 
@@ -3456,15 +2805,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="pickup_service_name"></a>`pickup_service_name`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="plaintext_reject_code"></a>`plaintext_reject_code`
 
@@ -3472,15 +2817,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postmulti_control_commands"></a>`postmulti_control_commands`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postmulti_start_commands"></a>`postmulti_start_commands`
 
@@ -3488,15 +2829,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postmulti_stop_commands"></a>`postmulti_stop_commands`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_access_list"></a>`postscreen_access_list`
 
@@ -3504,15 +2841,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_bare_newline_action"></a>`postscreen_bare_newline_action`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_bare_newline_enable"></a>`postscreen_bare_newline_enable`
 
@@ -3520,15 +2853,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_bare_newline_ttl"></a>`postscreen_bare_newline_ttl`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_blacklist_action"></a>`postscreen_blacklist_action`
 
@@ -3536,15 +2865,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_cache_cleanup_interval"></a>`postscreen_cache_cleanup_interval`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_cache_map"></a>`postscreen_cache_map`
 
@@ -3552,15 +2877,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_cache_retention_time"></a>`postscreen_cache_retention_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_client_connection_count_limit"></a>`postscreen_client_connection_count_limit`
 
@@ -3568,15 +2889,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_command_count_limit"></a>`postscreen_command_count_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_command_filter"></a>`postscreen_command_filter`
 
@@ -3584,15 +2901,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_command_time_limit"></a>`postscreen_command_time_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_disable_vrfy_command"></a>`postscreen_disable_vrfy_command`
 
@@ -3600,15 +2913,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_discard_ehlo_keyword_address_maps"></a>`postscreen_discard_ehlo_keyword_address_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_discard_ehlo_keywords"></a>`postscreen_discard_ehlo_keywords`
 
@@ -3616,15 +2925,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_dnsbl_action"></a>`postscreen_dnsbl_action`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_dnsbl_reply_map"></a>`postscreen_dnsbl_reply_map`
 
@@ -3632,15 +2937,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_dnsbl_sites"></a>`postscreen_dnsbl_sites`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_dnsbl_threshold"></a>`postscreen_dnsbl_threshold`
 
@@ -3648,15 +2949,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_dnsbl_ttl"></a>`postscreen_dnsbl_ttl`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_enforce_tls"></a>`postscreen_enforce_tls`
 
@@ -3664,15 +2961,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_expansion_filter"></a>`postscreen_expansion_filter`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_forbidden_commands"></a>`postscreen_forbidden_commands`
 
@@ -3680,15 +2973,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_greet_action"></a>`postscreen_greet_action`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_greet_banner"></a>`postscreen_greet_banner`
 
@@ -3696,15 +2985,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_greet_ttl"></a>`postscreen_greet_ttl`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_greet_wait"></a>`postscreen_greet_wait`
 
@@ -3712,15 +2997,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_helo_required"></a>`postscreen_helo_required`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_non_smtp_command_action"></a>`postscreen_non_smtp_command_action`
 
@@ -3728,15 +3009,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_non_smtp_command_enable"></a>`postscreen_non_smtp_command_enable`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_non_smtp_command_ttl"></a>`postscreen_non_smtp_command_ttl`
 
@@ -3744,15 +3021,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_pipelining_action"></a>`postscreen_pipelining_action`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_pipelining_enable"></a>`postscreen_pipelining_enable`
 
@@ -3760,15 +3033,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_pipelining_ttl"></a>`postscreen_pipelining_ttl`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_post_queue_limit"></a>`postscreen_post_queue_limit`
 
@@ -3776,15 +3045,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_pre_queue_limit"></a>`postscreen_pre_queue_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_reject_footer"></a>`postscreen_reject_footer`
 
@@ -3792,15 +3057,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_tls_security_level"></a>`postscreen_tls_security_level`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_upstream_proxy_protocol"></a>`postscreen_upstream_proxy_protocol`
 
@@ -3808,15 +3069,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_upstream_proxy_timeout"></a>`postscreen_upstream_proxy_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_use_tls"></a>`postscreen_use_tls`
 
@@ -3824,15 +3081,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="postscreen_watchdog_timeout"></a>`postscreen_watchdog_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="postscreen_whitelist_interfaces"></a>`postscreen_whitelist_interfaces`
 
@@ -3840,15 +3093,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="prepend_delivered_header"></a>`prepend_delivered_header`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="process_id_directory"></a>`process_id_directory`
 
@@ -3856,15 +3105,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="propagate_unmatched_extensions"></a>`propagate_unmatched_extensions`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="proxy_interfaces"></a>`proxy_interfaces`
 
@@ -3872,15 +3117,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="proxy_read_maps"></a>`proxy_read_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="proxy_write_maps"></a>`proxy_write_maps`
 
@@ -3888,15 +3129,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="proxymap_service_name"></a>`proxymap_service_name`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="proxywrite_service_name"></a>`proxywrite_service_name`
 
@@ -3904,15 +3141,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="qmgr_clog_warn_time"></a>`qmgr_clog_warn_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="qmgr_daemon_timeout"></a>`qmgr_daemon_timeout`
 
@@ -3920,15 +3153,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="qmgr_fudge_factor"></a>`qmgr_fudge_factor`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="qmgr_ipc_timeout"></a>`qmgr_ipc_timeout`
 
@@ -3936,15 +3165,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="qmgr_message_active_limit"></a>`qmgr_message_active_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="qmgr_message_recipient_limit"></a>`qmgr_message_recipient_limit`
 
@@ -3952,15 +3177,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="qmgr_message_recipient_minimum"></a>`qmgr_message_recipient_minimum`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="qmqpd_authorized_clients"></a>`qmqpd_authorized_clients`
 
@@ -3968,15 +3189,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="qmqpd_client_port_logging"></a>`qmqpd_client_port_logging`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="qmqpd_error_delay"></a>`qmqpd_error_delay`
 
@@ -3984,15 +3201,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="qmqpd_timeout"></a>`qmqpd_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="queue_directory"></a>`queue_directory`
 
@@ -4000,15 +3213,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: `$postfix::params::queue_directory`
-
 ##### <a name="queue_file_attribute_count_limit"></a>`queue_file_attribute_count_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="queue_minfree"></a>`queue_minfree`
 
@@ -4016,15 +3225,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="queue_run_delay"></a>`queue_run_delay`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="queue_service_name"></a>`queue_service_name`
 
@@ -4032,15 +3237,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="rbl_reply_maps"></a>`rbl_reply_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="readme_directory"></a>`readme_directory`
 
@@ -4048,15 +3249,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: `$postfix::params::readme_directory`
-
 ##### <a name="receive_override_options"></a>`receive_override_options`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="recipient_bcc_maps"></a>`recipient_bcc_maps`
 
@@ -4064,15 +3261,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="recipient_canonical_classes"></a>`recipient_canonical_classes`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="recipient_canonical_maps"></a>`recipient_canonical_maps`
 
@@ -4080,15 +3273,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="recipient_delimiter"></a>`recipient_delimiter`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="reject_code"></a>`reject_code`
 
@@ -4096,15 +3285,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="reject_tempfail_action"></a>`reject_tempfail_action`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="relay_clientcerts"></a>`relay_clientcerts`
 
@@ -4112,15 +3297,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="relay_domains"></a>`relay_domains`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="relay_domains_reject_code"></a>`relay_domains_reject_code`
 
@@ -4128,15 +3309,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="relay_recipient_maps"></a>`relay_recipient_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="relay_transport"></a>`relay_transport`
 
@@ -4144,15 +3321,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="relayhost"></a>`relayhost`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="relocated_maps"></a>`relocated_maps`
 
@@ -4160,15 +3333,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="remote_header_rewrite_domain"></a>`remote_header_rewrite_domain`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="require_home_directory"></a>`require_home_directory`
 
@@ -4176,15 +3345,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="reset_owner_alias"></a>`reset_owner_alias`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="resolve_dequoted_address"></a>`resolve_dequoted_address`
 
@@ -4192,15 +3357,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="resolve_null_domain"></a>`resolve_null_domain`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="resolve_numeric_domain"></a>`resolve_numeric_domain`
 
@@ -4208,15 +3369,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="rewrite_service_name"></a>`rewrite_service_name`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="sample_directory"></a>`sample_directory`
 
@@ -4224,15 +3381,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: `$postfix::params::sample_directory`
-
 ##### <a name="send_cyrus_sasl_authzid"></a>`send_cyrus_sasl_authzid`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="sender_bcc_maps"></a>`sender_bcc_maps`
 
@@ -4240,15 +3393,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="sender_canonical_classes"></a>`sender_canonical_classes`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="sender_canonical_maps"></a>`sender_canonical_maps`
 
@@ -4256,15 +3405,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="sender_dependent_default_transport_maps"></a>`sender_dependent_default_transport_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="sender_dependent_relayhost_maps"></a>`sender_dependent_relayhost_maps`
 
@@ -4272,15 +3417,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="sendmail_fix_line_endings"></a>`sendmail_fix_line_endings`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="sendmail_path"></a>`sendmail_path`
 
@@ -4288,15 +3429,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: `$postfix::params::sendmail_path`
-
 ##### <a name="service_throttle_time"></a>`service_throttle_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="setgid_group"></a>`setgid_group`
 
@@ -4304,15 +3441,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: `$postfix::params::setgid_group`
-
 ##### <a name="shlib_directory"></a>`shlib_directory`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: `$postfix::params::shlib_directory`
 
 ##### <a name="show_user_unknown_table_name"></a>`show_user_unknown_table_name`
 
@@ -4320,15 +3453,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="showq_service_name"></a>`showq_service_name`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_address_preference"></a>`smtp_address_preference`
 
@@ -4336,15 +3465,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_always_send_ehlo"></a>`smtp_always_send_ehlo`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_bind_address"></a>`smtp_bind_address`
 
@@ -4352,15 +3477,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_bind_address6"></a>`smtp_bind_address6`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_body_checks"></a>`smtp_body_checks`
 
@@ -4368,15 +3489,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_cname_overrides_servername"></a>`smtp_cname_overrides_servername`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_connect_timeout"></a>`smtp_connect_timeout`
 
@@ -4384,15 +3501,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_connection_cache_destinations"></a>`smtp_connection_cache_destinations`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_connection_cache_on_demand"></a>`smtp_connection_cache_on_demand`
 
@@ -4400,15 +3513,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_connection_cache_time_limit"></a>`smtp_connection_cache_time_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_connection_reuse_time_limit"></a>`smtp_connection_reuse_time_limit`
 
@@ -4416,15 +3525,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_data_done_timeout"></a>`smtp_data_done_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_data_init_timeout"></a>`smtp_data_init_timeout`
 
@@ -4432,15 +3537,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_data_xfer_timeout"></a>`smtp_data_xfer_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_defer_if_no_mx_address_found"></a>`smtp_defer_if_no_mx_address_found`
 
@@ -4448,15 +3549,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_discard_ehlo_keyword_address_maps"></a>`smtp_discard_ehlo_keyword_address_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_discard_ehlo_keywords"></a>`smtp_discard_ehlo_keywords`
 
@@ -4464,15 +3561,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_dns_resolver_options"></a>`smtp_dns_resolver_options`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_enforce_tls"></a>`smtp_enforce_tls`
 
@@ -4480,15 +3573,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_fallback_relay"></a>`smtp_fallback_relay`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_generic_maps"></a>`smtp_generic_maps`
 
@@ -4496,15 +3585,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_header_checks"></a>`smtp_header_checks`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_helo_name"></a>`smtp_helo_name`
 
@@ -4512,15 +3597,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_helo_timeout"></a>`smtp_helo_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_host_lookup"></a>`smtp_host_lookup`
 
@@ -4528,15 +3609,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_line_length_limit"></a>`smtp_line_length_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_mail_timeout"></a>`smtp_mail_timeout`
 
@@ -4544,15 +3621,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_mime_header_checks"></a>`smtp_mime_header_checks`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_mx_address_limit"></a>`smtp_mx_address_limit`
 
@@ -4560,15 +3633,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_mx_session_limit"></a>`smtp_mx_session_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_nested_header_checks"></a>`smtp_nested_header_checks`
 
@@ -4576,15 +3645,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_never_send_ehlo"></a>`smtp_never_send_ehlo`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_per_record_deadline"></a>`smtp_per_record_deadline`
 
@@ -4592,15 +3657,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_pix_workaround_delay_time"></a>`smtp_pix_workaround_delay_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_pix_workaround_maps"></a>`smtp_pix_workaround_maps`
 
@@ -4608,15 +3669,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_pix_workaround_threshold_time"></a>`smtp_pix_workaround_threshold_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_pix_workarounds"></a>`smtp_pix_workarounds`
 
@@ -4624,15 +3681,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_quit_timeout"></a>`smtp_quit_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_quote_rfc821_envelope"></a>`smtp_quote_rfc821_envelope`
 
@@ -4640,15 +3693,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_randomize_addresses"></a>`smtp_randomize_addresses`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_rcpt_timeout"></a>`smtp_rcpt_timeout`
 
@@ -4656,15 +3705,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_reply_filter"></a>`smtp_reply_filter`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_rset_timeout"></a>`smtp_rset_timeout`
 
@@ -4672,15 +3717,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_sasl_auth_cache_name"></a>`smtp_sasl_auth_cache_name`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_sasl_auth_cache_time"></a>`smtp_sasl_auth_cache_time`
 
@@ -4688,15 +3729,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_sasl_auth_enable"></a>`smtp_sasl_auth_enable`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_sasl_auth_soft_bounce"></a>`smtp_sasl_auth_soft_bounce`
 
@@ -4704,15 +3741,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_sasl_mechanism_filter"></a>`smtp_sasl_mechanism_filter`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_sasl_password_maps"></a>`smtp_sasl_password_maps`
 
@@ -4720,15 +3753,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_sasl_path"></a>`smtp_sasl_path`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_sasl_security_options"></a>`smtp_sasl_security_options`
 
@@ -4736,15 +3765,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_sasl_tls_security_options"></a>`smtp_sasl_tls_security_options`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_sasl_tls_verified_security_options"></a>`smtp_sasl_tls_verified_security_options`
 
@@ -4752,15 +3777,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_sasl_type"></a>`smtp_sasl_type`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_send_dummy_mail_auth"></a>`smtp_send_dummy_mail_auth`
 
@@ -4768,15 +3789,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_send_xforward_command"></a>`smtp_send_xforward_command`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_sender_dependent_authentication"></a>`smtp_sender_dependent_authentication`
 
@@ -4784,15 +3801,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_skip_5xx_greeting"></a>`smtp_skip_5xx_greeting`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_skip_quit_response"></a>`smtp_skip_quit_response`
 
@@ -4800,15 +3813,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_starttls_timeout"></a>`smtp_starttls_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_tls_cafile"></a>`smtp_tls_cafile`
 
@@ -4816,15 +3825,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: `$postfix::params::smtp_tls_cafile`
-
 ##### <a name="smtp_tls_capath"></a>`smtp_tls_capath`
 
 Data type: `Optional[String]`
 
 
-
-Default value: `$postfix::params::smtp_tls_capath`
 
 ##### <a name="smtp_tls_block_early_mail_reply"></a>`smtp_tls_block_early_mail_reply`
 
@@ -4832,15 +3837,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_tls_cert_file"></a>`smtp_tls_cert_file`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_tls_ciphers"></a>`smtp_tls_ciphers`
 
@@ -4848,15 +3849,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_tls_dcert_file"></a>`smtp_tls_dcert_file`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_tls_dkey_file"></a>`smtp_tls_dkey_file`
 
@@ -4864,15 +3861,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_tls_eccert_file"></a>`smtp_tls_eccert_file`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_tls_eckey_file"></a>`smtp_tls_eckey_file`
 
@@ -4880,15 +3873,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_tls_enforce_peername"></a>`smtp_tls_enforce_peername`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_tls_exclude_ciphers"></a>`smtp_tls_exclude_ciphers`
 
@@ -4896,15 +3885,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_tls_fingerprint_cert_match"></a>`smtp_tls_fingerprint_cert_match`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_tls_fingerprint_digest"></a>`smtp_tls_fingerprint_digest`
 
@@ -4912,15 +3897,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_tls_key_file"></a>`smtp_tls_key_file`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_tls_loglevel"></a>`smtp_tls_loglevel`
 
@@ -4928,15 +3909,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_tls_mandatory_ciphers"></a>`smtp_tls_mandatory_ciphers`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_tls_mandatory_exclude_ciphers"></a>`smtp_tls_mandatory_exclude_ciphers`
 
@@ -4944,15 +3921,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_tls_mandatory_protocols"></a>`smtp_tls_mandatory_protocols`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_tls_note_starttls_offer"></a>`smtp_tls_note_starttls_offer`
 
@@ -4960,15 +3933,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_tls_per_site"></a>`smtp_tls_per_site`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_tls_policy_maps"></a>`smtp_tls_policy_maps`
 
@@ -4976,15 +3945,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_tls_protocols"></a>`smtp_tls_protocols`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_tls_scert_verifydepth"></a>`smtp_tls_scert_verifydepth`
 
@@ -4992,15 +3957,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_tls_secure_cert_match"></a>`smtp_tls_secure_cert_match`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_tls_security_level"></a>`smtp_tls_security_level`
 
@@ -5008,15 +3969,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: `$postfix::params::smtp_tls_security_level`
-
 ##### <a name="smtp_tls_session_cache_database"></a>`smtp_tls_session_cache_database`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_tls_session_cache_timeout"></a>`smtp_tls_session_cache_timeout`
 
@@ -5024,15 +3981,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_tls_verify_cert_match"></a>`smtp_tls_verify_cert_match`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtp_use_tls"></a>`smtp_use_tls`
 
@@ -5040,15 +3993,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtp_xforward_timeout"></a>`smtp_xforward_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_authorized_verp_clients"></a>`smtpd_authorized_verp_clients`
 
@@ -5056,15 +4005,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_authorized_xclient_hosts"></a>`smtpd_authorized_xclient_hosts`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_authorized_xforward_hosts"></a>`smtpd_authorized_xforward_hosts`
 
@@ -5072,15 +4017,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_banner"></a>`smtpd_banner`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_client_connection_count_limit"></a>`smtpd_client_connection_count_limit`
 
@@ -5088,15 +4029,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_client_connection_rate_limit"></a>`smtpd_client_connection_rate_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_client_event_limit_exceptions"></a>`smtpd_client_event_limit_exceptions`
 
@@ -5104,15 +4041,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_client_message_rate_limit"></a>`smtpd_client_message_rate_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_client_new_tls_session_rate_limit"></a>`smtpd_client_new_tls_session_rate_limit`
 
@@ -5120,15 +4053,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_client_port_logging"></a>`smtpd_client_port_logging`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_client_recipient_rate_limit"></a>`smtpd_client_recipient_rate_limit`
 
@@ -5136,15 +4065,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_client_restrictions"></a>`smtpd_client_restrictions`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_command_filter"></a>`smtpd_command_filter`
 
@@ -5152,15 +4077,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_data_restrictions"></a>`smtpd_data_restrictions`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_delay_open_until_valid_rcpt"></a>`smtpd_delay_open_until_valid_rcpt`
 
@@ -5168,15 +4089,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_delay_reject"></a>`smtpd_delay_reject`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_discard_ehlo_keyword_address_maps"></a>`smtpd_discard_ehlo_keyword_address_maps`
 
@@ -5184,15 +4101,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_discard_ehlo_keywords"></a>`smtpd_discard_ehlo_keywords`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_end_of_data_restrictions"></a>`smtpd_end_of_data_restrictions`
 
@@ -5200,15 +4113,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_enforce_tls"></a>`smtpd_enforce_tls`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_error_sleep_time"></a>`smtpd_error_sleep_time`
 
@@ -5216,15 +4125,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_etrn_restrictions"></a>`smtpd_etrn_restrictions`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_expansion_filter"></a>`smtpd_expansion_filter`
 
@@ -5232,15 +4137,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_forbidden_commands"></a>`smtpd_forbidden_commands`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_hard_error_limit"></a>`smtpd_hard_error_limit`
 
@@ -5248,15 +4149,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_helo_required"></a>`smtpd_helo_required`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_helo_restrictions"></a>`smtpd_helo_restrictions`
 
@@ -5264,15 +4161,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_history_flush_threshold"></a>`smtpd_history_flush_threshold`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_junk_command_limit"></a>`smtpd_junk_command_limit`
 
@@ -5280,15 +4173,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_log_access_permit_actions"></a>`smtpd_log_access_permit_actions`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_milters"></a>`smtpd_milters`
 
@@ -5296,15 +4185,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_noop_commands"></a>`smtpd_noop_commands`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_null_access_lookup_key"></a>`smtpd_null_access_lookup_key`
 
@@ -5312,15 +4197,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_peername_lookup"></a>`smtpd_peername_lookup`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_per_record_deadline"></a>`smtpd_per_record_deadline`
 
@@ -5328,15 +4209,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_policy_service_max_idle"></a>`smtpd_policy_service_max_idle`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_policy_service_max_ttl"></a>`smtpd_policy_service_max_ttl`
 
@@ -5344,15 +4221,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_policy_service_timeout"></a>`smtpd_policy_service_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_proxy_ehlo"></a>`smtpd_proxy_ehlo`
 
@@ -5360,15 +4233,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_proxy_filter"></a>`smtpd_proxy_filter`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_proxy_options"></a>`smtpd_proxy_options`
 
@@ -5376,15 +4245,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_proxy_timeout"></a>`smtpd_proxy_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_recipient_limit"></a>`smtpd_recipient_limit`
 
@@ -5392,15 +4257,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_recipient_overshoot_limit"></a>`smtpd_recipient_overshoot_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_recipient_restrictions"></a>`smtpd_recipient_restrictions`
 
@@ -5408,15 +4269,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_reject_footer"></a>`smtpd_reject_footer`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_reject_unlisted_recipient"></a>`smtpd_reject_unlisted_recipient`
 
@@ -5424,15 +4281,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_reject_unlisted_sender"></a>`smtpd_reject_unlisted_sender`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_relay_restrictions"></a>`smtpd_relay_restrictions`
 
@@ -5440,15 +4293,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_restriction_classes"></a>`smtpd_restriction_classes`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_sasl_auth_enable"></a>`smtpd_sasl_auth_enable`
 
@@ -5456,15 +4305,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_sasl_authenticated_header"></a>`smtpd_sasl_authenticated_header`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_sasl_exceptions_networks"></a>`smtpd_sasl_exceptions_networks`
 
@@ -5472,15 +4317,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_sasl_local_domain"></a>`smtpd_sasl_local_domain`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_sasl_path"></a>`smtpd_sasl_path`
 
@@ -5488,15 +4329,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_sasl_security_options"></a>`smtpd_sasl_security_options`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_sasl_tls_security_options"></a>`smtpd_sasl_tls_security_options`
 
@@ -5504,15 +4341,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_sasl_type"></a>`smtpd_sasl_type`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_sender_login_maps"></a>`smtpd_sender_login_maps`
 
@@ -5520,15 +4353,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_sender_restrictions"></a>`smtpd_sender_restrictions`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_service_name"></a>`smtpd_service_name`
 
@@ -5536,15 +4365,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_soft_error_limit"></a>`smtpd_soft_error_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_starttls_timeout"></a>`smtpd_starttls_timeout`
 
@@ -5552,15 +4377,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_timeout"></a>`smtpd_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_tls_cafile"></a>`smtpd_tls_cafile`
 
@@ -5568,15 +4389,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_tls_capath"></a>`smtpd_tls_capath`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_tls_always_issue_session_ids"></a>`smtpd_tls_always_issue_session_ids`
 
@@ -5584,15 +4401,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_tls_ask_ccert"></a>`smtpd_tls_ask_ccert`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_tls_auth_only"></a>`smtpd_tls_auth_only`
 
@@ -5600,15 +4413,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_tls_ccert_verifydepth"></a>`smtpd_tls_ccert_verifydepth`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_tls_cert_file"></a>`smtpd_tls_cert_file`
 
@@ -5616,15 +4425,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: `$postfix::params::smtpd_tls_cert_file`
-
 ##### <a name="smtpd_tls_ciphers"></a>`smtpd_tls_ciphers`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_tls_dcert_file"></a>`smtpd_tls_dcert_file`
 
@@ -5632,15 +4437,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_tls_dh1024_param_file"></a>`smtpd_tls_dh1024_param_file`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_tls_dh512_param_file"></a>`smtpd_tls_dh512_param_file`
 
@@ -5648,15 +4449,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_tls_dkey_file"></a>`smtpd_tls_dkey_file`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_tls_eccert_file"></a>`smtpd_tls_eccert_file`
 
@@ -5664,15 +4461,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_tls_eckey_file"></a>`smtpd_tls_eckey_file`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_tls_eecdh_grade"></a>`smtpd_tls_eecdh_grade`
 
@@ -5680,15 +4473,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_tls_exclude_ciphers"></a>`smtpd_tls_exclude_ciphers`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_tls_fingerprint_digest"></a>`smtpd_tls_fingerprint_digest`
 
@@ -5696,15 +4485,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_tls_key_file"></a>`smtpd_tls_key_file`
 
 Data type: `Optional[String]`
 
 
-
-Default value: `$postfix::params::smtpd_tls_key_file`
 
 ##### <a name="smtpd_tls_loglevel"></a>`smtpd_tls_loglevel`
 
@@ -5712,15 +4497,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_tls_mandatory_ciphers"></a>`smtpd_tls_mandatory_ciphers`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_tls_mandatory_exclude_ciphers"></a>`smtpd_tls_mandatory_exclude_ciphers`
 
@@ -5728,15 +4509,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_tls_mandatory_protocols"></a>`smtpd_tls_mandatory_protocols`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_tls_protocols"></a>`smtpd_tls_protocols`
 
@@ -5744,15 +4521,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_tls_received_header"></a>`smtpd_tls_received_header`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_tls_req_ccert"></a>`smtpd_tls_req_ccert`
 
@@ -5760,15 +4533,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_tls_security_level"></a>`smtpd_tls_security_level`
 
 Data type: `Optional[String]`
 
 
-
-Default value: `$postfix::params::smtpd_tls_security_level`
 
 ##### <a name="smtpd_tls_session_cache_database"></a>`smtpd_tls_session_cache_database`
 
@@ -5776,15 +4545,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_tls_session_cache_timeout"></a>`smtpd_tls_session_cache_timeout`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_tls_wrappermode"></a>`smtpd_tls_wrappermode`
 
@@ -5792,15 +4557,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_upstream_proxy_protocol"></a>`smtpd_upstream_proxy_protocol`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="smtpd_upstream_proxy_timeout"></a>`smtpd_upstream_proxy_timeout`
 
@@ -5808,15 +4569,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="smtpd_use_tls"></a>`smtpd_use_tls`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="soft_bounce"></a>`soft_bounce`
 
@@ -5824,15 +4581,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="stale_lock_time"></a>`stale_lock_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="strict_7bit_headers"></a>`strict_7bit_headers`
 
@@ -5840,15 +4593,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="strict_8bitmime"></a>`strict_8bitmime`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="strict_8bitmime_body"></a>`strict_8bitmime_body`
 
@@ -5856,15 +4605,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="strict_mailbox_ownership"></a>`strict_mailbox_ownership`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="strict_mime_encoding_domain"></a>`strict_mime_encoding_domain`
 
@@ -5872,15 +4617,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="strict_rfc821_envelopes"></a>`strict_rfc821_envelopes`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="sun_mailtool_compatibility"></a>`sun_mailtool_compatibility`
 
@@ -5888,15 +4629,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="swap_bangpath"></a>`swap_bangpath`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="syslog_facility"></a>`syslog_facility`
 
@@ -5904,15 +4641,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="syslog_name"></a>`syslog_name`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tcp_windowsize"></a>`tcp_windowsize`
 
@@ -5920,15 +4653,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tls_append_default_ca"></a>`tls_append_default_ca`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tls_daemon_random_bytes"></a>`tls_daemon_random_bytes`
 
@@ -5936,15 +4665,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tls_disable_workarounds"></a>`tls_disable_workarounds`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tls_eecdh_strong_curve"></a>`tls_eecdh_strong_curve`
 
@@ -5952,15 +4677,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tls_eecdh_ultra_curve"></a>`tls_eecdh_ultra_curve`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tls_export_cipherlist"></a>`tls_export_cipherlist`
 
@@ -5968,15 +4689,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tls_high_cipherlist"></a>`tls_high_cipherlist`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tls_legacy_public_key_fingerprints"></a>`tls_legacy_public_key_fingerprints`
 
@@ -5984,15 +4701,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tls_low_cipherlist"></a>`tls_low_cipherlist`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tls_medium_cipherlist"></a>`tls_medium_cipherlist`
 
@@ -6000,15 +4713,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tls_null_cipherlist"></a>`tls_null_cipherlist`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tls_preempt_cipherlist"></a>`tls_preempt_cipherlist`
 
@@ -6016,15 +4725,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tls_random_bytes"></a>`tls_random_bytes`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tls_random_exchange_name"></a>`tls_random_exchange_name`
 
@@ -6032,15 +4737,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tls_random_prng_update_period"></a>`tls_random_prng_update_period`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tls_random_reseed_period"></a>`tls_random_reseed_period`
 
@@ -6048,15 +4749,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tls_random_source"></a>`tls_random_source`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_enforce_tls"></a>`tlsproxy_enforce_tls`
 
@@ -6064,15 +4761,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tlsproxy_service_name"></a>`tlsproxy_service_name`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_tls_cafile"></a>`tlsproxy_tls_cafile`
 
@@ -6080,15 +4773,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tlsproxy_tls_capath"></a>`tlsproxy_tls_capath`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_tls_always_issue_session_ids"></a>`tlsproxy_tls_always_issue_session_ids`
 
@@ -6096,15 +4785,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tlsproxy_tls_ask_ccert"></a>`tlsproxy_tls_ask_ccert`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_tls_ccert_verifydepth"></a>`tlsproxy_tls_ccert_verifydepth`
 
@@ -6112,15 +4797,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tlsproxy_tls_cert_file"></a>`tlsproxy_tls_cert_file`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_tls_ciphers"></a>`tlsproxy_tls_ciphers`
 
@@ -6128,15 +4809,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tlsproxy_tls_dcert_file"></a>`tlsproxy_tls_dcert_file`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_tls_dh1024_param_file"></a>`tlsproxy_tls_dh1024_param_file`
 
@@ -6144,15 +4821,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tlsproxy_tls_dh512_param_file"></a>`tlsproxy_tls_dh512_param_file`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_tls_dkey_file"></a>`tlsproxy_tls_dkey_file`
 
@@ -6160,15 +4833,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tlsproxy_tls_eccert_file"></a>`tlsproxy_tls_eccert_file`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_tls_eckey_file"></a>`tlsproxy_tls_eckey_file`
 
@@ -6176,15 +4845,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tlsproxy_tls_eecdh_grade"></a>`tlsproxy_tls_eecdh_grade`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_tls_exclude_ciphers"></a>`tlsproxy_tls_exclude_ciphers`
 
@@ -6192,15 +4857,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tlsproxy_tls_fingerprint_digest"></a>`tlsproxy_tls_fingerprint_digest`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_tls_key_file"></a>`tlsproxy_tls_key_file`
 
@@ -6208,15 +4869,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tlsproxy_tls_loglevel"></a>`tlsproxy_tls_loglevel`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_tls_mandatory_ciphers"></a>`tlsproxy_tls_mandatory_ciphers`
 
@@ -6224,15 +4881,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tlsproxy_tls_mandatory_exclude_ciphers"></a>`tlsproxy_tls_mandatory_exclude_ciphers`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_tls_mandatory_protocols"></a>`tlsproxy_tls_mandatory_protocols`
 
@@ -6240,15 +4893,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tlsproxy_tls_protocols"></a>`tlsproxy_tls_protocols`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_tls_req_ccert"></a>`tlsproxy_tls_req_ccert`
 
@@ -6256,15 +4905,11 @@ Data type: `Optional[Variant[Boolean, String]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tlsproxy_tls_security_level"></a>`tlsproxy_tls_security_level`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_tls_session_cache_timeout"></a>`tlsproxy_tls_session_cache_timeout`
 
@@ -6272,15 +4917,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="tlsproxy_use_tls"></a>`tlsproxy_use_tls`
 
 Data type: `Optional[Variant[Boolean, String]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="tlsproxy_watchdog_timeout"></a>`tlsproxy_watchdog_timeout`
 
@@ -6288,15 +4929,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="trace_service_name"></a>`trace_service_name`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="transport_maps"></a>`transport_maps`
 
@@ -6304,15 +4941,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="transport_retry_time"></a>`transport_retry_time`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="trigger_timeout"></a>`trigger_timeout`
 
@@ -6320,15 +4953,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="undisclosed_recipients_header"></a>`undisclosed_recipients_header`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="unknown_address_reject_code"></a>`unknown_address_reject_code`
 
@@ -6336,15 +4965,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="unknown_address_tempfail_action"></a>`unknown_address_tempfail_action`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="unknown_client_reject_code"></a>`unknown_client_reject_code`
 
@@ -6352,15 +4977,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="unknown_helo_hostname_tempfail_action"></a>`unknown_helo_hostname_tempfail_action`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="unknown_hostname_reject_code"></a>`unknown_hostname_reject_code`
 
@@ -6368,15 +4989,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="unknown_local_recipient_reject_code"></a>`unknown_local_recipient_reject_code`
 
 Data type: `Optional[String]`
 
 
-
-Default value: `$postfix::params::unknown_local_recipient_reject_code`
 
 ##### <a name="unknown_relay_recipient_reject_code"></a>`unknown_relay_recipient_reject_code`
 
@@ -6384,15 +5001,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="unknown_virtual_alias_reject_code"></a>`unknown_virtual_alias_reject_code`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="unknown_virtual_mailbox_reject_code"></a>`unknown_virtual_mailbox_reject_code`
 
@@ -6400,15 +5013,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="unverified_recipient_defer_code"></a>`unverified_recipient_defer_code`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="unverified_recipient_reject_code"></a>`unverified_recipient_reject_code`
 
@@ -6416,15 +5025,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="unverified_recipient_reject_reason"></a>`unverified_recipient_reject_reason`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="unverified_recipient_tempfail_action"></a>`unverified_recipient_tempfail_action`
 
@@ -6432,15 +5037,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="unverified_sender_defer_code"></a>`unverified_sender_defer_code`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="unverified_sender_reject_code"></a>`unverified_sender_reject_code`
 
@@ -6448,15 +5049,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="unverified_sender_reject_reason"></a>`unverified_sender_reject_reason`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="unverified_sender_tempfail_action"></a>`unverified_sender_tempfail_action`
 
@@ -6464,15 +5061,11 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="verp_delimiter_filter"></a>`verp_delimiter_filter`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="virtual_alias_domains"></a>`virtual_alias_domains`
 
@@ -6480,15 +5073,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="virtual_alias_expansion_limit"></a>`virtual_alias_expansion_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="virtual_alias_maps"></a>`virtual_alias_maps`
 
@@ -6496,15 +5085,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="virtual_alias_recursion_limit"></a>`virtual_alias_recursion_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="virtual_gid_maps"></a>`virtual_gid_maps`
 
@@ -6512,15 +5097,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="virtual_mailbox_base"></a>`virtual_mailbox_base`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="virtual_mailbox_domains"></a>`virtual_mailbox_domains`
 
@@ -6528,15 +5109,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="virtual_mailbox_limit"></a>`virtual_mailbox_limit`
 
 Data type: `Optional[String]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="virtual_mailbox_lock"></a>`virtual_mailbox_lock`
 
@@ -6544,15 +5121,11 @@ Data type: `Optional[Array[String, 1]]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="virtual_mailbox_maps"></a>`virtual_mailbox_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ##### <a name="virtual_minimum_uid"></a>`virtual_minimum_uid`
 
@@ -6560,23 +5133,17 @@ Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="virtual_transport"></a>`virtual_transport`
 
 Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
-
 ##### <a name="virtual_uid_maps"></a>`virtual_uid_maps`
 
 Data type: `Optional[Array[String, 1]]`
 
 
-
-Default value: ``undef``
 
 ### <a name="postfixconfig"></a>`postfix::config`
 
@@ -6585,10 +5152,6 @@ The postfix::config class.
 ### <a name="postfixinstall"></a>`postfix::install`
 
 The postfix::install class.
-
-### <a name="postfixparams"></a>`postfix::params`
-
-The postfix::params class.
 
 ### <a name="postfixservice"></a>`postfix::service`
 
@@ -7632,7 +6195,7 @@ Data type: `String`
 
 ##### <a name="service"></a>`service`
 
-Data type: `Pattern[/(?x) ^ [^\/]+ \/ (?:inet|unix|fifo|pass) $/]`
+Data type: `Pattern[/(?x) ^ [^\/]+ \/ (?:inet|unix(?:-dgram)?|fifo|pass) $/]`
 
 
 
