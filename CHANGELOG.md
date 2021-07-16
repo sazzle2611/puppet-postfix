@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v3.1.1](https://github.com/bodgit/puppet-postfix/tree/v3.1.1) (2021-07-16)
+
+[Full Changelog](https://github.com/bodgit/puppet-postfix/compare/v3.1.0...v3.1.1)
+
+### Fixed
+
+- Allow `unix-dgram` in `postfix::master` define [\#26](https://github.com/bodgit/puppet-postfix/pull/26) ([bodgit](https://github.com/bodgit))
+
 ## [v3.1.0](https://github.com/bodgit/puppet-postfix/tree/v3.1.0) (2021-07-07)
 
 [Full Changelog](https://github.com/bodgit/puppet-postfix/compare/v3.0.1...v3.1.0)
