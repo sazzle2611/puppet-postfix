@@ -117,7 +117,7 @@ postfix::master { &#39;dovecot/unix&#39;:
         <span class='name'>service</span>
       
       
-        <span class='type'>(<tt>Pattern[/(?x) ^ [^\/]+ \/ (?:inet|unix|fifo|pass) $/]</tt>)</span>
+        <span class='type'>(<tt>Pattern[/(?x) ^ [^\/]+ \/ (?:inet|unix(?:-dgram)?|fifo|pass) $/]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>$title</tt>)</em>
@@ -270,14 +270,14 @@ postfix::master { &#39;dovecot/unix&#39;:
         <pre class="code"><span class="info file"># File 'manifests/master.pp', line 25</span>
 
 define postfix::master (
-  String                                                $command,
-  Pattern[/(?x) ^ [^\/]+ \/ (?:inet|unix|fifo|pass) $/] $service      = $title,
-  Enum[&#39;present&#39;, &#39;absent&#39;]                             $ensure       = &#39;present&#39;,
-  Optional[Enum[&#39;-&#39;, &#39;n&#39;, &#39;y&#39;]]                         $private      = undef,
-  Optional[Enum[&#39;-&#39;, &#39;n&#39;, &#39;y&#39;]]                         $unprivileged = undef,
-  Optional[Enum[&#39;-&#39;, &#39;n&#39;, &#39;y&#39;]]                         $chroot       = undef,
-  Optional[Pattern[/(?x) ^ (?: - | \d+ [?]? ) $/]]      $wakeup       = undef,
-  Optional[Pattern[/(?x) ^ (?: - | \d+ ) $/]]           $limit        = undef,
+  String                                                           $command,
+  Pattern[/(?x) ^ [^\/]+ \/ (?:inet|unix(?:-dgram)?|fifo|pass) $/] $service      = $title,
+  Enum[&#39;present&#39;, &#39;absent&#39;]                                        $ensure       = &#39;present&#39;,
+  Optional[Enum[&#39;-&#39;, &#39;n&#39;, &#39;y&#39;]]                                    $private      = undef,
+  Optional[Enum[&#39;-&#39;, &#39;n&#39;, &#39;y&#39;]]                                    $unprivileged = undef,
+  Optional[Enum[&#39;-&#39;, &#39;n&#39;, &#39;y&#39;]]                                    $chroot       = undef,
+  Optional[Pattern[/(?x) ^ (?: - | \d+ [?]? ) $/]]                 $wakeup       = undef,
+  Optional[Pattern[/(?x) ^ (?: - | \d+ ) $/]]                      $limit        = undef,
 ) {
 
   include postfix
