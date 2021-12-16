@@ -10,7 +10,7 @@ fixtures:
       ref: "3.0.2"
     stdlib:
       repo: "puppetlabs/stdlib"
-      ref: "7.1.0"
+      ref: "8.1.0"
   repositories:
     augeasproviders_core:
       repo: "https://github.com/hercules-team/augeasproviders_core.git"
